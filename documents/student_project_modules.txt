@@ -1,0 +1,106 @@
+Conceptual Blending - Modules
+
+1. Extract Module
+	a) select blending pattern
+		input		: pattern repository, blending patterns
+		output		: blending pattern
+		task		: literature search on blending patterns, 
+				  create a blending patterns repository, 
+				  selects the user preferred blending pattern from the given list of patterns based on requirements and background knowledge
+				  how to decide which blending pattern should be chosen (question) - literature search
+		requirement	: familiarize with ontohub
+		possible tools	: Ontohub for blending repository
+		language	: ruby, owl
+		i/o file format	: owl file
+		development	: to-do
+
+	b) select input spaces
+		input		: blending pattern, input space repository, blend reuirement
+		output		: input space
+		task		: select the input spaces from the repository, selection based on blending pattern and blend requirements
+				  design selection strategy- backward reasoning over the signature
+		requirement	: familiarize with ontohub		
+		possible tools	: Ontohub for input space repository, wordnet
+		language 	: ruby, owl
+		i/o file format	: owl file
+		development	: to-do
+
+2. Blend Module
+	a) create base + morphism
+		input		: input space
+		output		: base, base morphism
+		task		: develop: generate a base and base morphism using structure 
+				  mapping technique from the input space, anti-unification technique, HDTP for owl, anti-matching for owl using image schema
+		requirement	: familiarize with the structure mapping theory and HDTP tool
+		possible tools	: structure mapping engine, HDTP
+		language	: ruby, owl
+		i/o file format	: owl file
+		development	: to-do (master thesis)
+
+	b) create blends
+		input		: input space, base, base morphism
+		output		: blendoid
+		task		: develop: generate blends from input space using base and base 
+				  morphism
+		requirement	: familiarize with the script
+		possible tools	: ruby script for generating blends
+		language	: ruby, owl
+		i/o file format	: owl file
+		development	: done
+
+3. Evaluation Module
+	a) consistency checker
+		input	: blendoid, ontological constraints, backgroud knowledge, requirements
+		output	: either of the below
+				1) consistent blendoid
+				2) inconsistent blendoid, conflict set
+		task		: 1. check whether the blendoid is logically consistent
+				  2. in case of the blendoid is logically inconsistent, generate 
+				     the conflict set using the existing tools
+				  3. develop a script which will communicate with the user the output of the conflict sets
+		requirement	: search the suitable existing tools that generate a conflict set,
+		possible tools	: HETS, conflict-set tool (plug-in for haskell or stand-alone tool)
+		language	: ruby, haskell, owl
+		i/o file format	: owl file
+		development	: done
+
+
+	b) requirement checker
+		input	: consistent blendoid, background knowledge, consequence requirements
+		output	: either of the below 
+				1) met the requirements - desired blendoid
+				2) did not meet the requirements - list of failed requirements
+		task		: 1. check whether the consistent blendoid meets all the requirements
+				  2. in case the requirements are not met, generate the list of 
+			             failed requirements
+		requirement	: MADHURA		
+		possible tools	: HETS
+		language	: haskell, owl
+		i/o file format	: owl file
+		development	: 1. done
+				  2. to-do	
+
+
+4. Repair Module: MADHURA
+	a) weakening input spaces
+		input	: conflict set, original input space
+		output	: weakened input space
+
+	b) abducing missing axioms from the input space
+		input	: list of failed requirements, blendoid, input space
+		output	: list of missing axioms + input space
+
+
+
+Issues to be discussed:
+	1) redefine, refine modules
+	2) how to connect the modules
+	3) assignment of modules
+	4) 
+
+literature search on
+1.  
+
+
+image schema
+1. developing of 
