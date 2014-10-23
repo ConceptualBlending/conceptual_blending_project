@@ -1,0 +1,147 @@
+logic OWL
+		
+		
+
+		
+ontology horse =
+		Class: Horse
+			SubClassOf: Herbivore
+
+			SubClassOf: covered_by some Hair
+
+		Class: Mammal 	
+		Class: Herbivore
+		Class: QuadrupedShape		
+		Class: Savanna 
+		Class: Grasslands
+		Class: Hoof 
+		Class: Tail
+		Class: Hair 
+		
+		ObjectProperty: has_habitat
+		ObjectProperty: has_body_shape
+		ObjectProperty: has_part 
+		ObjectProperty: covered_by 
+		
+		Individual: this
+			Types:  Horse
+			
+			
+		
+end 		
+
+
+		
+
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+ontology tiger =  
+		Class: Tiger 
+			
+			SubClassOf: has_body_shape some QuadrupedShape
+			
+
+			Class: Mammal 	
+			Class: Carnivore
+			Class: QuadrupedShape		
+			Class: Jungle 
+			Class: Fang
+			Class: Claw
+			Class: Tail 
+			Class: Hair
+			
+			ObjectProperty: has_habitat
+			ObjectProperty: has_body_shape
+			ObjectProperty: has_part 
+			ObjectProperty: covered_by 			
+			
+			Individual: this
+				Types:  Tiger
+			
+end 
+
+
+
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+ontology  backgroundKnowledge = 
+
+%%%<https://ontohub.org/monster-blend/background/animalKnowledge.owl>
+
+	ObjectProperty: has_habitat
+	ObjectProperty: has_body_shape
+		Domain: Organism
+		Range: BodyShape 
+		Characteristics: Functional 
+	ObjectProperty: has_part 
+	ObjectProperty: covered_by 
+
+	Class: Organism
+
+
+	Class: Mammal
+	Class: Hair 
+	Class: QuadrupedShape 
+	Class: Tail 
+
+
+
+	Class: Carnivore
+	Class: Herbivore 
+	Class: Omnivore 
+
+	DisjointClasses: Carnivore, Herbivore, Omnivore 
+
+
+	Class: Organism
+	Class: BodyShape 
+	Class: HumanoidShape 
+	Class: QuadrupedShape
+		SubClassOf: BodyShape
+	Class: SnakeShape
+	Class: FishShape
+		
+	DisjointClasses: HumanoidShape, 
+						QuadrupedShape, 
+						SnakeShape, 
+						FishShape    
+
+end
+   
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+ontology base = 
+	ObjectProperty: has_habitat
+	ObjectProperty: has_body_shape
+	ObjectProperty: has_part 
+	ObjectProperty: covered_by 
+
+	Class: Organism
+	
+end 
+
+ontology hoti1 =
+	base then 
+	Class: Mammal
+	Class: Hair 
+	Class: QuadrupedShape 
+	Class: Tail 
+	
+end
+
+
+
+interpretation hoti12Horse: hoti1 to horse  =
+	Organism |-> Horse 
+
+interpretation hoti12Tiger: hoti1 to tiger  =
+	Organism |-> Tiger
+
+
+
+ontology monsterblend1  = 
+    combine hoti12Horse, hoti12Tiger 
+	with  Organism |-> Monster
+
+ontology evalmb1 = monsterblend1 and backgroundKnowledge 

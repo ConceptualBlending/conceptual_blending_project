@@ -1,0 +1,11 @@
+logic OWL.ELQLRL-ALC
+spec hoti1 =
+Class: Hair
+Class: Mammal
+Class: Organism
+Class: QuadrupedShape
+Class: Tail
+ObjectProperty: covered_by
+ObjectProperty: has_body_shape
+ObjectProperty: has_habitat
+ObjectProperty: has_part

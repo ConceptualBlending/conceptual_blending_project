@@ -1,0 +1,3 @@
+exit
+hets input.dol
+use input.dol

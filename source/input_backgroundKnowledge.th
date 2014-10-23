@@ -1,0 +1,22 @@
+logic OWL.RL-ALC
+spec backgroundKnowledge =
+Class: BodyShape
+Class: Carnivore
+Class: FishShape
+Class: Hair
+Class: Herbivore
+Class: HumanoidShape
+Class: Mammal
+Class: Omnivore
+Class: Organism
+Class: SnakeShape
+Class: Tail
+ObjectProperty: covered_by
+ObjectProperty: has_habitat
+ObjectProperty: has_part
+Class: QuadrupedShape
+       SubClassOf: BodyShape
+ObjectProperty: has_body_shape
+                Domain: Organism
+                Range: BodyShape
+                Characteristics: Functional

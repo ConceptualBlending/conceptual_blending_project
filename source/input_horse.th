@@ -1,0 +1,19 @@
+logic OWL.ELQL-ALC
+spec horse =
+Class: Grasslands
+Class: Hair
+Class: Herbivore
+Class: Hoof
+Class: Mammal
+Class: QuadrupedShape
+Class: Savanna
+Class: Tail
+ObjectProperty: covered_by
+ObjectProperty: has_body_shape
+ObjectProperty: has_habitat
+ObjectProperty: has_part
+Class: Horse
+       SubClassOf: Herbivore
+       SubClassOf: covered_by some Hair
+Individual: this
+            Types: Horse

@@ -1,0 +1,7 @@
+logic OWL.ELQLRL-ALC
+spec base =
+Class: Organism
+ObjectProperty: covered_by
+ObjectProperty: has_body_shape
+ObjectProperty: has_habitat
+ObjectProperty: has_part

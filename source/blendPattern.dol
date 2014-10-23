@@ -1,0 +1,7 @@
+logic OWL	
+
+ontology monsterblend1  = 
+    combine hoti12Horse, hoti12Tiger 
+	with  Organism |-> Monster
+
+ontology evalmb1 = monsterblend1 and backgroundKnowledge 
