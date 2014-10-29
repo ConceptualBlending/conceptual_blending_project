@@ -186,10 +186,10 @@ def make_input_file(input_General, base_General, morphism_General)
 
 	dest.close()
 
-	#destination = "input.dol"
+	destination = "input.dol"
 
-	#return destination
-	return 
+	return destination
+	
 
 end
 

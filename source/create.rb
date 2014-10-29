@@ -118,10 +118,10 @@ def create
 	# ----- make the input .dol file to be sent to hets for creating the blends
 
 	#blend_input = make_input_file(input_General, base_General, morphism_General)
-	make_input_file(input_General, base_General, morphism_General)
-	blend_input = "input.dol"	
+	blend_input = make_input_file(input_General, base_General, morphism_General)
+	#blend_input = "input.dol"	
 	puts blend_input
-	#print "reading the input...\n"
+	#rint "reading the input...\n"
 	#inputForBlend = "input.dol"
 
 	#blend_input_1 = "input_file.dol"	
