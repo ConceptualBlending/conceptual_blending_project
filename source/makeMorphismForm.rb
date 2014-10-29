@@ -23,6 +23,9 @@ def make_Morphism_Form(morphism_form, input_General, base_General)
 
 end
 
+# MC: it is possible that we are going to use morphisms for other purposes in the application
+# MC: so therefore it is more convenient to store the pairs (Organism, Horse)
+# MC: instead of the string "Organism |-> Horse"
 
 # interpretation hoti12Horse: hoti1 to horse  =
 #	Organism |-> Horse 

@@ -12,7 +12,7 @@ def make_Input_Form(input_form)
 							:inputName_2 => "animal_2",
 							:inputClass_2 => "MyAnimal_2", 
 							:inputURL_2 => "",
-							:input_ontology_key => "ontology",
+							:input_ontology_key => "ontology", 
 							:input_class_key => "Class", 
 							:inputNameEnd => "=",
 							:inputClassSeparate => ":",
@@ -23,3 +23,6 @@ def make_Input_Form(input_form)
 	end
 
 end
+
+
+# MC: the keywords and separators do not depend on the pattern, so they should be elsewhere as constants

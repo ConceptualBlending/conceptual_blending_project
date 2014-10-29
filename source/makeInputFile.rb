@@ -12,14 +12,10 @@ def make_input_file(input_General, base_General, morphism_General)
 
 	dest = File.open('input.dol', 'w') #{|file| file.truncate(0) }
 	
-	#dest.puts ""
-	#dest.puts "%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
-	#dest.puts ""
 
 	dest.puts "logic OWL"
 
 	dest.puts ""
-	#dest.puts "%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
 	dest.puts ""
 	# ----- writing input spaces
 	# 		input_General = { :inputName_1 => "animal_1",	
@@ -39,6 +35,21 @@ def make_input_file(input_General, base_General, morphism_General)
 	dest.puts "<#{input_General[:inputURL_1]}>"
 	dest.puts "#{input_General[:inputEnd]}"
 
+         #MC: this is not valid DOL
+         #MC:   ontology animal_1 = 
+         #MC:     Class: My_Animal1
+         #MC:     <some_url>
+         #MC:   end
+         #MC: could be written like
+         #MC:  ontology animal_1  = 
+         #MC:    <some_url>
+         #MC:   then
+         #MC:    Class: My_Animal1
+         #MC: but you don't want to do this anyways
+         #MC: what you want is to say which is the class from <some_url> 
+         #MC: where Monster is mapped to, so you can write the interpretations
+         #MC: for the moment, it can be set by a method to the constant Horse 
+
 	dest.puts ""
 	#dest.puts "%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
 	dest.puts ""
@@ -48,6 +59,8 @@ def make_input_file(input_General, base_General, morphism_General)
 	dest.puts "#{input_General[:input_class_key]}#{input_General[:inputClassSeparate]} #{input_General[:inputClass_2]}"
 	dest.puts "<#{input_General[:inputURL_2]}>"
 	dest.puts "#{input_General[:inputEnd]}"
+
+        # MC: same as above
 
 	dest.puts ""
 	#dest.puts "%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
@@ -63,8 +76,10 @@ def make_input_file(input_General, base_General, morphism_General)
 	# ----- write background knowledge to input.dol
 
 	bk_repository = "https://ontohub.org/animal_monster/animalKnowledge.owl"
+             # MC: there is already a variable for this in the create function...
 	bk_General = make_BK_Form(bk_repository)
-	dest.puts "#{bk_General[:bk_ontology_key]} #{bk_General[:bk_name_end]} #{bk_General[:bk_name]}"
+	dest.puts "#{bk_General[:bk_ontology_key]} #{bk_General[:bk_name]} #{bk_General[:bk_name_end]}"
+             # MC: I corrected the order, so you get "ontology O_name =" and not "ontology = O_name" 
 	dest.puts "<#{bk_General[:bk_URL]}>"
 	dest.puts "#{bk_General[:bk_end]}"
 
@@ -83,6 +98,7 @@ def make_input_file(input_General, base_General, morphism_General)
 	#						:base_class_separate => ":"}
 
 	sharedObjectProperty, sharedClass = create_base(input_General, base_General, morphism_General)
+            # MC: you have called this already in create.rb
 	shared_Structure = make_shared_structure_form()
 	dest.puts "#{base_General[:base_ontology_key]} #{base_General[:base_name]} #{base_General[:base_name_end]}"
 	dest.puts "#{base_General[:base_class_key]}#{base_General[:base_class_separate]} #{base_General[:base_class]}"

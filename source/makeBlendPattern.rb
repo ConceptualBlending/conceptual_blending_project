@@ -5,7 +5,7 @@ require_relative "makeBaseForm"
 require_relative "makeMorphismForm"
 require_relative "makeInputForm"
 
-# input required? blend_patterns stored at remote loacation (ontohub)? 
+# input required? blend_patterns stored at remote location (ontohub)? 
 def select_blend_pattern(blendPattern)
 	
 	if blendPattern == "v_pattern"
@@ -21,26 +21,6 @@ def select_blend_pattern(blendPattern)
 	else
 		return "no pattern is chosen"
 	end
-	# assign the urls to input_space array
-	#blend_pattern.input_space = [repository+"/horse.owl", repository+"/tiger.owl"]
-	#blend_pattern.base = "base.dol"
-	#blend_pattern.morphism = 
-	#blendPattern = "blendPattern.dol"
-	# open the dol file for blending pattern, wipe it clean
-	#File.open('blendPattern.dol', 'w') {|file| file.truncate(0) }
-	#print "selecting the blending pattern...\n"
-	# clear the file before writing
-	# decide the pattern according to requirements and selection criteria?
-	# connect to the blend pattern repository
-	# extract the decided pattern
-	# or create the decided pattern
-	#if File.exists?('blendPattern.dol')
-		#print "blending pattern selected...\n"
-		#return
-	#else
-		#print "file does not exist...\n"
-		#abort 
-	#end
 end
 
 

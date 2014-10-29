@@ -10,6 +10,9 @@ def select_input_space(input_General, bkfilename, requirement)
 	
 		input_General[:inputURL_1] = "https://ontohub.org/animal_monster/horse.owl"
 		input_General[:inputURL_2] = "https://ontohub.org/animal_monster/tiger.owl"
+
+             # MC: why do you have arguments that you don't use? It seems to me that here you
+             # MC: would need to store bkfilename as well
 		
 	return input_General	 
 

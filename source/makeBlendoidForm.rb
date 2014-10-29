@@ -22,3 +22,4 @@ return blendoid_General
 
 end
 
+# MC: constants

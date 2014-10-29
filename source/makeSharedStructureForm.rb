@@ -15,3 +15,4 @@ def make_shared_structure_form
 
 end
 
+#MC: these are constants, you don't need a function for this

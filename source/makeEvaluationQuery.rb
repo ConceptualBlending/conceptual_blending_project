@@ -16,3 +16,5 @@ def make_Evaluation_Query(blend, bKnowledge)
 
 
 end
+
+# MC: constants

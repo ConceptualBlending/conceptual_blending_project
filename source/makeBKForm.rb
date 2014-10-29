@@ -12,3 +12,5 @@ def make_BK_Form(bk_repository)
 	return bkGeneralForm
 	
 end
+
+# MC: again constants
