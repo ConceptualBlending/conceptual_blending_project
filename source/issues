@@ -1,5 +1,0 @@
-issues:
-
-1. rewrite the weaken ruby script to handle multiple dol files for input spaces, background knowledge, requirements, base and base morphism
-2. what are the hets commands for accepting input spaces, background knowledge, requirements and base and base morphism
-3. one possible way would be to combine all the above files into one file and then send it to hets. By doing this, ruby code for dealing with input files would remain intact

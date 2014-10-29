@@ -6,14 +6,8 @@ logic OWL
 ontology horse =
 		Class: Horse
 			SubClassOf: Mammal 
-			SubClassOf: Herbivore
-			SubClassOf: has_habitat some Savanna 
-			SubClassOf: has_habitat some Grasslands 
 
-			SubClassOf: has_body_shape some QuadrupedShape
-			SubClassOf: has_part exactly 4 Hoof
 			SubClassOf: has_part exactly 1 Tail
-			SubClassOf: covered_by some Hair
 
 		Class: Mammal 	
 		Class: Herbivore
@@ -46,13 +40,7 @@ ontology tiger =
 		Class: Tiger 
 			SubClassOf: Mammal 
 			SubClassOf: Carnivore 
-			SubClassOf: has_habitat some Jungle 
-			
-			SubClassOf: has_body_shape some QuadrupedShape
-			SubClassOf: has_part some Fang 
-			SubClassOf: has_part exactly 4 Claw
-			SubClassOf: has_part exactly 1 Tail  
-			SubClassOf: covered_by some Hair
+			SubClassOf: has_habitat some Jungle
 			
 
 			Class: Mammal 	
@@ -83,13 +71,13 @@ end
 
 ontology  backgroundKnowledge = 
 <https://ontohub.org/monster-blend/background/animalKnowledge.owl>
-   
+end
    
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 		
-ontology base = 
+ontology hoti1 = 
 	ObjectProperty: has_habitat
 	ObjectProperty: has_body_shape
 	ObjectProperty: has_part 
@@ -97,10 +85,6 @@ ontology base =
 
 	Class: Organism
 	
-end 
-
-ontology hoti1 =
-	base then 
 	Class: Mammal
 	Class: Hair 
 	Class: QuadrupedShape 

@@ -1,0 +1,18 @@
+ontology base = 
+	ObjectProperty: has_habitat
+	ObjectProperty: has_body_shape
+	ObjectProperty: has_part 
+	ObjectProperty: covered_by 
+
+	Class: Organism
+	
+end 
+
+ontology hoti1 =
+	base then 
+	Class: Mammal
+	Class: Hair 
+	Class: QuadrupedShape 
+	Class: Tail 
+	
+end

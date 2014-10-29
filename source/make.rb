@@ -5,11 +5,11 @@ def make_input(input_space, bkfilename, base, blend_pattern)
 
 # clear the file before writing
 
-if File.exists?('input.dol') and File.exists?(blend_pattern) and File.exists?(bkfilename) and File.exists?(base) and File.exists?(input_space)
+if File.exists?('input_file.dol') and File.exists?(blend_pattern) and File.exists?(bkfilename) and File.exists?(base) and File.exists?(input_space)
 
 # write the input space into inputspace.dol
 
-dest = File.open('input.dol', 'w') #{|file| file.truncate(0) }
+dest = File.open('input_file.dol', 'w') #{|file| file.truncate(0) }
 
 print "combining all inputs...\n"
 
@@ -19,7 +19,7 @@ dest.write(data_to_copy)
 dest.close()
 
 
-open('input.dol', 'a') { |f|
+open('input_file.dol', 'a') { |f|
 	File.readlines(bkfilename).each do |line1| 
 		if line1.include?("logic OWL")
 			next
@@ -56,4 +56,6 @@ end
 
 
 end
+
+make_input("inputspace.dol", "backgroundKnowledge.dol", "baseMorphism.dol", "blendPattern.dol")
 

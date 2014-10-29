@@ -1,34 +1,18 @@
 
 
+require 'uri'
 
 
-def select_input_space(blend_pattern, bkfilename, requirement)
+def select_input_space(input_General, bkfilename, requirement)
 
-#File.open(input_space, 'w') {|file| file.truncate(0) }
-
-print "selecting the input spaces...\n"
-
-
-# clear the file before writing
-
-# select input spaces based on background knowledge, requirement and blending pattern
-
-if File.exists?(blend_pattern) and File.exists?(bkfilename) and File.exists?(requirement)
-
-
-
-# select the input space
-
-# write into 'inputspace.dol'
-
-	print "input spaces selected...\n"
-	return
-
-else 
-	print "File is missing...\n"
-	abort
-end
+	# ----- next task: HETS can be used here to parse all the input files to make the contents available to the selection process. 
+	# ----- at the moment, urls are assigned directly. 
+	
+		input_General[:inputURL_1] = "https://ontohub.org/animal_monster/horse.owl"
+		input_General[:inputURL_2] = "https://ontohub.org/animal_monster/tiger.owl"
+		
+	return input_General	 
 
 end
 
-#select_input_space(blend_pattern, bkfilename, requirement)
+
