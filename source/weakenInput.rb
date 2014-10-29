@@ -1,7 +1,7 @@
 # This method weakens the input. It needs to be improved considerably. 
 
 
-def weaken(fname)
+def weaken_Input(fname)
   puts("Weaken")
   lines = File.read(fname).split("\n")
   occurNo = File.read(fname).scan("SubClassOf:").count
@@ -26,7 +26,7 @@ def weaken(fname)
   occurNo2 = File.read(fname).scan("SubClassOf:").count
 
   if (occurNo ==  occurNo2) 
-    weaken(fname)
+    weaken_Input(fname)
    else
     return occurNo
   end

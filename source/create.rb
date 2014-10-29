@@ -5,7 +5,7 @@ require 'io/wait'
 
 
 require_relative "makeBlendPattern"
-require_relative "selectInput"
+require_relative "selectInputSpace"
 require_relative "makeSharedStructureForm"
 require_relative "makeBase"
 require_relative "makeInputFile"
@@ -23,6 +23,9 @@ def my_print(x, s) # MC: don't duplicate code, use functions, like this one
 end
 
 
+# to pass the values from create.rb to whereever they are required.
+# def send_values(a); end
+
 def create
 
 	# ----- select the blending pattern; arguments? initially only 'v'-shaped pattern will be used for blending..
@@ -35,7 +38,7 @@ def create
 	
 	repository = "v_pattern"
 	
-	input_General, base_General, morphism_General = select_blend_pattern(repository) 
+	input_General, base_General, morphism_General = make_Blend_Pattern(repository) 
             # MC: stay consistent with names: select_blend_pattern vs makeBlendPattern.rb
 
         my_print(input_General, "Input space general form: \n")
@@ -43,58 +46,59 @@ def create
         my_print(morphism_General, "base morphsim general form: \n")
 
 
-        # ----- extract the input spaces from the repository. Extract is guided by the blending pattern, requirement and background knowledge
+    # ----- extract the input spaces from the repository. Extract is guided by the blending pattern, requirement and background knowledge
 	# ----- list of URLs of selected input spaces. List will allow to handle more than two URLs in case of more complex blending patterm where more than two input spaces are selected
 	# ----- send the url of background knowledge located on ontohub
 	bkfilename = "https://ontohub.org/monster-blend/background/animalKnowledge.owl"
 	
-        # ----- send the url of requirement located on ontohub
+    # ----- send the url of requirement located on ontohub
 	# ----- requirement file is not there, fabian can you please make the requirement file. Since the requirement file is not present at the moment, no value is sent for requirement
 	requirement = ""
 
-	input_General_New = select_input_space(input_General, bkfilename, requirement)
+	input_General_New = select_Input_Space(input_General, bkfilename, requirement)
 
         my_print(input_General_New, "Input space general form with selected input spaces:\n")
 
-	sharedStructureForm = make_shared_structure_form()
+	sharedStructureForm = make_Shared_Structure_Form()
 
         my_print(sharedStructureForm, "The shared structure form is: \n")
 
-        # ----- once the input spaces are extracted, create a base and base morphisms.
+    # ----- once the input spaces are extracted, create a base and base morphisms.
 	# ----- The structure of the base and base morphism depends on the blending pattern
 	
-	sharedObjectProperty, sharedClass = create_base(input_General, base_General, morphism_General)
+	sharedObjectProperty, sharedClass = make_Base(input_General, base_General, morphism_General)
              # MC: again, create_base vs makeBase.rb
 	
-	print "---------------------------------------------------\n"
-	print "The shared object properties are: \n"
-	sharedObjectProperty.each do |property|
-		puts property
-	end
-	print "---------------------------------------------------\n"
-
-	print "---------------------------------------------------\n"	
-	print "The shared classes are: \n"
-	sharedClass.each do |sClass|
-		puts sClass
-	end
-	print "---------------------------------------------------\n"
+	my_print(sharedObjectProperty, "The shared object properties are: \n")
+	#print "---------------------------------------------------\n"
+	#print "The shared object properties are: \n"
+	#sharedObjectProperty.each do |property|
+	#	puts property
+	#end
+	#print "---------------------------------------------------\n"
+	
+	my_print(sharedClass, "The shared object properties are: \n")
+	#print "---------------------------------------------------\n"	
+	#print "The shared classes are: \n"
+	#sharedClass.each do |sClass|
+	#	puts sClass
+	#end
+	#print "---------------------------------------------------\n"
 
             # MC: above, use some auxiliary function for displaying...
 	
 	# ----- make the input .dol file to be sent to hets for creating the blends
 
 	
-	blend_input = make_input_file(input_General, base_General, morphism_General)
+	blend_input, query_name = make_Input_File(input_General, base_General, morphism_General, bkfilename, sharedStructureForm, sharedObjectProperty, sharedClass)
 	
 	puts blend_input
 	
-	# ----- create blendoid
-	
+	# ----- create blendoid	
 	# ----- check consistency and requirement satisfaction
 	# ----- needs to deal with nodefilename
 	Open3.popen3('hets -I') do | stdin, stdout, stderr |
-	case evaluate_blend(:query_name, stdin, stdout, blend_input) # MC: I have changed the first argument, it was from old code
+	case make_Evaluation(query_name, stdin, stdout, blend_input) # MC: I have changed the first argument, it was from old code
   		when :consistent 
   			puts "consistent"
  			send_cmd("hets -o th "+blend_input, stdin, stdout)

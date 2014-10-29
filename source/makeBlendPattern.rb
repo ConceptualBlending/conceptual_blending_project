@@ -6,10 +6,10 @@ require_relative "makeMorphismForm"
 require_relative "makeInputForm"
 
 # input required? blend_patterns stored at remote location (ontohub)? 
-def select_blend_pattern(blendPattern)
+def make_Blend_Pattern(blendPattern)
 	
 	if blendPattern == "v_pattern"
-		# since the blending pattern format is not yet finalized, simplest format is assumed. That is, how many input spaces, base and base morphisms
+		# since the blending pattern format is not yet finalized, simplest format is assumed. That is, how many input spaces, base and base morphisms the pattern consists of
 		# the array of input space, base and base morphism is created with blank values, the number of blank values depend on the blending pattern 
 		input_space = 2
 		base_form = 1

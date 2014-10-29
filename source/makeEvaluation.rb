@@ -4,7 +4,7 @@ require 'io/wait'
 #inputfilename = "input.dol"
 #blendnodename = "evalmb1"
 
-require_relative 'weaken_input'
+require_relative 'weakenInput'
 
 def send_cmd(cmd, stdin, stdout, wait=false, waitfor1=nil, waitfor2=nil)
 #  puts "\e[01;36m#{cmd}\e[00m"
@@ -30,7 +30,7 @@ end
 
 
 # evaluate the blends for consistency
-def evaluate_blend(o, stdin, stdout, inputfilename)
+def make_Evaluation(o, stdin, stdout, inputfilename)
 	send_cmd("use " + inputfilename, stdin, stdout)
   	send_cmd("dg basic " + o, stdin, stdout)
   	send_cmd("cons-checker darwin",stdin,stdout)
@@ -43,12 +43,12 @@ def evaluate_blend(o, stdin, stdout, inputfilename)
   	if out.include?("is consistent") then 
     	return :consistent
   	end
-  	i = weaken(inputfilename)  #here I want to call a program
+  	i = weaken_Input(inputfilename)  #here I want to call a program
   	if (i == 0)
     	return :inconsistent
    	else 
     puts("recursive call "+i.to_s)
-    evaluate_blend(o, stdin, stdout, inputfilename)
+    make_Evaluation(o, stdin, stdout, inputfilename)
   	end
 end
 

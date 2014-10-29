@@ -3,7 +3,7 @@
 
 
 
-def make_shared_structure_form
+def make_Shared_Structure_Form
 
 	shared_structure_features = {:structure_property => "ObjectProperty",
 								:structure_separate => ":",

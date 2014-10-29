@@ -2,17 +2,19 @@ logic OWL
 
 
 ontology animal_1 =
- <https://ontohub.org/animal_monster/horse.owl>
+Class: MyAnimal_1
+<https://ontohub.org/animal_monster/horse.owl>
 end
 
 
 ontology animal_2 =
- <https://ontohub.org/animal_monster/tiger.owl>
+Class: MyAnimal_2
+<https://ontohub.org/animal_monster/tiger.owl>
 end
 
 
 ontology bk =
-<https://ontohub.org/animal_monster/animalKnowledge.owl>
+<https://ontohub.org/monster-blend/background/animalKnowledge.owl>
 end
 
 
@@ -31,11 +33,11 @@ end
 
 
 interpretation animalMorphism1: monster_base to animal_1 =
-Monster |-> Horse
+Monster |-> MyAnimal_1
 
 
 interpretation animalMorphism2: monster_base to animal_2 =
-Monster |-> Tiger
+Monster |-> MyAnimal_2
 
 
 ontology monsterBlend =

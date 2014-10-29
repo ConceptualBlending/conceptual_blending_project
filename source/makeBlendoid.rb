@@ -2,7 +2,7 @@
 # send the inputForBlend to HETS along with the command to create blends
 
 
-def make_blendoid(inputForBlendoid)
+def make_Blendoid(inputForBlendoid)
 
 if File.exists?(inputForBlendoid)
 	print "creating blendoid...!!!\n"	

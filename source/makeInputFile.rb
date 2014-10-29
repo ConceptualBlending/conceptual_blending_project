@@ -8,12 +8,12 @@ require_relative "makeEvaluationQuery"
 	# ----- This method create the necesary input file for hets
 	# ----- This make_input_method is developed only for v-pattern blending pattern. To incorporate more complex blending pattern, the below code needs to be improved.
 
-def make_input_file(input_General, base_General, morphism_General)
+def make_Input_File(input_General, base_General, morphism_General, bk_repository, sharedStructureForm, sharedObjectProperty, sharedClass)
 
 	dest = File.open('input.dol', 'w') #{|file| file.truncate(0) }
 	
 
-	dest.puts "logic OWL"
+	dest.puts "logic OWL" 
 
 	dest.puts ""
 	dest.puts ""
@@ -75,11 +75,11 @@ def make_input_file(input_General, base_General, morphism_General)
 	#				:bk_name_end => "="}
 	# ----- write background knowledge to input.dol
 
-	bk_repository = "https://ontohub.org/animal_monster/animalKnowledge.owl"
-             # MC: there is already a variable for this in the create function...
+	#bk_repository = "https://ontohub.org/animal_monster/animalKnowledge.owl"
+             # MC: there is already a variable for this in the create function... Yup... I forgot...thanks.!
 	bk_General = make_BK_Form(bk_repository)
 	dest.puts "#{bk_General[:bk_ontology_key]} #{bk_General[:bk_name]} #{bk_General[:bk_name_end]}"
-             # MC: I corrected the order, so you get "ontology O_name =" and not "ontology = O_name" 
+             # MC: I corrected the order, so you get "ontology O_name =" and not "ontology = O_name" ... Ohh... I made a mistake here...
 	dest.puts "<#{bk_General[:bk_URL]}>"
 	dest.puts "#{bk_General[:bk_end]}"
 
@@ -97,25 +97,25 @@ def make_input_file(input_General, base_General, morphism_General)
 	#						:base_name_end => "=",
 	#						:base_class_separate => ":"}
 
-	sharedObjectProperty, sharedClass = create_base(input_General, base_General, morphism_General)
+	#sharedObjectProperty, sharedClass = create_base(input_General, base_General, morphism_General)
             # MC: you have called this already in create.rb
-	shared_Structure = make_shared_structure_form()
+	#sharedStructureForm = make_sharedStructureForm_Form()
 	dest.puts "#{base_General[:base_ontology_key]} #{base_General[:base_name]} #{base_General[:base_name_end]}"
 	dest.puts "#{base_General[:base_class_key]}#{base_General[:base_class_separate]} #{base_General[:base_class]}"
 
-	#		shared_structure_features = {:structure_property => "ObjectProperty",
+	#		sharedStructureForm_features = {:structure_property => "ObjectProperty",
 	#							:structure_separate => ":",
 	#							:structure_class => "Class",
 	#							:structure_subclass => "SubClassOf"		
 	#							}
 	sharedClass.each do |s_class|
-		dest.puts "#{shared_Structure[:structure_class]}#{shared_Structure[:structure_separate]} #{s_class}"	
+		dest.puts "#{sharedStructureForm[:structure_class]}#{sharedStructureForm[:structure_separate]} #{s_class}"	
 	end
 	
 	dest.puts ""
 
 	sharedObjectProperty.each do |property|
-		dest.puts "#{shared_Structure[:structure_property]}#{shared_Structure[:structure_separate]} #{property}"
+		dest.puts "#{sharedStructureForm[:structure_property]}#{sharedStructureForm[:structure_separate]} #{property}"
 	end
 
 	dest.puts "#{base_General[:base_end]}"
@@ -204,8 +204,8 @@ def make_input_file(input_General, base_General, morphism_General)
 
 	destination = "input.dol"
 
-	return destination
-	
+	return destination, query_General[:query_name]
+	 
 
 end
 
