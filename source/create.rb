@@ -49,7 +49,7 @@ def create
     # ----- extract the input spaces from the repository. Extract is guided by the blending pattern, requirement and background knowledge
 	# ----- list of URLs of selected input spaces. List will allow to handle more than two URLs in case of more complex blending patterm where more than two input spaces are selected
 	# ----- send the url of background knowledge located on ontohub
-	bkfilename = "https://ontohub.org/monster-blend/background/animalKnowledge.owl"
+	bkfilename = "https://ontohub.org/animal_monster/animalKnowledge.owl"
 	
     # ----- send the url of requirement located on ontohub
 	# ----- requirement file is not there, fabian can you please make the requirement file. Since the requirement file is not present at the moment, no value is sent for requirement

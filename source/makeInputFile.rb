@@ -4,13 +4,19 @@ require_relative "makeSharedStructureForm"
 require_relative "makeBase"
 require_relative "makeBlendoidForm"
 require_relative "makeEvaluationQuery"
+require_relative "downloadOntology"
 
 	# ----- This method create the necesary input file for hets
 	# ----- This make_input_method is developed only for v-pattern blending pattern. To incorporate more complex blending pattern, the below code needs to be improved.
 
+
 def make_Input_File(input_General, base_General, morphism_General, bk_repository, sharedStructureForm, sharedObjectProperty, sharedClass)
 
-	dest = File.open('input.dol', 'w') #{|file| file.truncate(0) }
+	dest = File.open('inputForBlend.dol', 'w') #{|file| file.truncate(0) }
+	
+	download_Ontology('animal_1.owl', input_General[:inputURL_1])
+	download_Ontology('animal_2.owl', input_General[:inputURL_2])
+	download_Ontology('bknowledge.owl', bk_repository)
 	
 
 	dest.puts "logic OWL" 
@@ -32,7 +38,11 @@ def make_Input_File(input_General, base_General, morphism_General, bk_repository
 	# ----- write input space 1 to input.dol
 	dest.puts "#{input_General[:input_ontology_key]} #{input_General[:inputName_1]} #{input_General[:inputNameEnd]}"
 	dest.puts "#{input_General[:input_class_key]}#{input_General[:inputClassSeparate]} #{input_General[:inputClass_1]}"
-	dest.puts "<#{input_General[:inputURL_1]}>"
+	
+	
+	src1 = File.open("animal_1.owl")
+	IO.copy_stream(src1, dest)
+	#dest.puts "<#{input_General[:inputURL_1]}>"
 	dest.puts "#{input_General[:inputEnd]}"
 
          #MC: this is not valid DOL
@@ -57,7 +67,10 @@ def make_Input_File(input_General, base_General, morphism_General, bk_repository
 	# ----- write input space 2 to input.dol
 	dest.puts "#{input_General[:input_ontology_key]} #{input_General[:inputName_2]} #{input_General[:inputNameEnd]}"
 	dest.puts "#{input_General[:input_class_key]}#{input_General[:inputClassSeparate]} #{input_General[:inputClass_2]}"
-	dest.puts "<#{input_General[:inputURL_2]}>"
+		
+	src2 = File.open("animal_2.owl")
+	IO.copy_stream(src2, dest)	
+	#dest.puts "<#{input_General[:inputURL_2]}>"
 	dest.puts "#{input_General[:inputEnd]}"
 
         # MC: same as above
@@ -80,7 +93,10 @@ def make_Input_File(input_General, base_General, morphism_General, bk_repository
 	bk_General = make_BK_Form(bk_repository)
 	dest.puts "#{bk_General[:bk_ontology_key]} #{bk_General[:bk_name]} #{bk_General[:bk_name_end]}"
              # MC: I corrected the order, so you get "ontology O_name =" and not "ontology = O_name" ... Ohh... I made a mistake here...
-	dest.puts "<#{bk_General[:bk_URL]}>"
+	
+	bk = File.open("bknowledge.owl")
+	IO.copy_stream(bk, dest)	
+	#dest.puts "<#{bk_General[:bk_URL]}>"
 	dest.puts "#{bk_General[:bk_end]}"
 
 	dest.puts ""
@@ -202,7 +218,7 @@ def make_Input_File(input_General, base_General, morphism_General, bk_repository
 
 	dest.close()
 
-	destination = "input.dol"
+	destination = "inputForBlend.dol"
 
 	return destination, query_General[:query_name]
 	 

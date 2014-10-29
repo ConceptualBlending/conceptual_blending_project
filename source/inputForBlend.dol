@@ -1,0 +1,158 @@
+logic OWL
+
+
+ontology animal_1 =
+Class: MyAnimal_1
+
+			SubClassOf: Mammal 
+			SubClassOf: Herbivore
+			SubClassOf: has_habitat some (Savanna or Grasslands) 
+
+			SubClassOf: has_body_shape some QuadrupedShape
+			SubClassOf: has_part exactly 4 Hoof
+			SubClassOf: has_part exactly 1 Tail
+			SubClassOf: covered_by some Hair
+
+		Class: Mammal 	
+		Class: Herbivore
+		Class: Savanna 
+		Class: Grasslands
+
+		Class: QuadrupedShape		
+		Class: Hoof 
+		Class: Tail
+		Class: Hair 
+		
+		ObjectProperty: has_habitat
+		ObjectProperty: has_body_shape
+		ObjectProperty: has_part 
+		ObjectProperty: covered_by 
+			
+end
+
+
+ontology animal_2 =
+Class: MyAnimal_2
+ 
+			SubClassOf: Mammal 
+			SubClassOf: Carnivore 
+			SubClassOf: has_habitat some Jungle 
+			
+			SubClassOf: has_body_shape some QuadrupedShape
+			SubClassOf: has_part some Fang 
+			SubClassOf: has_part exactly 4 Claw
+			SubClassOf: has_part exactly 1 Tail  
+			SubClassOf: covered_by some Hair
+			
+
+			Class: Mammal 	
+			Class: Carnivore
+			Class: QuadrupedShape		
+			Class: Jungle 
+			Class: Fang
+			Class: Claw
+			Class: Tail 
+			Class: Hair
+			
+			ObjectProperty: has_habitat
+			ObjectProperty: has_body_shape
+			ObjectProperty: has_part 
+			ObjectProperty: covered_by 			end
+
+
+ontology bk =
+	
+	ObjectProperty: has_habitat
+	ObjectProperty: has_body_shape
+		Domain: Organism
+		Range: BodyShape 
+		Characteristics: Functional 
+	ObjectProperty: has_part 
+	ObjectProperty: part_of 
+		InverseOf: has_part
+	ObjectProperty: covered_by 
+
+	Class: Organism
+
+
+	Class: Mammal
+		SubClassOf: Organism 
+	Class: Reptile
+		DisjointWith: Mammal
+		SubClassOf: Organism 	
+
+
+	Class: Hair 
+	Class: Scales 
+	
+	Class: Tail 
+	Class: Leg
+	Class: Claw
+		SubClassOf: part_of some Leg 
+
+
+	Class: Carnivore
+	Class: Herbivore 
+		DisjointWith: Carnivore
+	Class: Omnivore 
+		DisjointWith: Carnivore
+		DisjointWith: Herbivore
+
+	
+	Class: BodyShape 
+	Class: HumanoidShape 
+		SubClassOf: BodyShape
+	Class: QuadrupedShape
+		SubClassOf: BodyShape
+	Class: SnakeShape
+		SubClassOf: BodyShape 
+	Class: FishShape
+		SubClassOf: BodyShape 		
+		
+	Class: Axiom1
+		EquivalentTo:  has_body_shape some SnakeShape
+		SubClassOf: has_part only (not Leg)
+		SubClassOf: has_part exactly 1 Tail
+
+	Class: Axiom2
+		EquivalentTo:  has_body_shape some QuadrupedShape
+		SubClassOf: has_part exactly 4 Leg
+		SubClassOf: has_part exactly 1 Tail
+	
+	
+	DisjointClasses: HumanoidShape, 
+						QuadrupedShape, 
+						SnakeShape, 
+						FishShape
+end
+
+
+ontology monster_base =
+Class: Monster
+Class: Mammal
+Class: Hair
+Class: QuadrupedShape
+Class: Tail
+
+ObjectProperty: has_habitat
+ObjectProperty: has_body_shape
+ObjectProperty: has_part
+ObjectProperty: covered_by
+end
+
+
+interpretation animalMorphism1: monster_base to animal_1 =
+Monster |-> MyAnimal_1
+
+
+interpretation animalMorphism2: monster_base to animal_2 =
+Monster |-> MyAnimal_2
+
+
+ontology monsterBlend =
+combine animalMorphism1, animalMorphism2
+
+
+ontology monster_evaluate = monsterBlend and bk
+
+

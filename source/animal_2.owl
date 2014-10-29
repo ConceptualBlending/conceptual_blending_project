@@ -1,0 +1,25 @@
+ 
+			SubClassOf: Mammal 
+			SubClassOf: Carnivore 
+			SubClassOf: has_habitat some Jungle 
+			
+			SubClassOf: has_body_shape some QuadrupedShape
+			SubClassOf: has_part some Fang 
+			SubClassOf: has_part exactly 4 Claw
+			SubClassOf: has_part exactly 1 Tail  
+			SubClassOf: covered_by some Hair
+			
+
+			Class: Mammal 	
+			Class: Carnivore
+			Class: QuadrupedShape		
+			Class: Jungle 
+			Class: Fang
+			Class: Claw
+			Class: Tail 
+			Class: Hair
+			
+			ObjectProperty: has_habitat
+			ObjectProperty: has_body_shape
+			ObjectProperty: has_part 
+			ObjectProperty: covered_by 			
