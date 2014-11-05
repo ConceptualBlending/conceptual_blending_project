@@ -1,4 +1,8 @@
- 
+Prefix: <http://ontohub.org/animal_monster/tiger.owl#>
+Ontology: <http://ontohub.org/animal_monster/tiger.owl>
+
+		
+		Class: Tiger
 			SubClassOf: Mammal 
 			SubClassOf: Carnivore 
 			SubClassOf: has_habitat some Jungle 

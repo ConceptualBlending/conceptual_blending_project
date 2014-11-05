@@ -1,4 +1,7 @@
-	
+
+Prefix: : <http://ontohub.org/animal_monster/animalKnowledge.owl#>
+Ontology: <http://ontohub.org/animal_monster/animalKnowledge.owl>
+
 	ObjectProperty: has_habitat
 	ObjectProperty: has_body_shape
 		Domain: Organism

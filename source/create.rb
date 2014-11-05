@@ -39,7 +39,7 @@ def create
 	repository = "v_pattern"
 	
 	input_General, base_General, morphism_General = make_Blend_Pattern(repository) 
-            # MC: stay consistent with names: select_blend_pattern vs makeBlendPattern.rb
+           
 
         my_print(input_General, "Input space general form: \n")
         my_print(base_General, "base general form: \n")
@@ -49,10 +49,12 @@ def create
     # ----- extract the input spaces from the repository. Extract is guided by the blending pattern, requirement and background knowledge
 	# ----- list of URLs of selected input spaces. List will allow to handle more than two URLs in case of more complex blending patterm where more than two input spaces are selected
 	# ----- send the url of background knowledge located on ontohub
+
 	bkfilename = "https://ontohub.org/animal_monster/animalKnowledge.owl"
 	
     # ----- send the url of requirement located on ontohub
 	# ----- requirement file is not there, fabian can you please make the requirement file. Since the requirement file is not present at the moment, no value is sent for requirement
+	
 	requirement = ""
 
 	input_General_New = select_Input_Space(input_General, bkfilename, requirement)
@@ -70,20 +72,10 @@ def create
              # MC: again, create_base vs makeBase.rb
 	
 	my_print(sharedObjectProperty, "The shared object properties are: \n")
-	#print "---------------------------------------------------\n"
-	#print "The shared object properties are: \n"
-	#sharedObjectProperty.each do |property|
-	#	puts property
-	#end
-	#print "---------------------------------------------------\n"
+	
 	
 	my_print(sharedClass, "The shared object properties are: \n")
-	#print "---------------------------------------------------\n"	
-	#print "The shared classes are: \n"
-	#sharedClass.each do |sClass|
-	#	puts sClass
-	#end
-	#print "---------------------------------------------------\n"
+	
 
             # MC: above, use some auxiliary function for displaying...
 	

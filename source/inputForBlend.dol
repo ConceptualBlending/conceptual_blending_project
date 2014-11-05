@@ -3,7 +3,10 @@ logic OWL
 
 ontology animal_1 =
 Class: MyAnimal_1
-
+Prefix: <http://ontohub.org/animal_monster/horse.owl#>
+Ontology: <http://ontohub.org/animal_monster/horse.owl>
+		
+		Class: Horse
 			SubClassOf: Mammal 
 			SubClassOf: Herbivore
 			SubClassOf: has_habitat some (Savanna or Grasslands) 
@@ -33,7 +36,11 @@ end
 
 ontology animal_2 =
 Class: MyAnimal_2
- 
+Prefix: <http://ontohub.org/animal_monster/tiger.owl#>
+Ontology: <http://ontohub.org/animal_monster/tiger.owl>
+
+		
+		Class: Tiger
 			SubClassOf: Mammal 
 			SubClassOf: Carnivore 
 			SubClassOf: has_habitat some Jungle 
@@ -61,7 +68,10 @@ Class: MyAnimal_2
 
 
 ontology bk =
-	
+
+Prefix: : <http://ontohub.org/animal_monster/animalKnowledge.owl#>
+Ontology: <http://ontohub.org/animal_monster/animalKnowledge.owl>
+
 	ObjectProperty: has_habitat
 	ObjectProperty: has_body_shape
 		Domain: Organism
