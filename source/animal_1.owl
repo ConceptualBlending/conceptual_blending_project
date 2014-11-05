@@ -1,7 +1,6 @@
-Prefix: <http://ontohub.org/animal_monster/horse.owl#>
-Ontology: <http://ontohub.org/animal_monster/horse.owl>
+
 		
-		Class: Horse
+		
 			SubClassOf: Mammal 
 			SubClassOf: Herbivore
 			SubClassOf: has_habitat some (Savanna or Grasslands) 
