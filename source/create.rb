@@ -11,7 +11,6 @@ require_relative "makeBase"
 require_relative "makeInputFile"
 require_relative "makeEvaluation"
 
-# MC: don't leave in your file commented-out code, it makes the file hard to read    
 
 def my_print(x, s) # MC: don't duplicate code, use functions, like this one
  	print "---------------------------------------------------\n"	
@@ -23,8 +22,6 @@ def my_print(x, s) # MC: don't duplicate code, use functions, like this one
 end
 
 
-# to pass the values from create.rb to whereever they are required.
-# def send_values(a); end
 
 def create
 
@@ -77,8 +74,6 @@ def create
 	my_print(sharedClass, "The shared object properties are: \n")
 	
 
-            # MC: above, use some auxiliary function for displaying...
-	
 	# ----- make the input .dol file to be sent to hets for creating the blends
 
 	
@@ -90,7 +85,7 @@ def create
 	# ----- check consistency and requirement satisfaction
 	# ----- needs to deal with nodefilename
 	Open3.popen3('hets -I') do | stdin, stdout, stderr |
-	case make_Evaluation(query_name, stdin, stdout, blend_input) # MC: I have changed the first argument, it was from old code
+	case make_Evaluation(query_name, stdin, stdout, blend_input) 
   		when :consistent 
   			puts "consistent"
  			send_cmd("hets -o th "+blend_input, stdin, stdout)
@@ -101,7 +96,7 @@ def create
 		end
 	end
 
-	# i have not added method for conflict sets. It will be added soon...
+
 
 	return 
 
