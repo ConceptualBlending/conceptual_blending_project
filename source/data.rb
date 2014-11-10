@@ -65,95 +65,6 @@ sigma = Signature.new(cSet,oSet,dSet,iSet)
 #p sigma
 
 ################ Concepts
-
-=begin
-
-class Concept
-end
-
-class AtomicConcept < Concept
- 
- attr_accessor :name
- 
- def initialize(a_symbol)
-  if a_symbol.is_a?(Symbols)
-   @name = a_symbol
-  else 
-   raise "Symbol expected"
-  end
- end
-
-end
-
-a = Symbols.new(CLASS, "A")
-b = Symbols.new(CLASS, "B")
-r = Symbols.new(ROLE, "R")
-
-thing = AtomicConcept.new(top)
-#p thing
-
-ac = AtomicConcept.new(a)
-
-bc = AtomicConcept.new(b)
-
-
-#test = AtomicConcept.new(sigma)
-# this should be illegal
-
-class NegatedConcept < Concept
- attr_accessor :neg_concept
-
- def initialize(a_concept)
-   @neg_concept = a_concept
- end
-end
-
-nota = NegatedConcept.new(ac)
-
-#p nota
-
-AND = "owl:intersectionOf"
-OR = "owl:unionOf"
-
-class BinaryConcept < Concept 
- attr_accessor :left_concept, :right_concept, :operator
-
- def initialize(c1,c2,o) 
-  @left_concept = c1
-  @right_concept = c2
-  @operator = o
- end
-
-end
-
-a_and_b = BinaryConcept.new(ac, bc, AND)
-
-#p a_and_b
-
-SOME = "owl:someValuesFrom"
-ONLY = "owl:onlyValuesFrom"
-MIN  = "owl:minQualifiedCardinality"
-MAX  = "owl:maxQualifiedCardinality"
-EXACTLY = "owl:qualifiedCardinality"
-
-class RestrictionConcept < Concept
- 
-  attr_accessor :role, :restriction, :concept
-
-  def initialize(a_role, a_restr,a_concept)
-    @role = a_role
-    @restriction = a_restr
-    @concept = a_concept
-  end
-
-end
-
-some_r_a = RestrictionConcept.new(r, SOME, ac)
-#p some_r_a 
-
-#exactly_5_r_a = RestrictionConcept.new(r, Restriction.new(EXACTLY, 5), ac) # need a new class here
-=end
-################ Concepts
 class Expression
          attr_accessor :components
 end
@@ -257,17 +168,14 @@ end
 
 ################ Sentences
 
-class Sentence
+class Sentence < Expression
 end
 
 class ConceptSubsumption < Sentence
  
- attr_accessor :subsumed_concept, :subsuming_concept
-
  def initialize(c1, c2)
    if c1.is_a?(Concept)
-    @subsumed_concept = c1
-    @subsuming_concept = c2
+	@components = [c1, c2]
    else  
     raise "Waiting for concept here"
    end
@@ -281,23 +189,16 @@ each_a_is_b = ConceptSubsumption.new(ac, bc)
 
 class RoleAssertion < Sentence
  
- attr_accessor :first_ind, :second_ind, :role
-
- def initialize(i1, i2, r)
-   @first_ind = i1
-   @second_ind = i2
-   @role = r
+ def initialize(i1, r, i2)
+   @components = [i1, r, i2]
  end
 
 end
 
 class TypeAssertion < Sentence
 
- attr_accessor :ind, :type_concept
-
  def initialize(i,c)
-   @ind = i
-   @type_concept = c
+   @components = [i, c]
  end
 end
 
