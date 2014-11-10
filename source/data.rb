@@ -66,7 +66,8 @@ sigma = Signature.new(cSet,oSet,dSet,iSet)
 
 ################ Concepts
 class Expression
-         attr_accessor :components
+         attr_accessor :components, :parent
+		
 end
 
 # concept is an expression 
@@ -82,6 +83,7 @@ class AtomicConcept < Concept
   @components = []			
   if a_symbol.is_a?(Symbols)
    @name = a_symbol
+   a_symbol.parent = self
   else 
    raise "Symbol expected"
   end
@@ -90,18 +92,34 @@ class AtomicConcept < Concept
 end
 
 # negation of a concept is a concept
+=begin
 class NegatedConcept < Concept
 
      def initialize(a_concept)
      @components = [a_concept]
      end
 end
+=end
+
+class NegatedConcept < Concept
+
+    def initialize(a_concept)
+    @components = [a_concept]
+    a_concept.parent = self
+    end
+end
+a = Symbols.new(CLASS, "A")
+ac = AtomicConcept.new(a)
+nota = NegatedConcept.new(ac)
+p nota
  
 # disjunction of a concept is a concept
 class OrConcept < Concept
 
     def initialize(c1,c2)
     @components = [c1, c2]
+	c1.parent = self
+	c2.parent = self
      end
  end
 
@@ -110,6 +128,8 @@ class AndConcept < Concept
 
 	def initialize(c1, c2)
 		@components = [c1, c2]
+		c1.parent = self
+		c2.parent = self
 	end
 end
 
@@ -118,6 +138,8 @@ class UniversalConcept < Concept
 
   def initialize(a_role, a_concept)
     @components = [a_role, a_concept]   
+	a_role.parent = self
+	a_concept.parent = self
   end
 end
 
@@ -126,6 +148,8 @@ class ExistentialConcept < Concept
 
 	def initialize(a_role, a_concept)
 		@components = [a_role, a_concept]	
+		a_role.parent = self
+		a_concept.parent = self
 	end
 end
 
@@ -137,6 +161,9 @@ class MinConcept < Concept
   def initialize(a_role, a_cardinality, a_concept)
     @components = [a_role, a_concept]   
     @cardinality = a_cardinality
+	a_role.parent = self
+	a_cardinality.parent = self
+	a_concept.parent = self
   end
 end
 
@@ -149,6 +176,9 @@ class MaxConcept < Concept
   def initialize(a_role, a_cardinality, a_concept)
     @components = [a_role, a_concept]   
     @cardinality = a_cardinality
+	a_role.parent = self
+	a_cardinality.parent = self
+	a_concept.parent = self
   end
 end
 
@@ -161,6 +191,9 @@ class ExactConcept < Concept
   def initialize(a_role, a_cardinality, a_concept)
     @components = [a_role, a_concept]   
     @cardinality = a_cardinality
+	a_role.parent = self
+	a_cardinality.parent = self
+	a_concept.parent = self
   end
 end
 
@@ -176,13 +209,15 @@ class ConceptSubsumption < Sentence
  def initialize(c1, c2)
    if c1.is_a?(Concept)
 	@components = [c1, c2]
+	c1.parent = self
+	c2.parent = self
    else  
     raise "Waiting for concept here"
    end
  end
 end
 
-each_a_is_b = ConceptSubsumption.new(ac, bc)
+#each_a_is_b = ConceptSubsumption.new(ac, bc)
 #p each_a_is_b
 
 # class RoleSubsumption TODO
@@ -191,6 +226,9 @@ class RoleAssertion < Sentence
  
  def initialize(i1, r, i2)
    @components = [i1, r, i2]
+	i1.parent = self
+	r.parent = self
+	i2.parent = self
  end
 
 end
@@ -199,11 +237,13 @@ class TypeAssertion < Sentence
 
  def initialize(i,c)
    @components = [i, c]
+	i.parent = self
+	c.parent = self
  end
 end
 
-i1 = Symbols.new(ROLE, "i1")
-i1_is_nota = TypeAssertion.new(i1, nota)
+#i1 = Symbols.new(ROLE, "i1")
+#i1_is_nota = TypeAssertion.new(i1, nota)
 
 
 
@@ -223,16 +263,16 @@ class Ontology
 
 end
 
-onto = Ontology.new(sigma, [each_a_is_b,i1_is_nota])
+#onto = Ontology.new(sigma, [each_a_is_b,i1_is_nota])
 # it is possible to put a sentence in an ontology
 # even if it uses a symbol that is not in the signature
 # we need a test for that!
 
-p onto.o_sentences
+#p onto.o_sentences
 
-subs = onto.all_subsumptions # second sentence won't be displayed
+#subs = onto.all_subsumptions # second sentence won't be displayed
 
-onto.all_subsumptions.each {|x| p x.subsumed_concept} #dynamic typing => no casts
+#onto.all_subsumptions.each {|x| p x.subsumed_concept} #dynamic typing => no casts
 
 ####### Morphism
 
