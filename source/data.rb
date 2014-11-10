@@ -83,7 +83,6 @@ class AtomicConcept < Concept
   @components = []			
   if a_symbol.is_a?(Symbols)
    @name = a_symbol
-   a_symbol.parent = self
   else 
    raise "Symbol expected"
   end
@@ -92,14 +91,7 @@ class AtomicConcept < Concept
 end
 
 # negation of a concept is a concept
-=begin
-class NegatedConcept < Concept
 
-     def initialize(a_concept)
-     @components = [a_concept]
-     end
-end
-=end
 
 class NegatedConcept < Concept
 
@@ -138,7 +130,6 @@ class UniversalConcept < Concept
 
   def initialize(a_role, a_concept)
     @components = [a_role, a_concept]   
-	a_role.parent = self
 	a_concept.parent = self
   end
 end
@@ -148,7 +139,6 @@ class ExistentialConcept < Concept
 
 	def initialize(a_role, a_concept)
 		@components = [a_role, a_concept]	
-		a_role.parent = self
 		a_concept.parent = self
 	end
 end
@@ -161,8 +151,6 @@ class MinConcept < Concept
   def initialize(a_role, a_cardinality, a_concept)
     @components = [a_role, a_concept]   
     @cardinality = a_cardinality
-	a_role.parent = self
-	a_cardinality.parent = self
 	a_concept.parent = self
   end
 end
@@ -176,8 +164,6 @@ class MaxConcept < Concept
   def initialize(a_role, a_cardinality, a_concept)
     @components = [a_role, a_concept]   
     @cardinality = a_cardinality
-	a_role.parent = self
-	a_cardinality.parent = self
 	a_concept.parent = self
   end
 end
@@ -191,8 +177,6 @@ class ExactConcept < Concept
   def initialize(a_role, a_cardinality, a_concept)
     @components = [a_role, a_concept]   
     @cardinality = a_cardinality
-	a_role.parent = self
-	a_cardinality.parent = self
 	a_concept.parent = self
   end
 end
@@ -226,9 +210,6 @@ class RoleAssertion < Sentence
  
  def initialize(i1, r, i2)
    @components = [i1, r, i2]
-	i1.parent = self
-	r.parent = self
-	i2.parent = self
  end
 
 end
@@ -237,7 +218,6 @@ class TypeAssertion < Sentence
 
  def initialize(i,c)
    @components = [i, c]
-	i.parent = self
 	c.parent = self
  end
 end
