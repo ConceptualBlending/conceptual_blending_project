@@ -66,6 +66,8 @@ sigma = Signature.new(cSet,oSet,dSet,iSet)
 
 ################ Concepts
 
+=begin
+
 class Concept
 end
 
@@ -150,6 +152,108 @@ some_r_a = RestrictionConcept.new(r, SOME, ac)
 #p some_r_a 
 
 #exactly_5_r_a = RestrictionConcept.new(r, Restriction.new(EXACTLY, 5), ac) # need a new class here
+=end
+################ Concepts
+class Expression
+         attr_accessor :components
+end
+
+# concept is an expression 
+class Concept < Expression
+end
+
+# atomic concept is a concept
+class AtomicConcept < Concept
+ 
+ attr_accessor :name
+ 
+ def initialize(a_symbol)
+  @components = []			
+  if a_symbol.is_a?(Symbols)
+   @name = a_symbol
+  else 
+   raise "Symbol expected"
+  end
+ end
+
+end
+
+# negation of a concept is a concept
+class NegatedConcept < Concept
+
+     def initialize(a_concept)
+     @components = [a_concept]
+     end
+end
+ 
+# disjunction of a concept is a concept
+class OrConcept < Concept
+
+    def initialize(c1,c2)
+    @components = [c1, c2]
+     end
+ end
+
+# conjunction of a concept is a concept
+class AndConcept < Concept
+
+	def initialize(c1, c2)
+		@components = [c1, c2]
+	end
+end
+
+# universal restriction on a concept by a role is a concept
+class UniversalConcept < Concept
+
+  def initialize(a_role, a_concept)
+    @components = [a_role, a_concept]   
+  end
+end
+
+# existential restriction on a concept by a role is a concept
+class ExistentialConcept < Concept
+
+	def initialize(a_role, a_concept)
+		@components = [a_role, a_concept]	
+	end
+end
+
+# minimum cardinality
+class MinConcept < Concept
+ 
+  attr_accessor :cardinality
+
+  def initialize(a_role, a_cardinality, a_concept)
+    @components = [a_role, a_concept]   
+    @cardinality = a_cardinality
+  end
+end
+
+
+# maximum cardinality
+class MaxConcept < Concept
+ 
+  attr_accessor :cardinality
+
+  def initialize(a_role, a_cardinality, a_concept)
+    @components = [a_role, a_concept]   
+    @cardinality = a_cardinality
+  end
+end
+
+
+# exact cardinality
+class ExactConcept < Concept
+ 
+  attr_accessor :cardinality
+
+  def initialize(a_role, a_cardinality, a_concept)
+    @components = [a_role, a_concept]   
+    @cardinality = a_cardinality
+  end
+end
+
+
 
 ################ Sentences
 
