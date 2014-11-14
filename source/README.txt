@@ -13,8 +13,7 @@ The system still has error while sending file to hets.
 Files which are part of the blending system:
 
 --- data file:
-1. input.dol
----> contains the input space, base, base morphisms, blend command for hets, evaluation query to generate blend and to evaluate blend
+
 
 
 --- processing files
