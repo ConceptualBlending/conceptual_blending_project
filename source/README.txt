@@ -1,5 +1,8 @@
 
-To run the blending system, open a console
+------- OntoBlend --------
+
+
+To run OntoBlend, open a console
  Go to the local directory where the 'source' folder is located
 
 Make sure you have latest version of ruby installed
