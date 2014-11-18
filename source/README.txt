@@ -1,20 +1,16 @@
 
 To run the blending system, open a console
- go to the local directory where the 'source' folder is located
+ Go to the local directory where the 'source' folder is located
 
-make sure you have latest version of ruby installed
+Make sure you have latest version of ruby installed
 
-type "ruby begin_process.rb" 
+Type "ruby createMonster.rb" 
  without double quotes of course!
 
-The system still has error while sending file to hets.
+
 
 
 Files which are part of the blending system:
-
---- data file:
-
-
 
 --- processing files
 1. createMonster.rb
