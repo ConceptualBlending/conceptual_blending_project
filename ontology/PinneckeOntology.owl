@@ -1,0 +1,158 @@
+/*
+*	Cars have different colors, sizes. There are different kinds of cars such as sports cars, family cars, compact cars. Cars runs on either petrol or diesel or battery. 
+*/
+
+Ontology: Cars
+  	Annotations: creator Marcus Pinnecke
+
+	class: Car
+		ObjectProperty: hasColor
+			Domain: Car
+			Range:	Color
+		ObjectProperty: hasSize
+			Domain: Car
+			Range:	Size
+		ObjectProperty: hasType
+			Domain: Car
+			Range:	Type
+		ObjectProperty: hasFuel
+			Domain: Car
+			Range:	Fuel
+
+	class: Color
+	
+	class: Blue
+		SubClassOf: Color
+	class: Green
+		SubClassOf: Color
+	
+	class: Size
+	
+	class: Small
+		SubClassOf: Size
+	class: Medium
+		SubClassOf: Size	
+	class: Large
+		SubClassOf: Size	
+	
+	class: Type
+	
+	class: Sport
+		SubClassOf: Type
+	class: Family
+		SubClassOf: Type 
+	class: Compact
+		SubClassOf: Type
+	
+	class: Fuel
+		class Petrol
+			SubClassOf: Fuel
+		class Diesel
+			SubClassOf: Fuel	
+		class Battery
+			SubClassOf: Fuel	
+
+				
+	Individual: AutoA
+		SubClassOf : Car 
+		Facts:		 hasColor some Blue, hasSize some Large, hasType some Sport 
+		DifferentFrom: AutoB
+	
+	Individual: AutoB
+		SubClassOf : Car 
+		Facts:		 hasColor some Green, hasSize some Medium, hasFuel some Petrol 
+		DifferentFrom: AutoA
+	
+/*
+ * University: university has departments, students, professors. Professors teaches different subjects to students. University funds research projects.
+ */	
+ 
+Ontology: Universities
+
+	ObjectProperty:		teacherToSubject		/* How to express: 1:1, 1:N and M:N relations? What's about things like normalization in databases?
+		Domain:			Teacher
+		Range:			Subject
+		
+	ObjectProperty:		SubjectToStudent
+		Domain:			Subject
+		Range:			Student		
+
+	class University
+		ObjectProperty:	hasName
+			Range:		Name
+		ObjectProperty: hasHuman
+			Range:		Human
+
+	class Department
+		ObjectProperty:	hasName
+			Range:		Name
+	
+	class Name
+	
+	class Subject
+	
+	class Human
+		ObjectProperty:	hasName
+			Range:		Name
+		ObjectProperty:	hasUniversity
+			Range:		University	
+	
+	class Student
+		SubClassOf:		Human
+	
+	class Professor
+		SubClassOf:		Human
+	
+	class Teacher
+		SubClassOf:		Professor
+		DifferentFrom:  Student
+	
+	class Projects
+		ObjectProperty: isFundedBy
+			Range: 		University
+			
+/*
+ *  languages are of kinds such as object oriented, structured, procedural, declarative. Languages have syntax and semantics. Different language kinds are used for  
+ *  different purposes. 
+ */	
+
+Ontology: ProgrammingLanguages
+
+	Individual: C
+	    SubClassOf: Language
+		Facts: hasType some Procedural
+			   hasPurpose some Hardware
+			   hasSemantic some NoSemantic
+			
+	Individual: Java
+	    SubClassOf: Language	
+		Facts: hasType some ObjectOriented
+		   	   hasPurpose some PlatformIndependence
+			   hasSemantic some NoSemantic
+			
+	class: Language
+		ObjectProperty: hasType
+			Range:		Type
+		ObjectProperty: hasPurpose
+			Range:		Purpose
+		ObjectProperty: hasSemantic
+			Range:		Semantic
+	
+	class: Purpose
+		class: PlatformIndependence
+			SubClassOf: Purpose
+		class: Hardware
+			SubClassOf: Purpose
+	
+	class: Semantic
+		class: NoSemantic
+			SubClassOf: Semantic
+		class: SomeSemantic
+			SubClassOf: Semantic
+	
+	class: Type
+			class: Procedural
+				SubClassOf: Type			
+			class: ObjectOriented
+				SubClassOf: Type			
+	
