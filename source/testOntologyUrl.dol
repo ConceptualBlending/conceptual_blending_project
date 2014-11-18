@@ -1,5 +1,0 @@
-logic OWL
-		
-ontology horse =
-<https://ontohub.org/animal_monster/horse.owl>
-end 
