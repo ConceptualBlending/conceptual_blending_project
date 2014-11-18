@@ -26,13 +26,10 @@ def begin_process
 	# blendPattern = select_blend_pattern(blendPatternRepository, blendRequirement, backgroundKnowledge)
 	
 	# note: inputSpace_1, inputSpace_2, blendRequirement, backgroundKnowledge are objects of class Ontology
-	# inputSpace_1, inputSpace_2 = select_input_spaces(blendPattern, inputSpaceRepository, blendRequirement, backgroundKnowledge)
-	
+		
   inputSpace_1, inputSpace_2 = select_input_spaces(inputSpaceRepository, blendRequirement, backgroundKnowledge)
 		
-	#create_monsters(blendPattern, inputSpace_1, inputSpace_2, blendRequirement, backgroundKnowledge) 		# expected call
-
-	create_monsters(inputSpace_1, inputSpace_2, blendRequirement, backgroundKnowledge) 						        # current call
+	create_monsters(inputSpace_1, inputSpace_2, blendRequirement, backgroundKnowledge) 						        
 
 end
 
