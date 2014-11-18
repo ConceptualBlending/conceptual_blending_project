@@ -100,6 +100,7 @@ class NegatedConcept < Concept
     a_concept.parent = self
     end
 end
+
 a = Symbols.new(CLASS, "A")
 ac = AtomicConcept.new(a)
 nota = NegatedConcept.new(ac)
@@ -112,8 +113,8 @@ class OrConcept < Concept
     @components = [c1, c2]
 	c1.parent = self
 	c2.parent = self
-     end
- end
+    end
+end
 
 # conjunction of a concept is a concept
 class AndConcept < Concept
@@ -181,12 +182,98 @@ class ExactConcept < Concept
   end
 end
 
+# DataProperty
 
+class DataProperty < Expression
+end
+
+class AtomicDataProperty < DataProperty
+ attr_accessor :name
+ 
+ def initialize(a_symbol)
+  @components = []			
+  if a_symbol.is_a?(Symbols)
+   @name = a_symbol
+  else 
+   raise "Symbol expected"
+  end
+ end
+
+end
+
+# R^{-1}
+class InverseDataProperty < DataProperty
+
+ def initialize(r)
+  @components = [r]
+  r.parent = self
+ end
+end
+
+# role complement
+
+class NegatedDataProperty < 
+DataProperty
+
+ def initialize(r)
+   @components = [r]
+   r.parent = self  
+ end
+
+end
+
+# union of roles
+
+class UnionDataProperty < 
+DataProperty
+
+ def initialize(r1, r2)
+   @components = [r1, r2]
+   r1.parent = self
+   r2.parent = self
+ end
+end
+# conjunction of roles
+
+class ConjunctionDataProperty < DataProperty 
+
+ def initialize(r1,r2)
+   @components = [r1, r2]
+   r1.parent = self
+   r2.parent = self
+ end
+
+end
+
+# datatype restriction is missing!
+
+# Object properties
+
+class ObjectProperty < Expression
+end
+
+class AtomicObjectProperty < ObjectProperty
+ attr_accessor :name
+ def initialize(x)
+  @name = x
+ end
+end
+
+class InverseObjectProperty < ObjectProperty
+ 
+  def initialize(r)
+   @components = r
+   r.parent = self
+  end
+ 
+end
 
 ################ Sentences
 
 class Sentence < Expression
 end
+
+# classes 
 
 class ConceptSubsumption < Sentence
  
@@ -201,12 +288,139 @@ class ConceptSubsumption < Sentence
  end
 end
 
-#each_a_is_b = ConceptSubsumption.new(ac, bc)
-#p each_a_is_b
+# Equivalent concept
+class ConceptEquivalence < Sentence
+ 
+ def initialize(c1, c2)
+   if c1.is_a?(Concept)
+	@components = [c1, c2]
+	c1.parent = self
+	c2.parent = self
+   else  
+    raise "Waiting for concept here"
+   end
+ end
+end 
 
-# class RoleSubsumption TODO
+class DisjointUnionOfConcepts <
+Sentence
+ 
+ def initialize(c1, clist)
+ 
+ #@components = c1 : clist 
+ # how to write this in ruby?
+ 
+ end
 
-class RoleAssertion < Sentence
+end
+
+# has key?
+
+# object property frame sentences
+
+class DomainAssertion < Sentence
+
+ def initialize(r,c)
+   @components = [r,c]
+   r.parent = self
+   c.parent = self
+ end
+
+end
+
+class RangeAssertion < Sentence
+
+ def initialize(r,c)
+   @components = [r,c]
+   r.parent = self
+   c.parent = self
+ end
+
+end
+
+class CharacteristicsAssertion < Sentence
+
+  def initialize(r,clist)
+   # TODO: define Characteristics
+  end
+
+end
+
+class SubObjectProperty < Sentence
+
+  def initialize(r1, r2)
+   # ...
+  end
+
+end
+
+class EquivalentObjectProperty
+ < Sentence
+end
+
+class DisjointObjectProperty
+ < Sentence
+end
+
+class InverseOfObjectProperty
+ < Sentence
+end
+
+class SubPropertyChain < Sentence
+ 
+ def initialize(r1, rlist)
+ end
+
+end
+
+class DataDomainAssertion < Sentence
+
+ def initialize(r,c)
+   @components = [r,c]
+   r.parent = self
+   c.parent = self
+ end
+
+end
+
+class DataRangeAssertion < Sentence
+
+ def initialize(r,c)
+   @components = [r,c]
+   r.parent = self
+   c.parent = self
+ end
+
+end
+
+class CharacteristicsAssertion < Sentence
+
+  def initialize(r,clist)
+   # TODO: define Characteristics
+  end
+
+end
+
+class SubDataProperty < Sentence
+
+  def initialize(r1, r2)
+   # ...
+  end
+
+end
+
+class EquivalentDataProperty
+ < Sentence
+end
+
+class DisjointDataProperty
+ < Sentence
+end
+
+
+# roles
+
+class FactAssertion < Sentence
  
  def initialize(i1, r, i2)
    @components = [i1, r, i2]
@@ -220,6 +434,14 @@ class TypeAssertion < Sentence
    @components = [i, c]
 	c.parent = self
  end
+end
+
+# Individual: john SameAs: alex
+class SameAsAssertion < Sentence
+end
+
+# Individual: john DifferentFrom: alex
+class DifferentFromAssertion < Sentence
 end
 
 #i1 = Symbols.new(ROLE, "i1")

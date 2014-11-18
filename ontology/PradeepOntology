@@ -1,0 +1,161 @@
+University:
+
+Class EducationalInstitute
+ 
+Class: Departments
+	SubClassOf:  University
+Class: DataAndKnowledge
+	SubClassOf: Departments
+Class: DigitalEngg
+	SubClassOf: Departments
+
+Class: Students
+	SubClassOf: Departments
+
+Class: Professors
+	SubClassOf: Departments
+
+Class: Research
+	SubClassOf: Professors
+	SubClassOf: Students
+Class: HardwareResearch
+	SubClassOf: Research
+	SubClassOf:Departments
+Class: SoftwareResearch
+	SubClassOf:Research
+	SubClassOf:Departments
+
+ObjectProperty: Teaches
+ObjectProperty: Funds
+ObjectProperty: has_students
+	Domain: Students
+	Range: Graduated
+ObjectProperty: has_Research
+ObjectProperty: has_Deparments
+###########################################################
+Class: University
+	SubClassOf: EducationalInstitute
+	SubClassOf: has_students some Graduated
+	SubClassOf: has_Deparments exactly 1
+				(DataAndKnowledge and
+					(has_Research some (HardwareResearch and
+										SoftwareResearch)))
+	SubClassOf: Teaches exactly some
+				(DataAndKnowledge and DigitalEngg)
+	SubClassOf: Funds some Research 
+###########################################################
+
+------------------------------------------------------------------------
+
+Programming Languages:
+
+ Class : Algorithms
+ 
+ Class: Semantics
+ Class: Syntax
+ 
+ Class: ObjectOrinted
+	SubClassOf: Semantics
+	SubClassOf: Syntax
+ Class: Structural
+	SubClassOf: Semantics
+	SubClassOf: Syntax
+ Class: Procedural
+	SubClassOf: Semantics
+	SubClassOf: Syntax
+ Class:	declarative
+	SubClassOf: Semantics
+	SubClassOf: Syntax
+ 
+ Class: CProg
+	SubClassOf:Procedural
+ 
+ Class:Java
+	SubClassOf:ObjectOrinted
+ 
+ Class:Ruby
+	SubClassOf: Structural
+ 
+ Class:C#
+	SubClassOf: declarative
+ 
+ ObjectProperty : has_types
+ ObjectProperty : has_some
+ ObjectProperty : has_kinds
+ 
+ ########################################################
+ Class: ProgrammingLang
+	SubClassOf: Algorithms
+	SubClassOf: has_types(ObjectOrinted and Structural and Procedural
+							and declarative)
+	SubClassOf: has_some (Semantics and Syntax)	
+	SubClassOf: has_kinds (CProg and Java and C# and Ruby)
+ ########################################################
+ 
+----------------------------------------------------------------------------
+CAR:
+ 
+Class: Colour
+Class: BodyPart
+
+Class: Means_Of_Transport
+
+Class: Road
+SubClassOf: Means_Of_Transport
+
+Class: Vehicle
+SubClassOf: Road
+
+Class: FlatBody
+SubClassOf: Vehicle
+SubClassOf: has_color exactly 1 Colour
+
+Class: Engine 
+SubClassOf: FlatBody
+SubClassOf: has_size exactly FlatBody
+
+Class: Electric_Engine
+SubClassOf: Engine
+SubClassOf: BodyPart
+
+Class: Fuel_Engine
+SubClassOf: Engine
+
+Class: Four_Wheel
+SubClassOf: Engine
+SubClassOf: has_Engine exactly 1 Small_Engine
+
+Class: FlatBody
+Class: MidSize
+SubClassOf: FlatBody
+Class:Compact
+SubClassOf: FlatBody
+
+
+Class: Car
+SubClassOf: Four_Wheel
+SubClassOf: has_Engine exactly 1 Small_Engine
+SubClassOf:	has_color exactly 1 Colour	
+SubClassOf: has_size exactly 1 FlatBody
+
+	
+ObjectProperty: has_color
+ObjectProperty: has_size
+	Domain: BodyPart
+	Range: FlatBody
+ObjectProperty: has_Engine
+	Domain: BodyPart
+	Range: Small_Engine
+ObjectProperty: has_part
+
+#######################################################
+CAR 
+#######################################################
+Class:  Car
+	SubClassOf: Four_Wheel
+	SubClassOf: has_part exactly 1
+				(has_Engine some (Fuel_Engine or Electric_Engine))
+    SubClassOf: has_size exactly 
+				(Compact and MidSize) 	
+	SubClassOf: has_color (Red and Black)
+#######################################################
