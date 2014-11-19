@@ -1,0 +1,118 @@
+####### programming languages#########
+######################################
+
+class : programming languages
+
+ Class : Algorithms	
+ Class: Semantics
+ Class: Syntax
+ 
+ Class: ObjectOrinted language
+	SubClassOf: Semantics
+	SubClassOf: Syntax
+ Class: Structural language
+	SubClassOf: Semantics
+	SubClassOf: Syntax
+ Class: Procedural language
+	SubClassOf: Semantics
+	SubClassOf: Syntax
+ Class:	declarative language
+	SubClassOf: Semantics
+	SubClassOf: Syntax
+ 
+ Class: CProg
+	SubClassOf:Procedural language
+ 
+ Class:Java
+	SubClassOf:ObjectOrinted language
+ 
+ Class:Ruby
+	SubClassOf: Structural language
+ 
+ Class:C#
+	SubClassOf: declarative
+ 
+ ObjectProperty : has_types
+ ObjectProperty : has_some
+ ObjectProperty : has_kinds
+ 
+ ########################################################
+ Class: ProgrammingLang
+	SubClassOf: Algorithms
+	SubClassOf: has_types(ObjectOrinted language and Structural language and Procedural language
+							and declarative language)
+	SubClassOf: has_some (Semantics and Syntax)	
+	SubClassOf: has_kinds (CProg and Java and C# and Ruby)
+	
+	
+	
+	##########################################################
+	############ university##################################
+	#########################################################
+	class :university
+
+subclass of :educational institutions
+
+class:professors
+class:teaching
+class:books
+class:research
+class:graduates
+class:under graduates
+class:phd
+class:engineering
+class:management
+
+object property:has_students
+object property:has_departments
+object property:has_lectures
+
+#######################################################
+#######################################################
+
+class : university
+	subclassof : educational institutions
+			has_students(graduates and under graduates and phd)
+			and
+			has_departments(engineering or management)
+			and
+			has_lectures (engineering or management)
+			
+			
+##################################################################
+#############################CAR ONTOLOGY#########################
+##################################################################
+
+class: car
+
+subclassof:vehicle
+subclassof:body
+subclassof:fuel
+
+
+class:1_engine
+class:body parts
+class:colour
+class:4_wheels
+class:fuel
+class:steering
+class:diesel
+class:petrol 
+
+object property: has_some_colour
+object property: has_some_engine
+object property: has_exatly
+object property: runs _with 
+
+#####################################################################################################
+#####################################################################################################
+
+class:car
+	subclassof:vehicle
+	subclassof:body parts
+	subclassof:has_part exatly 1
+			(has_ some engine(diesel or petrol))
+			and 
+			has_exatly (4_wheels and 1_engine)
+			and
+			runs_with (fuel)
