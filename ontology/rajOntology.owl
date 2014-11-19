@@ -1,0 +1,166 @@
+########################Car Ontology##########################
+
+Ontology Car = 
+
+Class: Vehicle
+Class: Wheels
+Class: Engine
+Class: Steering
+Class: Seats
+Class: Body
+Class: Model
+Class: Vendor
+
+Class: Color
+Class: Red
+	SubClassOf: Color
+Class: Green
+	SubClassOf: Color
+Class: Blue
+	SubClassOf: Color
+Class: Mixed
+	SubClassOf: Color
+
+Class: Size
+Class: Mini
+	SubClassOf: Size
+Class: Mid
+	SubClassOf: Size
+Class: Full
+	SubClassOf: Size
+
+Class: CarType
+
+Class: Sport
+	SubClassOf: CarType
+Class: Family
+	SubClassOf: CarType
+Class: Compact
+	SubClassOf: CarType
+
+Class: Fuel
+
+Class: Petrol
+	SubClassOf: Fuel
+Class: Diesel
+	SubClassOf: Fuel
+Class: Battery
+	SubClassOf: Fuel
+
+
+ObjectProperty: has_vendor
+	Domain: Car
+	Range : Vendor
+ObjectProperty:	has_modelNr
+	Domain: Car
+	Range : Model
+ObjectProperty: has_parts
+ObjectProperty:	has_engine
+ObjectProperty:	has_steeringwheel
+ObjectProperty:	has_seats
+ObjectProperty:	has_body
+ObjectProperty: has_color
+ObjectProperty: has_size
+ObjectProperty: has_type
+ObjectProperty: fuel_type
+
+ Class: Car
+	
+	SubClassOf: Vehicle
+	SubClassOf: has_parts EXACTLY 1((has_wheels MIN 4 Wheels) AND (has_engine EXACTLY 1 Engine) AND (has_steeringWheel EXACTLY 1 Steering) 
+                                                                  AND (has_seats MIN 2 Seats) AND (has_body EXACTLY 1 Body))
+	
+	SubClassOf: has_modelnr some Model
+	SubClassOf: has_vendor some Vendor
+	SubClassOf: has_color {Red Green Blue Mixed}
+	SubClassOf: has_size {Mini Mid Full}
+	SubClassof: has_type {Sport Family Compact}
+	SubClassOf: fuel_type {Petrol Diesel Battery}
+
+end
+
+########################University Ontology##########################
+
+Ontology University =
+
+Class: Person
+Class: Course
+Class: Research
+
+ObjectProperty: visits
+ObjectProperty: gives
+ObjectProperty: has_students
+ObjectProperty: has_professor
+ObjectProperty: has_institutes
+ObjectProperty: offers
+ObjectProperty: has
+ObjectProperty: fundedby
+
+Class: Lecture
+	SubClassOf: Course
+
+Class: Student
+	SubClassOf: Person
+	SubClassOf: visits some Lecture
+
+Class: Professor
+	SubClassOf: Person
+	SubClassOf: gives MIN 1 Lecture
+	SubClassOf: organizes Research
+
+Class: University
+	SubClassOf: has_students some Student
+	SubClassOf: has_professor some Professor
+
+Class: Faculties
+	SubClassOf: University
+	SubClassOf: has_institutes some Institutes
+	
+Class: Institutes
+	SubClassOf: Faculties
+	SubclassOf: offers MIN 1 Course
+	SubClassOf: has some Research
+
+Class: Research
+	SubClassOf: fundedby some University
+
+end
+
+########################Programming Languages Ontology##########################
+
+Ontology ProgrammingLang =
+
+Class: Syntax
+Class: Semantics
+Class: IntendedUse
+Class: Application
+Class: Web
+Class: Embedded
+Class: Education
+Class: RealTime
+Class: GUIAutomation
+Class: Games
+Class: AI
+
+Class: ObjectOriented
+	SubClassOf: has_uses some (Application and Web and Embedded)
+Class: Structural
+	SubClassOf: has_uses some Education
+Class: Procedural
+	SubClassOf: has_uses some (RealTime and GUIAutomation and Games)
+Class: Declarative
+	SubClassOf: has_uses some (Application and AI)
+
+ObjectProperty: has_uses
+ObjectProperty: has_components
+ObjectProperty: has_paradigm
+
+Class: ProgrammingLanguages
+	SubClassOf: has_components only (Syntax and Semantics)
+	SubClassOf: has_paradigm some (ObjectOriented or Structural or Procedural or Declarative)
+
+Individual: Ruby
+ 	SubClassOf : ProgrammingLanguages
+	Facts:	has_components only (syntax and Semantics), has_paradigm some ObjectOriented
+
+end
