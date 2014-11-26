@@ -1,0 +1,23 @@
+file = File.open("test.owl", 'r')
+while !file.eof?
+   line = file.readline
+   if line.match("Class:")
+		puts line
+   end
+end
+
+file = File.open("test.owl", 'r')
+while !file.eof?
+   line = file.readline
+   if line.match("SubClassOf:")
+		puts line
+   end
+end
+
+file = File.open("test.owl", 'r')
+while !file.eof?
+   line = file.readline
+   if line.match("ObjectProperty")
+		puts line
+   end
+end
