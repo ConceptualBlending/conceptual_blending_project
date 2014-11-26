@@ -354,16 +354,13 @@ class SubObjectProperty < Sentence
 
 end
 
-class EquivalentObjectProperty
- < Sentence
+class EquivalentObjectProperty < Sentence
 end
 
-class DisjointObjectProperty
- < Sentence
+class DisjointObjectProperty < Sentence
 end
 
-class InverseOfObjectProperty
- < Sentence
+class InverseOfObjectProperty < Sentence
 end
 
 class SubPropertyChain < Sentence
@@ -409,12 +406,10 @@ class SubDataProperty < Sentence
 
 end
 
-class EquivalentDataProperty
- < Sentence
+class EquivalentDataProperty < Sentence
 end
 
-class DisjointDataProperty
- < Sentence
+class DisjointDataProperty < Sentence
 end
 
 
@@ -489,3 +484,44 @@ class Morphism
  end 
 
 end
+
+
+# Class: Mammal SubClassOf: Animal
+
+m = Symbol.new(CLASS, "Mammal")
+a = Symbol.new(CLASS, "Animal")
+mc = AtomicConcept.new(m)
+ac = AtomicConcept.new(a)
+s  = ConceptSubsumption.new(mc, ac)
+
+# Class: Birds EquivalentTo: Animal and has_part some Wing
+
+b = Symbol.new(CLASS, "Birds")
+w = Symbol.new(CLASS, "Wing")
+hp = Symbol.new(ROLE, "has_part")
+bc = AtomicConcept.new(b)
+wc = AtomicConcept.new(w)
+ac2 = AtomicConcept.new(a)
+c2 = ExistentialConcept(hp, wc)
+c1 = IntersectionConcept.new(ac2, c2)
+s2 = ConceptEquivalence(bc, c1)  
+
+cSet1 = Set[top, a, b, w, m]
+oSet1 = Set[hp]
+dSet1 = Set[]
+iSet1 = Set[]
+
+sigma1 = Signature.new(cSet1,oSet1,dSet1,iSet1)
+onto1 = Ontology.new(sigma1, [s1, s2])
+
+
+
+
+
+
+
+
+
+
+
+
