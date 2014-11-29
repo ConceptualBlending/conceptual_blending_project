@@ -47,10 +47,15 @@ class Signature
 
  def initialize(cSet, oSet, dSet, iSet)
   #Todo: check that you only have sets as args
+  if cSet.kind_of?(Array) & oSet.kind_of?(Array) & dSet.kind_of?(Array) & iSet.kind_of?(Array)
    @concepts = cSet
    @objProps = oSet
    @dataProps = dSet
    @individuals = iSet
+  else
+  #Todo: use ruby exception raise. use logger
+    puts "wrong data"
+  end
  end
 
 end
@@ -212,8 +217,7 @@ end
 
 # role complement
 
-class NegatedDataProperty < 
-DataProperty
+class NegatedDataProperty < DataProperty
 
  def initialize(r)
    @components = [r]
@@ -224,8 +228,7 @@ end
 
 # union of roles
 
-class UnionDataProperty < 
-DataProperty
+class UnionDataProperty < DataProperty
 
  def initialize(r1, r2)
    @components = [r1, r2]
@@ -279,9 +282,9 @@ class ConceptSubsumption < Sentence
  
  def initialize(c1, c2)
    if c1.is_a?(Concept)
-	@components = [c1, c2]
-	c1.parent = self
-	c2.parent = self
+	  @components = [c1, c2]
+	  c1.parent = self
+	  c2.parent = self
    else  
     raise "Waiting for concept here"
    end
@@ -293,23 +296,25 @@ class ConceptEquivalence < Sentence
  
  def initialize(c1, c2)
    if c1.is_a?(Concept)
-	@components = [c1, c2]
-	c1.parent = self
-	c2.parent = self
+	  @components = [c1, c2]
+	  c1.parent = self
+	  c2.parent = self
    else  
     raise "Waiting for concept here"
    end
  end
 end 
 
-class DisjointUnionOfConcepts <
-Sentence
+class DisjointUnionOfConcepts < Sentence
  
  def initialize(c1, clist)
- 
- #@components = c1 : clist 
- # how to write this in ruby?
- 
+  @components = [c1, ":", clist]
+  #@components = c1 : clist 
+  # how to write this in ruby?
+  #md: i dont know, may be above will work for time being, until we find a way 
+  c1.parent = self
+  clist.parent = self
+  #md please check if this is right
  end
 
 end
@@ -341,7 +346,12 @@ end
 class CharacteristicsAssertion < Sentence
 
   def initialize(r,clist)
+    @components = [r, clist]
+    r.parent = self
+    clist.parent = self
+    #md: clist.parent is right?
    # TODO: define Characteristics
+   
   end
 
 end
@@ -349,23 +359,47 @@ end
 class SubObjectProperty < Sentence
 
   def initialize(r1, r2)
-   # ...
+    @components = [r1, r2]
+    r1.parent = self
+    r2.parent = self
   end
 
 end
 
 class EquivalentObjectProperty < Sentence
+  
+  def initialize(r1, r2)
+    @components = [r1, r2]
+    r1.parent = self
+    r2.parent = self
+  end
 end
 
 class DisjointObjectProperty < Sentence
+
+  def initialize(r1, r2)
+    @components = [r1, r2]
+    r1.parent = self
+    r2.parent = self
+  end
 end
 
 class InverseOfObjectProperty < Sentence
+
+  def initialize(r1, r2)
+    @components = [r1, r2]
+    r1.parent = self
+    r2.parent = self
+  end
 end
 
 class SubPropertyChain < Sentence
  
  def initialize(r1, rlist)
+  @components = [r1, rlist]
+  r1.parent = self
+  rlist.parent = self
+  #md: rlist.parent is right?
  end
 
 end
@@ -391,7 +425,7 @@ class DataRangeAssertion < Sentence
 end
 
 class CharacteristicsAssertion < Sentence
-
+  #md is this class repeated by mistake, CharacteristicsAssertion is defined above already. 
   def initialize(r,clist)
    # TODO: define Characteristics
   end
@@ -401,15 +435,27 @@ end
 class SubDataProperty < Sentence
 
   def initialize(r1, r2)
-   # ...
+    @components = [r1, r2]
+    r1.parent = self
+    r2.parent = self
   end
 
 end
 
 class EquivalentDataProperty < Sentence
+    def initialize(r1, r2)
+    @components = [r1, r2]
+    r1.parent = self
+    r2.parent = self
+  end
 end
 
 class DisjointDataProperty < Sentence
+  def initialize(r1, r2)
+    @components = [r1, r2]
+    r1.parent = self
+    r2.parent = self
+  end
 end
 
 
@@ -427,7 +473,7 @@ class TypeAssertion < Sentence
 
  def initialize(i,c)
    @components = [i, c]
-	c.parent = self
+	 c.parent = self
  end
 end
 
