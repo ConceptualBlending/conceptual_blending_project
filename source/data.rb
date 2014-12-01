@@ -47,7 +47,7 @@ class Signature
 
  def initialize(cSet, oSet, dSet, iSet)
   #Todo: check that you only have sets as args
-  if cSet.kind_of?(Array) & oSet.kind_of?(Array) & dSet.kind_of?(Array) & iSet.kind_of?(Array)
+  if cSet.kind_of?(Set) & oSet.kind_of?(Set) & dSet.kind_of?(Set) & iSet.kind_of?(Set)
    @concepts = cSet
    @objProps = oSet
    @dataProps = dSet
@@ -308,13 +308,11 @@ end
 class DisjointUnionOfConcepts < Sentence
  
  def initialize(c1, clist)
-  @components = [c1, ":", clist]
-  #@components = c1 : clist 
-  # how to write this in ruby?
-  #md: i dont know, may be above will work for time being, until we find a way 
+  @components = clist.unshift(c1)
   c1.parent = self
-  clist.parent = self
-  #md please check if this is right
+  clist.each do |c|
+    c.parent = self
+  end 
  end
 
 end
@@ -346,10 +344,11 @@ end
 class CharacteristicsAssertion < Sentence
 
   def initialize(r,clist)
-    @components = [r, clist]
+    @components = clist.unshift(r)
     r.parent = self
-    clist.parent = self
-    #md: clist.parent is right?
+    clist.each do |c|
+     c.parent = self
+    end 
    # TODO: define Characteristics
    
   end
@@ -396,10 +395,11 @@ end
 class SubPropertyChain < Sentence
  
  def initialize(r1, rlist)
-  @components = [r1, rlist]
+  @components = rlist.unshift(r1)
   r1.parent = self
-  rlist.parent = self
-  #md: rlist.parent is right?
+  rlist.each do |r|
+    r.parent = self
+  end 
  end
 
 end
@@ -424,8 +424,9 @@ class DataRangeAssertion < Sentence
 
 end
 
-class CharacteristicsAssertion < Sentence
+class DataCharacteristicsAssertion < Sentence
   #md is this class repeated by mistake, CharacteristicsAssertion is defined above already. 
+  # MC: I changed
   def initialize(r,clist)
    # TODO: define Characteristics
   end
@@ -548,7 +549,8 @@ hp = Symbol.new(ROLE, "has_part")
 bc = AtomicConcept.new(b)
 wc = AtomicConcept.new(w)
 ac2 = AtomicConcept.new(a)
-c2 = ExistentialConcept(hp, wc)
+hpr = AtomicObjectProperty.new(hp) # added to get different instances for different occurences
+c2 = ExistentialConcept(hpr, wc)
 c1 = IntersectionConcept.new(ac2, c2)
 s2 = ConceptEquivalence(bc, c1)  
 
