@@ -11,7 +11,7 @@ INDIVIDUAL = "owl:NamedIndividual"
 
 ###### Symbols
 
-class Symbols 
+class Symbols
  
  attr_accessor :kind, :name 
 
@@ -32,7 +32,7 @@ class Symbols
 end
 
 top = Symbols.new(CLASS, "Thing")
-top.show
+#top.show
 
 #err = Symbols.new(3, "a") throws an error
 
@@ -106,10 +106,10 @@ class NegatedConcept < Concept
     end
 end
 
-a = Symbols.new(CLASS, "A")
-ac = AtomicConcept.new(a)
-nota = NegatedConcept.new(ac)
-p nota
+#a = Symbols.new(CLASS, "A")
+#ac = AtomicConcept.new(a)
+#nota = NegatedConcept.new(ac)
+#p nota
  
 # disjunction of a concept is a concept
 class OrConcept < Concept
@@ -535,24 +535,28 @@ end
 
 # Class: Mammal SubClassOf: Animal
 
-m = Symbol.new(CLASS, "Mammal")
-a = Symbol.new(CLASS, "Animal")
+m = Symbols.new(CLASS, "Mammal")
+a = Symbols.new(CLASS, "Animal")
 mc = AtomicConcept.new(m)
 ac = AtomicConcept.new(a)
-s  = ConceptSubsumption.new(mc, ac)
+s1  = ConceptSubsumption.new(mc, ac)
+
+p s1
 
 # Class: Birds EquivalentTo: Animal and has_part some Wing
 
-b = Symbol.new(CLASS, "Birds")
-w = Symbol.new(CLASS, "Wing")
-hp = Symbol.new(ROLE, "has_part")
+b = Symbols.new(CLASS, "Birds")
+w = Symbols.new(CLASS, "Wing")
+hp = Symbols.new(ROLE, "has_part")
 bc = AtomicConcept.new(b)
 wc = AtomicConcept.new(w)
 ac2 = AtomicConcept.new(a)
 hpr = AtomicObjectProperty.new(hp) # added to get different instances for different occurences
-c2 = ExistentialConcept(hpr, wc)
-c1 = IntersectionConcept.new(ac2, c2)
-s2 = ConceptEquivalence(bc, c1)  
+c2 = ExistentialConcept.new(hpr, wc)
+c1 = AndConcept.new(ac2, c2)
+s2 = ConceptEquivalence.new(bc, c1)  
+
+p s2
 
 cSet1 = Set[top, a, b, w, m]
 oSet1 = Set[hp]
@@ -562,7 +566,7 @@ iSet1 = Set[]
 sigma1 = Signature.new(cSet1,oSet1,dSet1,iSet1)
 onto1 = Ontology.new(sigma1, [s1, s2])
 
-
+p onto1
 
 
 
