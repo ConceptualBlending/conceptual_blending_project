@@ -1,4 +1,4 @@
-
+load 'data.rb' # from wherever it is
 
 #class: car subclassof: vehicle
 
@@ -18,28 +18,29 @@ Tc = AtomicConcept.new(T)
 Trc = AtomicConcept.new(Tr)
 Vc1 = AtomicConcept.new(V)
 hapr = AtomicObjectProperty(hap)
-c2 = ExistentialConcept.new(hapr,Tr)
+c2 = ExistentialConcept.new(hapr,Trc)
 c1 = AndConcept.new(Vc1,c2)
 s2 = ConceptSubsumption.new(Tc,c1)
 
 
 
-#class: Rugby Subclassof: Team Sport
+#class: Rugby Subclassof: TeamSport
 
 R = Symbols.new(CLASS,"Rugby")
-Te = Symbols.new(CLASS,"Team Sport")
+Te = Symbols.new(CLASS,"TeamSport")
 Rc = AtomicConcept.new(R)
 Tec = AtomicConcept.new(Te)
 s3 = ConceptSubsumption.new(Rc,Tec)
 
 
 
-#class: American_Football EquivalentTo: Rugby and  is_played_by only (Players and wears some Helmet)
+#class: American_Football 
+#EquivalentTo: Rugby and  is_played_by only (Player and wears some Helmet)
 
-P = Symbols.new(CLASS,"Players")
+P = Symbols.new(CLASS,"Player")
 H = Symbols.new(CLASS,"Helmet")
 A = Symbols.new(CLASS,"American_Football")
-ip = Symbols.new(ROLE,"is_played")
+ip = Symbols.new(ROLE,"is_played_by")
 wp = Symbols.new(ROLE,"wears")
 Pc = AtomicConcept.new(P)
 Hc = AtomicConcept.new(H)
@@ -49,7 +50,7 @@ ipr = AtomicObjectProperty(ip)
 wpr = AtomicObjectProperty(wp)
 c6 = ExistentialConcept.new(wpr,Hc)
 c5 = AndConcept.new(Pc,c6)
-c4 = ForallConcept.new(ipr,c5)
+c4 = UniversalConcept.new(ipr,c5)
 c3 = AndConcept.new(Rc1,C4)
 s4 = ConceptEquivalence.new(Ac,c3)
 
@@ -113,7 +114,7 @@ Rec1 = AtomicConcept.new(Re)
 Lc1 = AtomicConcept.new(L)
 Wac1 = AtomicConcept.new(Wa)
 Hhpr = AtomicObjectProperty.new(Hhp)
-c12 = Orconcept.new(Wac1,Lc1)
+c12 = AndConcept.new(Wac1,Lc1)
 c13 = ExistentialConcept.new(Hhpr,c12)
 c14 = AndConcept.new(Rec1,c13)
 s9 = ConceptEquivalence.new(Tuc,c14)
