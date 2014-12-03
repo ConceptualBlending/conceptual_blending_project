@@ -1,0 +1,172 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://webprotege.stanford.edu/project/BQ9brKWW6pcSvWvKu3ajh4#"
+     xml:base="http://webprotege.stanford.edu/project/BQ9brKWW6pcSvWvKu3ajh4"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:webprotege="http://protege.stanford.edu/webprotege/"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+    <owl:Ontology rdf:about="http://webprotege.stanford.edu/project/BQ9brKWW6pcSvWvKu3ajh4">
+        <webprotege:revision rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">22</webprotege:revision>
+        <dc:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">EJanssen</dc:creator>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Ontology about animals</rdfs:comment>
+        <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">Sep 14, 2014 6:38:07 AM</dc:date>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">This ontology was generated from an ontology revision in WebProtege http://webprotege.stanford.edu</rdfs:comment>
+        <dc:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string">system</dc:creator>
+    </owl:Ontology>
+
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+
+
+
+    <!-- http://webprotege.stanford.edu/R9Z6fbARatTkgoJhEpMjytr -->
+
+    <owl:ObjectProperty rdf:about="http://webprotege.stanford.edu/R9Z6fbARatTkgoJhEpMjytr">
+        <rdfs:label>Drinks</rdfs:label>
+        <rdfs:range rdf:resource="http://webprotege.stanford.edu/RDfLBsjF5VXHjIMNZLSglj2"/>
+        <rdfs:domain rdf:resource="http://webprotege.stanford.edu/RRREaIUh6q9KqzdEOkBpa1"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </owl:ObjectProperty>
+
+
+
+    <!-- http://webprotege.stanford.edu/RBPJv5YYGgRxw4wupG78qFL -->
+
+   <owl:ObjectProperty rdf:about="http://webprotege.stanford.edu/RBPJv5YYGgRxw4wupG78qFL">
+        <rdfs:label>Eats</rdfs:label>
+        <rdfs:domain rdf:resource="http://webprotege.stanford.edu/R8aa4JfA8ilBqDTg4YF0QCb"/>
+        <rdfs:range rdf:resource="http://webprotege.stanford.edu/RB7FtTBsgxHX3uNNBgAwwuK"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+    </owl:ObjectProperty>
+
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+
+
+
+    <!-- http://webprotege.stanford.edu/R8aa4JfA8ilBqDTg4YF0QCb -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/R8aa4JfA8ilBqDTg4YF0QCb">
+        <rdfs:label>Antelope</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/RBpiF25MlENANetxLWz3GKy"/>
+    </owl:Class>
+
+
+
+    <!-- http://webprotege.stanford.edu/R9hI4308JSIAIPxtFXbEviM -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/R9hI4308JSIAIPxtFXbEviM">
+        <rdfs:label>Carnivore</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/RCrNsyIgq7F5Ft5lURU28fD"/>
+    </owl:Class>
+
+
+
+    <!-- http://webprotege.stanford.edu/RB7FtTBsgxHX3uNNBgAwwuK -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/RB7FtTBsgxHX3uNNBgAwwuK">
+        <rdfs:label>Tree</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/RRREaIUh6q9KqzdEOkBpa1"/>
+    </owl:Class>
+
+
+    <!-- http://webprotege.stanford.edu/RBLnMqi8aoxrcZWPn8wgMql -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/RBLnMqi8aoxrcZWPn8wgMql">
+        <rdfs:label>Flower</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/RRREaIUh6q9KqzdEOkBpa1"/>
+    </owl:Class>
+
+
+
+    <!-- http://webprotege.stanford.edu/RBW7WIAsDzDJS1o1OLSx4wv -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/RBW7WIAsDzDJS1o1OLSx4wv">
+        <rdfs:label>Evergreen</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/RB7FtTBsgxHX3uNNBgAwwuK"/>
+    </owl:Class>
+
+
+
+    <!-- http://webprotege.stanford.edu/RBpiF25MlENANetxLWz3GKy -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/RBpiF25MlENANetxLWz3GKy">
+        <rdfs:label>Herbivore</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/RCrNsyIgq7F5Ft5lURU28fD"/>
+    </owl:Class>
+
+
+
+    <!-- http://webprotege.stanford.edu/RCrNsyIgq7F5Ft5lURU28fD -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/RCrNsyIgq7F5Ft5lURU28fD">
+        <rdfs:label>Animal</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+    </owl:Class>
+
+
+
+    <!-- http://webprotege.stanford.edu/RCu0Ky0KJlTg0e9TFGypMRK -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/RCu0Ky0KJlTg0e9TFGypMRK">
+        <rdfs:label>Lion</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/R9hI4308JSIAIPxtFXbEviM"/>
+    </owl:Class>
+
+                               
+    <!-- http://webprotege.stanford.edu/RCx1KLqdQIBuFmYMfNCLiad -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/RCx1KLqdQIBuFmYMfNCLiad">
+        <rdfs:label>Lilly</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/RBLnMqi8aoxrcZWPn8wgMql"/>
+    </owl:Class>
+
+
+
+    <!-- http://webprotege.stanford.edu/RDfLBsjF5VXHjIMNZLSglj2 -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/RDfLBsjF5VXHjIMNZLSglj2">
+        <rdfs:label>water</rdfs:label>
+    </owl:Class>
+
+
+
+    <!-- http://webprotege.stanford.edu/RDpl3g9JpjuIry7b47tCbPA -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/RDpl3g9JpjuIry7b47tCbPA">
+        <rdfs:label>Amaryllis</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://webprotege.stanford.edu/RBLnMqi8aoxrcZWPn8wgMql"/>
+    </owl:Class>
+
+
+
+    <!-- http://webprotege.stanford.edu/RRREaIUh6q9KqzdEOkBpa1 -->
+
+    <owl:Class rdf:about="http://webprotege.stanford.edu/RRREaIUh6q9KqzdEOkBpa1">
+        <rdfs:label>Plant</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+    </owl:Class>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 3.5.0) http://owlapi.sourceforge.net -->
+                                                                                                                    133,1         68%
