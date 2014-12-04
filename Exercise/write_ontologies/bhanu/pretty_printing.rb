@@ -13,7 +13,9 @@ def pp(req_string)
 end
 
 def test()
+   puts("\n")
    pp("CLASS")
+   puts("\n")
    pp("ROLE")
 end
 
