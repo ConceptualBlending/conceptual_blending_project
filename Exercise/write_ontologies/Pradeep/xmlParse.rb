@@ -1,53 +1,56 @@
+require 'set'
 require 'rexml/document'
 include REXML
 load 'data.rb'
-
-def xmlParseText(matchString, type)
-    string = ""
-   doc = Document.new(File.new("root-ontology.owl"))
-   root = doc.root
-   if type.eql? "Text"
-      doc.elements.each(matchString) do |i|
-         string << "\n "<< i.text
-      end
-   end
-   if type.eql? "attributes"
-      puts "In attribues"
-      doc.elements.each(matchString) do |i|
-         string = i.attributes.to_s
-         i = string.split("=")
-         l = i[2].chop
-         doc.elements.each("rdf:RDF/owl:Class") do |i|
-            parentclass = i.attributes.to_s
-            a = parentclass.split("=")
-            z = a[2].chop
-            if l.eql? z
-              puts l
-            end
+   def parseSymbols()
+      cSet = Set[]
+      dSet = Set[]
+      cs1 = []
+      doc = Document.new(File.new("animal.owl"))
+      root = doc.root
+      doc.elements.each("rdf:RDF/owl:Class") do |i|  # Parse Classes
+         string = element_about(i, "about")
+         symClass = Symbols.new(CLASS, string)
+#        p symClass
+         acClass = AtomicConcept.new(symClass)
+         cSet = Set[acClass]
+         doc.elements.each("rdf:RDF/owl:Class/rdfs:subClassOf") do |i| # Parse Sub Classes
+            subString = element_about(i, "resource" )
+            symSubClass = Symbols.new(CLASS, subString)
+#           p symSubClass
+            acSubClass = AtomicConcept.new(symSubClass)
+            cs1 = ConceptSubsumption.new(acClass, acSubClass)
+#           p cs1
          end
       end
+      doc.elements.each("rdf:RDF/owl:ObjectProperty") do |i| # Parse ObjectProperty 
+         objString = element_about(i, "about")
+         symObjProp = Symbols.new(ROLE, objString)
+         dSet = [symObjProp]
+         acObjProp = AtomicConcept.new(symObjProp)
+      end
+      dSet1 = Set[]
+      iSet1 = Set[]
+      sig = Signature.new(cSet, dSet, dSet1, iSet1)
+      onto1 = Ontology.new(sig, cs1)
+      p onto1
    end
-   return string
+
+   def element_attr(e, attr)
+      return e.attributes[attr][0,100000000]
+   end
+
+   def element_about(e, text)
+      if text.eql? "about"
+         return element_attr(e, "about")
+      end
+
+      if text.eql? "resource"
+      if text.eql? "resource"
+         return element_attr(e, "resource")
+      end
+   end
 end
 
-
-def subClassOf()
-   subclass = xmlParseText("rdf:RDF/owl:Class/rdfs:subClassOf", "attributes")
-end
-
-def classParse()
-   puts "\n CLASS:"
-   parentClass = xmlParseText("rdf:RDF/owl:Class/rdfs:label", "Text")
-   puts parentClass
-end
-
-def objPropParse()
-   puts("\n OBJECT PROP:")
-   objprop = xmlParseText("rdf:RDF/owl:ObjectProperty/rdfs:label","Text")
-   puts objprop
-end
-
-#xmlParse()
-classParse()
-objPropParse()
-subClassOf()
+top = ParseOntology.new()
+top.parseSymbols
