@@ -1,0 +1,44 @@
+load 'data.rb'
+
+# INPUTSPACE 1
+# Class: A SubClassOf: C
+
+a1 = Symbols.new(CLASS, "A")
+a2 = Symbols.new(CLASS, "C")
+ac1 = AtomicConcept.new(a1)
+ac2 = AtomicConcept.new(a2)
+cs1  = ConceptSubsumption.new(ac1,ac2)
+
+
+#INPUTSPACE 2
+# Class: A SubClassOf: B
+
+b1 = Symbols.new(CLASS, "A")
+b2 = Symbols.new(CLASS, "B")
+bc1 = AtomicConcept.new(b1)
+bc2 = AtomicConcept.new(b2)
+cs2 = ConceptSubsumption.new(bc1,bc2)
+  
+def au(name1,name2)
+    @n1=name1
+    @n2=name2
+  if @n1==@n2
+    return @n1
+  else
+    return "X"
+  end
+ end
+
+if cs1.class==cs2.class
+   result1=au(a1.name,b1.name)   
+   result2=au(a2.name,b2.name)
+end
+
+r1=Symbols.new(CLASS,result1)
+r2=Symbols.new(CLASS,result2)
+rac1=AtomicConcept.new(r1)
+rac2=AtomicConcept.new(r2)
+rcs=ConceptSubsumption.new(rac1,rac2)
+ 
+
+
