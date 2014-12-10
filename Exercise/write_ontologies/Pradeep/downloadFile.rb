@@ -1,5 +1,6 @@
 def generateListOfFiles(path)
-   system("git clone https://github.com/ConceptualBlending/conceptual_blending_project.git")
+   system("git clone" ++ path ++ "myFolder" )
+   ## change to the folder myFolder
    if Dir[path] == nil
       puts "Entered wrong path"
    end
@@ -9,5 +10,5 @@ def generateListOfFiles(path)
 end
 
 
-generateListOfFiles("/home/pradeep/FunProg/RubyFun/OVGU_Prjct/conceptual_blending_project/Exercise/write_ontologies")
+generateListOfFiles("https://github.com/ConceptualBlending/conceptual_blending_project.git")
                                                                                                                            

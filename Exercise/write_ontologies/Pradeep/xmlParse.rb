@@ -1,26 +1,29 @@
 require 'set'
 require 'rexml/document'
 include REXML
-load 'data.rb'
-   def parseSymbols()
+load '../../../source/data.rb'
+
+def parseSymbols()
       cSet = Set[]
       dSet = Set[]
-      cs1 = []
+      sens = []
+
       doc = Document.new(File.new("animal.owl"))
+
       root = doc.root
       doc.elements.each("rdf:RDF/owl:Class") do |i|  # Parse Classes
          string = element_about(i, "about")
          symClass = Symbols.new(CLASS, string)
 #        p symClass
          acClass = AtomicConcept.new(symClass)
-         cSet = Set[acClass]
+         cSet.add(symClass)
          doc.elements.each("rdf:RDF/owl:Class/rdfs:subClassOf") do |i| # Parse Sub Classes
             subString = element_about(i, "resource" )
             symSubClass = Symbols.new(CLASS, subString)
 #           p symSubClass
             acSubClass = AtomicConcept.new(symSubClass)
             cs1 = ConceptSubsumption.new(acClass, acSubClass)
-#           p cs1
+           sens.push(cs1)
          end
       end
       doc.elements.each("rdf:RDF/owl:ObjectProperty") do |i| # Parse ObjectProperty 
@@ -32,8 +35,8 @@ load 'data.rb'
       dSet1 = Set[]
       iSet1 = Set[]
       sig = Signature.new(cSet, dSet, dSet1, iSet1)
-      onto1 = Ontology.new(sig, cs1)
-      p onto1
+      onto1 = Ontology.new(sig, sens)
+      return onto1
    end
 
    def element_attr(e, attr)
@@ -52,5 +55,7 @@ load 'data.rb'
    end
 end
 
-top = ParseOntology.new()
-top.parseSymbols
+
+o = parseSymbols()
+p o.o_signature.concepts.size
+p o.o_sentences.size
