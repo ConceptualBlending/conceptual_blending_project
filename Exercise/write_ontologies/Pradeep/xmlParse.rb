@@ -3,12 +3,14 @@ require 'rexml/document'
 include REXML
 load '../../../source/data.rb'
 
-def parseSymbols()
+   def parseSymbols(file)
       cSet = Set[]
       dSet = Set[]
       sens = []
-
-      doc = Document.new(File.new("animal.owl"))
+      acClass = []
+      symArr = []
+      acSubClass = []
+      doc = Document.new(File.new(file))
 
       root = doc.root
       doc.elements.each("rdf:RDF/owl:Class") do |i|  # Parse Classes
@@ -17,45 +19,33 @@ def parseSymbols()
 #        p symClass
          acClass = AtomicConcept.new(symClass)
          cSet.add(symClass)
-         doc.elements.each("rdf:RDF/owl:Class/rdfs:subClassOf") do |i| # Parse Sub Classes
-            subString = element_about(i, "resource" )
-            symSubClass = Symbols.new(CLASS, subString)
-#           p symSubClass
-            acSubClass = AtomicConcept.new(symSubClass)
-            cs1 = ConceptSubsumption.new(acClass, acSubClass)
-           sens.push(cs1)
-         end
       end
+
+      doc.elements.each("rdf:RDF/owl:Class/rdfs:subClassOf") do |i| # Parse Sub Classes
+         subString = element_about(i, "resource" )
+         symSubClass = Symbols.new(CLASS, subString)
+#        p symSubClas
+         acSubClass = AtomicConcept.new(symSubClass)
+      end
+
+      cs1 = ConceptSubsumption.new(acClass, acSubClass)
+      sens.push(cs1)
       doc.elements.each("rdf:RDF/owl:ObjectProperty") do |i| # Parse ObjectProperty 
          objString = element_about(i, "about")
          symObjProp = Symbols.new(ROLE, objString)
-         dSet = [symObjProp]
          acObjProp = AtomicConcept.new(symObjProp)
+         dSet.add(symObjProp)
       end
+
       dSet1 = Set[]
       iSet1 = Set[]
       sig = Signature.new(cSet, dSet, dSet1, iSet1)
       onto1 = Ontology.new(sig, sens)
+      # p onto1
       return onto1
    end
 
-   def element_attr(e, attr)
-      return e.attributes[attr][0,100000000]
-   end
-
-   def element_about(e, text)
-      if text.eql? "about"
-         return element_attr(e, "about")
-      end
-
-      if text.eql? "resource"
-      if text.eql? "resource"
-         return element_attr(e, "resource")
-      end
-   end
-end
-
-
-o = parseSymbols()
+o = parseSymbols("animal.owl")
 p o.o_signature.concepts.size
 p o.o_sentences.size
+                                 
