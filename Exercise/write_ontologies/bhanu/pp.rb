@@ -27,12 +27,30 @@ class Symbols
 
 
  def show 
-   puts "\nKind: #{@kind} \n name: #{@name}"
+   puts "Kind: #{@kind} name: #{@name}"
  end
+ def show
+#	 @kind.each do |x|
+if @kind.eql? "owl:Class"
+puts "class:"
+elsif
+@kind.eql? "owl:ObjectProperty"
+puts "ObjectProperty:"
+elsif
+@kind.eql? "owl:NamedIndividual"
+puts "Individual:"
+
+else
+
+	puts @kind + " "
+end 
+#	 @name.each do |x|
+		 puts @name + " \n "
+  end
 end
 
-top = Symbols.new(CLASS, "Thing")
-top.show
+#top = Symbols.new(CLASS, "Thing")
+#top.show
 
 #err = Symbols.new(3, "a") throws an error
 
@@ -56,11 +74,26 @@ class Signature
   #Todo: use ruby exception raise. use logger
     puts "wrong data"
   end
+  def show 
+  @concepts.each do |x|
+   x.show
+  end
+   @objProps.each do |x|
+   x.show
+  end
+  @dataProps.each do |x|
+   x.show
+  end
+  @individuals.each do |x|
+   x.show
+  end
+  end
+  
  end
 
 end
 
-cSet = Set[top]
+cSet = Set[]
 oSet = Set[]
 dSet = Set[]
 iSet = Set[]
@@ -92,6 +125,11 @@ class AtomicConcept < Concept
    raise "Symbol expected"
   end
  end
+def show
+
+#@name.each do |x|
+ @name.show
+end
 
 end
 
@@ -129,6 +167,11 @@ class AndConcept < Concept
 		c1.parent = self
 		c2.parent = self
 	end
+	def show 
+	@components.each do |x|
+	 x.show
+	end
+	end
 end
 
 # universal restriction on a concept by a role is a concept
@@ -146,6 +189,11 @@ class ExistentialConcept < Concept
 	def initialize(a_role, a_concept)
 		@components = [a_role, a_concept]	
 		a_concept.parent = self
+	end
+	def show
+	@components.each do |x|
+	x.show
+	end
 	end
 end
 
@@ -253,6 +301,7 @@ end
 # Object properties
 
 class ObjectProperty < Expression
+#puts ObjectProperty
 end
 
 class AtomicObjectProperty < ObjectProperty
@@ -260,6 +309,10 @@ class AtomicObjectProperty < ObjectProperty
  def initialize(x)
   @name = x
  end
+ def show
+ @name.show
+ end
+ 
 end
 
 class InverseObjectProperty < ObjectProperty
@@ -288,6 +341,12 @@ class ConceptSubsumption < Sentence
    else  
     raise "Waiting for concept here"
    end
+   def show
+    puts "SubClassOf:"   
+    c1.show
+	
+	c2.show
+	end
  end
 end
 
@@ -301,6 +360,11 @@ class ConceptEquivalence < Sentence
 	  c2.parent = self
    else  
     raise "Waiting for concept here"
+   end
+   def show
+   @components.each do |x|
+    x.show
+   end
    end
  end
 end 
@@ -504,29 +568,16 @@ class Ontology
  def all_subsumptions
    @o_sentences.select{|x| x.is_a?(ConceptSubsumption)}
  end
-
-
- def showOnto
-#   puts "\nSignature#{@o_sentences} "
-   file_create = File.new("out.txt","w")
-   file_create.puts "#{@o_sentences}"
-   file_create.close
-   file = File.open("out.txt", "r")
-   puts file
-=begin
-   while !file.eof?
-    line = file.readline
-    puts line
-      if line. match("@name")
-           puts line
-         
-     end
-  end
-=end
-   file.close 
  
+ def show
+   # @o_sentences.each do |x|
+    #    x.show
+    #end
+#    @o_signature.each do |x|
+       @o_signature.show
+#    end
+ end
 
- end  
 end
 
 #onto = Ontology.new(sigma, [each_a_is_b,i1_is_nota])
@@ -558,13 +609,12 @@ end
 # Class: Mammal SubClassOf: Animal
 
 m = Symbols.new(CLASS, "Mammal")
-m.show
 a = Symbols.new(CLASS, "Animal")
-a.show
 mc = AtomicConcept.new(m)
 ac = AtomicConcept.new(a)
 s1  = ConceptSubsumption.new(mc, ac)
 
+#p s1
 
 # Class: Birds EquivalentTo: Animal and has_part some Wing
 
@@ -581,16 +631,18 @@ s2 = ConceptEquivalence.new(bc, c1)
 
 #p s2
 
-cSet1 = Set[top, a, b, w, m]
+cSet1 = Set[a, b, w, m]
 oSet1 = Set[hp]
 dSet1 = Set[]
 iSet1 = Set[]
 
 sigma1 = Signature.new(cSet1,oSet1,dSet1,iSet1)
 onto1 = Ontology.new(sigma1, [s1, s2])
+onto1.show
 
-onto1.showOnto
 #p onto1
+
+
 
 
 
