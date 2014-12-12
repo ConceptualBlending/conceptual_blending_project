@@ -25,27 +25,22 @@ class Symbols
   @name = a_name
  end
 
-
- def show 
-   puts "Kind: #{@kind} name: #{@name}"
- end
  def show
 #	 @kind.each do |x|
-if @kind.eql? "owl:Class"
-puts "class:"
-elsif
-@kind.eql? "owl:ObjectProperty"
-puts "ObjectProperty:"
-elsif
-@kind.eql? "owl:NamedIndividual"
-puts "Individual:"
-
+case @kind
+when  CLASS
+puts "Class:"+@name
+when ROLE
+puts "ObjectProperty:"+@name
+when DATA
+puts "DatatypeProperty"+@name
+when INDIVIDUAL
+puts "Individual:"+@name
 else
-
-	puts @kind + " "
+puts "ERROR,false value"+@name
 end 
 #	 @name.each do |x|
-		 puts @name + " \n "
+		 #puts @name + "\n "
   end
 end
 
@@ -157,7 +152,13 @@ class OrConcept < Concept
 	c1.parent = self
 	c2.parent = self
     end
+	def show
+	components[0].show
+	puts "or"
+components[1].show
 end
+end
+
 
 # conjunction of a concept is a concept
 class AndConcept < Concept
@@ -168,9 +169,11 @@ class AndConcept < Concept
 		c2.parent = self
 	end
 	def show 
-	@components.each do |x|
-	 x.show
-	end
+	components[0].show
+	puts "and"
+components[1].show
+	#@components.each do |x|
+	 #x.show
 	end
 end
 
@@ -191,9 +194,11 @@ class ExistentialConcept < Concept
 		a_concept.parent = self
 	end
 	def show
-	@components.each do |x|
-	x.show
-	end
+	components[0].show
+	puts "some"
+    components[1].show
+	#@components.each do |x|
+	#x.show
 	end
 end
 
@@ -342,12 +347,16 @@ class ConceptSubsumption < Sentence
     raise "Waiting for concept here"
    end
    def show
-    puts "SubClassOf:"   
-    c1.show
-	
-	c2.show
+	components[0].show
+	puts "SubClassOf:"
+components[1].show
+ # @components.each do |x|
+   #x.show
+   # puts "SubClassOf:"   
+    #c1.show
+	#c2.show
 	end
- end
+	end
 end
 
 # Equivalent concept
@@ -362,9 +371,11 @@ class ConceptEquivalence < Sentence
     raise "Waiting for concept here"
    end
    def show
-   @components.each do |x|
-    x.show
-   end
+   components[0].show
+	puts "EquivalentTo:"
+    components[1].show
+   #@components.each do |x|
+    #x.show
    end
  end
 end 
@@ -570,10 +581,10 @@ class Ontology
  end
  
  def show
-   # @o_sentences.each do |x|
-    #    x.show
-    #end
-#    @o_signature.each do |x|
+    @o_sentences.each do |x|
+        x.show
+    end
+ #   @o_signature.each do |x|
        @o_signature.show
 #    end
  end
@@ -602,7 +613,6 @@ class Morphism
    @target_sig = tsig
    @symbol_map = smap
  end 
-
 end
 
 
@@ -641,13 +651,3 @@ onto1 = Ontology.new(sigma1, [s1, s2])
 onto1.show
 
 #p onto1
-
-
-
-
-
-
-
-
-
-
