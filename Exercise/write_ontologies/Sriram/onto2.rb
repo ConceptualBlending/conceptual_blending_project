@@ -21,9 +21,16 @@ load '../../../source/data.rb'
             sens() # this is unfinished code, you want to add x here at the end of sens
          end
       end
+      # here you must create a new ontology and return it
    end
 
 
 
-#onto = Ontology.new()
+#onto = Ontology.new() 
+# you need to create an instance of the Ontology class, that you pass as an argument to your function
+# maybe it's best to create something on your own, to understand the data structures:
+#  three classes, A,B,C
+#  A subclassof B
+#  B equivalent C
+# look at the end of data.rb to see how it is done!
 replace_equivalences(onto)
