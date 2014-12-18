@@ -39,8 +39,8 @@ puts "Individual:"+@name
 else
 puts "ERROR,false value"+@name
 end 
-#	 @name.each do |x|
-		 #puts @name + "\n "
+#@name.each do |x|
+#puts @name + "\n "
   end
 end
 
@@ -153,9 +153,9 @@ class OrConcept < Concept
 	c2.parent = self
     end
 	def show
-	components[0].show
-	puts "or"
-components[1].show
+	components[0].show 
+	print "or " 
+	components[1].show
 end
 end
 
@@ -170,8 +170,8 @@ class AndConcept < Concept
 	end
 	def show 
 	components[0].show
-	puts "and"
-components[1].show
+	print "and "
+	components[1].show
 	#@components.each do |x|
 	 #x.show
 	end
@@ -195,7 +195,7 @@ class ExistentialConcept < Concept
 	end
 	def show
 	components[0].show
-	puts "some"
+	print "some "
     components[1].show
 	#@components.each do |x|
 	#x.show
@@ -348,8 +348,9 @@ class ConceptSubsumption < Sentence
    end
    def show
 	components[0].show
-	puts "SubClassOf:"
+	print "SubClassOf:"
 components[1].show
+puts ''
  # @components.each do |x|
    #x.show
    # puts "SubClassOf:"   
@@ -372,8 +373,9 @@ class ConceptEquivalence < Sentence
    end
    def show
    components[0].show
-	puts "EquivalentTo:"
+	print "EquivalentTo:"
     components[1].show
+	puts ''
    #@components.each do |x|
     #x.show
    end
