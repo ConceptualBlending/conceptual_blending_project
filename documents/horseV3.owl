@@ -1,0 +1,201 @@
+Prefix: : <http://ontohub.org/monster-blend/animals/horse#>
+Ontology: <http://ontohub.org/monster-blend/animals/horse>
+
+
+######################################################################
+###### General/Background     ########################################
+######################################################################
+
+
+ObjectProperty: has_part
+	Characteristics: Transitive  
+ObjectProperty: part_of 
+	InverseOf: has_part 
+ObjectProperty: has_fiat_boundary
+	Domain: BodyPart
+	Range: FiatBoundary 
+
+ObjectProperty: fiat_boundary_of 
+	InverseOf: has_fiat_boundary
+
+ObjectProperty: meets 
+
+
+Class: FiatBoundary
+Class: Organism
+
+Class: Mammal
+	SubClassOf: Organism 
+
+Class: BodyPart 
+	SubClassOf: part_of some Organism 
+
+Class: Hair 
+	SubClassOf: BodyPart
+
+Class: CardinalBodyPart
+	SubClassOf: BodyPart
+	 
+Class: Head
+	SubClassOf: CardinalBodyPart
+	SubClassOf: has_fiat_boundary exactly 1 FiatBoundary		
+Class: Trunk 
+	SubClassOf: CardinalBodyPart
+Class: Limb
+	SubClassOf: CardinalBodyPart
+	SubClassOf: has_fiat_boundary exactly 2 FiatBoundary	
+	SubClassOf: has_fiat_boundary exactly 1 ProximalBoundary 
+	SubClassOf: has_fiat_boundary exactly 1 DistalBoundary 
+Class: Tail
+	SubClassOf: CardinalBodyPart
+	SubClassOf: has_fiat_boundary exactly 1 FiatBoundary	
+Class: LimbEnd 
+	SubClassOf: CardinalBodyPart
+	SubClassOf: has_fiat_boundary exactly 1 FiatBoundary		
+	
+Class: QuadrupedTrunk 
+	SubClassOf: has_fiat_boundary exactly 6 FiatBoundary
+	SubClassOf: has_fiat_boundary exactly 1 NeckBoundary 
+	SubClassOf: has_fiat_boundary exactly 1 LeftForeLimbBoundary  
+	SubClassOf: has_fiat_boundary exactly 1 RightForeLimbBoundary   
+	SubClassOf: has_fiat_boundary exactly 1 LeftHindLimbBoundary   
+	SubClassOf: has_fiat_boundary exactly 1 RightHindLimbBoundary   
+	SubClassOf: has_fiat_boundary exactly 1 TailBoundary   
+
+Class: NeckBoundary 
+	SubClassOf: FiatBoundary
+Class: LeftForeLimbBoundary  
+	SubClassOf: FiatBoundary
+Class: RightForeLimbBoundary    
+	SubClassOf: FiatBoundary
+Class: LeftHindLimbBoundary    
+	SubClassOf: FiatBoundary
+Class: RightHindLimbBoundary       
+	SubClassOf: FiatBoundary
+Class: TailBoundary
+	SubClassOf: FiatBoundary		
+Class: ProximalBoundary
+	SubClassOf: FiatBoundary	
+Class: DistalBoundary
+	SubClassOf: FiatBoundary		
+	
+Class: Arm 
+	SubClassOf: Limb
+Class: Leg
+	SubClassOf: Limb
+Class: Hoof 
+	SubClassOf: LimbEnd 
+Class: Paw 
+	SubClassOf: LimbEnd 
+Class: Foot 
+	SubClassOf: LimbEnd 
+Class: Hand 
+	SubClassOf: LimbEnd 
+
+
+
+######################################################################
+###### Horse     #####################################################
+######################################################################
+
+
+Class: Horse 
+	SubClassOf: Mammal 
+
+Class: HorseTrunk
+	EquivalentTo: QuadrupedTrunk  and part_of some Horse 
+
+Class: HorseHead 
+	EquivalentTo: Head and part_of some Horse 
+	
+Class: HorseLeg
+	EquivalentTo: Leg and part_of some Horse 
+
+Class: HorseHoof
+	EquivalentTo: Hoof and part_of some Horse 
+
+Class: HorseTail 
+	EquivalentTo: Tails and part_of some Horse 
+
+
+######################################################################
+###### INSTANCE     ##################################################
+######################################################################
+
+Individual: thisAnimal
+    Types: Horse
+	
+Individual: t 
+	 Types: HorseTrunk 
+	 Facts: part_of thisAnimal, 
+	 	 	has_fiat_boundary t-nb, 
+			has_fiat_boundary t-lflb
+			has_fiat_boundary t-rflb,
+			has_fiat_boundary t-lblb,
+			has_fiat_boundary t-rblb,
+			has_fiat_boundary t-tb
+
+Individual: t-nb
+	Types: TrunkNeckBoundary 
+
+Individual: t-lflb
+	Types: LeftForeLimbBoundary  
+
+Individual: t-rflb
+	Types: RightForeLimbBoundary    
+	
+Individual: t-lblb
+	Types: LeftHindLimbBoundary    
+	
+Individual: t-rblb
+	Types: RightHindLimbBoundary       
+
+Individual: t-rblb
+	Types: RightHindLimbBoundary       
+
+Individual: t-tb	
+	Types: TailBoundary
+
+
+############# Head #############
+
+Individual: h
+	Types: HorseHead
+	Facts: part_of thisAnimal, 
+			has_fiat_boundary h-nb
+
+Individual: h-nb 
+	Types: ProximalBoundary  
+	Facts: meets t-nb
+
+
+############# Leg (left front) #############
+
+Individual: lfl
+	Types: HorseLeg
+	Facts: part_of thisAnimal, 
+	 		has_fiat_boundary lfl-pb, 
+			has_fiat_boundary lfl-db 
+
+Individual: lfl-pb
+	Types: ProximalBoundary 
+	Facts: meets t-lflb
+	 
+Individual: lfl-db
+	Types: DistalBoundary 
+
+############# Hoof (left front) #############
+
+Individual: lfh 
+	Types: HorseHoof
+	Facts: part_of thisAnimal, 
+	 		has_fiat_boundary lfh-pb 
+ 
+Individual: lhl-pb
+	Types: ProximalBoundary 
+	Facts: meets lfl-db
+
+
+
+
+
