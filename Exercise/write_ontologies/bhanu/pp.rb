@@ -1,6 +1,9 @@
 #!/usr/bin/env ruby
 
+
+
 require 'set'
+load '../Pradeep/xmlParse.rb'
 
 ###### some constants
 
@@ -617,7 +620,9 @@ class Morphism
  end 
 end
 
-
+o = parseSymbols("../Pradeep/root-ontology.owl")
+o.show
+=begin 
 # Class: Mammal SubClassOf: Animal
 
 m = Symbols.new(CLASS, "Mammal")
@@ -653,3 +658,4 @@ onto1 = Ontology.new(sigma1, [s1, s2])
 onto1.show
 
 #p onto1
+=end
