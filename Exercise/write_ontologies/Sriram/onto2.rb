@@ -1,5 +1,4 @@
-
-load '\..\..\..\source\data.rb'
+load '/../../../bhanu.rb'
 
 
    def repConcept(obj)
@@ -12,9 +11,13 @@ load '\..\..\..\source\data.rb'
             y = ConceptSubsumption.new(a, b) 
             sens.push(y) 
           else 
-		    sens.push()
+		    sens.push(x)
          end  
+	  
+	 
       end
+	 onto2 = Ontology.new(sig,sens)
+     onto2.show 		
    end
 
 
@@ -44,5 +47,3 @@ onto1 = Ontology.new(sigma1, [s1, s2])
 
 
 onto2 = repConcept(onto1)
-
-p onto2
