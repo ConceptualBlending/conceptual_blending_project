@@ -7,6 +7,7 @@ include REXML
    def parseSymbols(file)
       cSet = Set[] 
       dSet = Set[]
+      dSet1 = Set[]
       sens = []
       acClass = []
       symArr = []
@@ -25,13 +26,10 @@ include REXML
       doc.elements.each("rdf:RDF/owl:Class/rdfs:subClassOf") do |i| # Parse Sub Classes
          prntString = element_about(i.parent, "about" )
          subString = element_about(i, "resource")
-
          symPrntClass = Symbols.new(CLASS, prntString)
          symSubClass = Symbols.new(CLASS, subString) 
-
          acprntClass = AtomicConcept.new(symPrntClass)
          acSubClass = AtomicConcept.new(symSubClass)
-     
          cs1 = ConceptSubsumption.new(acSubClass, acprntClass)
          sens.push(cs1)
       end
@@ -43,7 +41,13 @@ include REXML
          dSet.add(symObjProp)
       end
 
-      dSet1 = Set[]
+      doc.elements.each("rdf:RDF/owl:DatatypeProperty") do |i| # Parse dataProperty 
+         dataString = element_about(i, "about")
+         symdataProp = Symbols.new(DATA, dataString)
+         acdataProp = AtomicConcept.new(symdataProp)
+         dSet1.add(symdataProp)
+      end
+
       iSet1 = Set[]
       sig = Signature.new(cSet, dSet, dSet1, iSet1)
       onto1 = Ontology.new(sig, sens)
