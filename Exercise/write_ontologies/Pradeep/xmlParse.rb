@@ -1,8 +1,8 @@
 require 'set'
 require 'rexml/document'
 include REXML
-load 'data.rb'
-
+#load '../../../source/data.rb'
+#load '../bhanu/pp.rb'
 
    def parseSymbols(file)
       cSet = Set[] 
@@ -44,15 +44,14 @@ load 'data.rb'
       end
 
       dSet1 = Set[]
-            iSet1 = Set[]
+      iSet1 = Set[]
       sig = Signature.new(cSet, dSet, dSet1, iSet1)
       onto1 = Ontology.new(sig, sens)
-       p onto1
       return onto1
    end
 
    def self.element_attr(e, attr)
-      return e.attributes[attr][0,10000]
+      return e.attributes[attr][0,1000]
    end
 
    def self.element_about(e, text)
@@ -66,6 +65,6 @@ load 'data.rb'
    end
 
 
-o = parseSymbols("animal.owl")
-p o.o_signature.concepts.size
-p o.o_sentences.size
+#o = parseSymbols("root-ontology.owl")
+#p o.o_signature.concepts.size
+#p o.o_sentences.size
