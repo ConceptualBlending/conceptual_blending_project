@@ -1,37 +1,41 @@
-load 'data.rb'
+load 'pp.rb'
 $top = Symbols.new(CLASS,"Thing")
 
-#INPUT SPACE 1
-# Class: A EquivalentTo: B and C
+# Class: Quadrilaterals  EquivalentTo: Squares and Rectangles
 
-a = Symbols.new(CLASS,"A")
-b = Symbols.new(CLASS,"B")
-c = Symbols.new(CLASS,"C")
-aac = AtomicConcept.new(a)
-bac = AtomicConcept.new(b)
-cac = AtomicConcept.new(c)
-bc  = AndConcept.new(bac,cac)
+q = Symbols.new(CLASS, "Quadrilaterals")
+s = Symbols.new(CLASS, "Squares")
+r=  Symbols.new(CLASS, "Rectangles")
+qc = AtomicConcept.new(q)
+sc = AtomicConcept.new(s)
+rc = AtomicConcept.new(r)
+c1=AndConcept.new(sc,rc)
 
-#INPUT SPACE 2
-# Class: A EquivalentTo: B and D
+# Class: Quadrilaterals  EquivalentTo: Rhombus and Rectangles
 
-a1 = Symbols.new(CLASS,"A")
-b1 = Symbols.new(CLASS,"B")
-c1 = Symbols.new(CLASS,"D")
-aac1 = AtomicConcept.new(a1)
-bac1 = AtomicConcept.new(b1)
-cac1 = AtomicConcept.new(c1)
-bc1  = AndConcept.new(bac1,cac1)
+rh=  Symbols.new(CLASS, "Rhombus")
+rhc = AtomicConcept.new(rh)
+c2= AndConcept.new(rhc,rc)
 
-cSet1 = Set[$top,a,b,c,a1,b1,c1]
-oSet1 = Set[]
-dSet1 = Set[]
-iSet1 = Set[]
+# Class: Car SubclassOf: has_modelnr some Model
 
-sigma1 = Signature.new(cSet1,oSet1,dSet1,iSet1)
-onto1 = Ontology.new(sigma1,[])
+c = Symbols.new(CLASS, "Car")
+m = Symbols.new(CLASS, "Model")
+hm=Symbols.new(ROLE,"has_modelnr")
+cc=AtomicConcept.new(c)
+mc=AtomicConcept.new(m)
+hmr = AtomicObjectProperty.new(hm)
+c3 = ExistentialConcept.new(hmr,mc)
+s1 = ConceptEquivalence.new(cc,c3)
 
-class Af
+# Class: Car SubclassOf: has_color some Model
+
+hc=Symbols.new(ROLE,"has_color")
+hcr = AtomicObjectProperty.new(hc)
+c4 = ExistentialConcept.new(hcr,mc)
+s2 = ConceptEquivalence.new(cc,c4)
+
+# Method for Antiunification
 
   def antiunify(concept1,concept2)
 
@@ -39,17 +43,10 @@ class Af
       if concept2.is_a?(AndConcept)
         andresult = AndConcept.new(antiunify(concept1.components[0],concept2.components[0]),antiunify(concept1.components[1],concept2.components[1]))
         return andresult
-      else concept2.is_a?(AtomicConcept) || concept2.is_a?(ExistentialConcept)
-      puts "\n"
-        puts "AntiUnification Not Possible between AND &[ Atomic Concept or Existential Concept ]"
       end
     end
-
     if concept1.is_a?(AtomicConcept)
-      if concept2.is_a?(AndConcept) || concept2.is_a?(ExistentialConcept)
-        puts "\n"
-        puts "AntiUnification Not Possible between Atomic Concept & [ AND Concept or Existential Concept ]"
-      else concept2.is_a?(AtomicConcept)
+      if concept2.is_a?(AtomicConcept)
       res=antiunify(concept1.name,concept2.name)
       s=Symbols.new(CLASS,res)
       return AtomicConcept.new(s)
@@ -65,14 +62,10 @@ class Af
         return "X"
       end
     end
-
     if concept1.is_a?(ExistentialConcept)
-      if concept2.is_a?(AndConcept) || concept2.is_a?(AtomicConcept)
-        puts "\n"
-        puts "AntiUnification Not Possible between Existential Concept & [ AND Concept or Atomic Concept ]"
-      else concept2.is_a?(ExistentialConcept)
+      if concept2.is_a?(ExistentialConcept)
         existresult = ExistentialConcept.new(antiunify(concept1.components[0],concept2.components[0]),antiunify(concept1.components[1],concept2.components[1]))
-      return existresult
+        return existresult
       end
     end
 
@@ -82,19 +75,24 @@ class Af
       return ac
     end
 
+
+    if (concept1.is_a?(AtomicConcept)&&(concept2.is_a?(AndConcept) || concept2.is_a?(ExistentialConcept)))||(concept1.is_a?(ExistentialConcept)&&(concept2.is_a?(AndConcept) || concept2.is_a?(AtomicConcept)))||(concept1.is_a?(AndConcept)&&(concept2.is_a?(AtomicConcept) || concept2.is_a?(ExistentialConcept)))
+      s=Symbols.new(CLASS,"X")
+      return AtomicConcept.new(s)
+    end
+
+
     if concept1==$top || concept2==$top
       return $top
     end
   end
-end
 
-concept1= [bc,$top]
-concept2= [bc1]
+concept1= [c1,$top]
+concept2= [c2]
 result =Array.new(200)
 concept1.each do |concept1|
   concept2.each do |concept2|
-    obj=Af.new
-    result=obj.antiunify(concept1,concept2)
-        puts result
+  antiunify(concept1,concept2).show
+  puts "\n"
   end
 end
