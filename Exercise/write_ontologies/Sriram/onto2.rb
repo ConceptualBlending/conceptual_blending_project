@@ -1,4 +1,4 @@
-load 'bhanu.rb'
+load '/../../bhanu.rb'
 
 
    def repConcept(obj)
