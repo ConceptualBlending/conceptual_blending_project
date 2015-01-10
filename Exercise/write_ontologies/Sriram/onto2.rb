@@ -1,4 +1,4 @@
-load '/../../../bhanu.rb'
+load 'bhanu.rb'
 
 
    def repConcept(obj)
@@ -13,11 +13,11 @@ load '/../../../bhanu.rb'
           else 
 		    sens.push(x)
          end  
-	  
-	 
-      end
-	 onto2 = Ontology.new(sig,sens)
-     onto2.show 		
+         
+		 end
+	       onto2 = Ontology.new(sig,sens)
+           			 
+
    end
 
 
@@ -35,6 +35,7 @@ s1  = ConceptSubsumption.new(Ac, Bc)
  
  C = Symbols.new(CLASS, "C")
  Cc = AtomicConcept.new(C)
+ Bc1 = AtomicConcept.new(B)
  s2 = ConceptEquivalence.new(Bc, Cc)
 
 cSet1 = Set[A, B, C]
@@ -47,3 +48,5 @@ onto1 = Ontology.new(sigma1, [s1, s2])
 
 
 onto2 = repConcept(onto1)
+onto1.show
+onto2.show
