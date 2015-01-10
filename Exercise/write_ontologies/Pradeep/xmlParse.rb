@@ -27,7 +27,8 @@ include REXML
          prntString = element_about(i.parent, "about" )
          subString = element_about(i, "resource")
          symPrntClass = Symbols.new(CLASS, prntString)
-         symSubClass = Symbols.new(CLASS, subString) 
+         symSubClass = Symbols.new(SUBCLASSOF, subString) 
+		puts symSubClass
          acprntClass = AtomicConcept.new(symPrntClass)
          acSubClass = AtomicConcept.new(symSubClass)
          cs1 = ConceptSubsumption.new(acSubClass, acprntClass)
@@ -69,6 +70,6 @@ include REXML
    end
 
 
-#o = parseSymbols("root-ontology.owl")
+#o = parseSymbols("animal.owl")
 #p o.o_signature.concepts.size
 #p o.o_sentences.size
