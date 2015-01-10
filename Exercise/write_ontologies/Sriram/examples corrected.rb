@@ -9,7 +9,7 @@ cc = AtomicConcept.new(c)
 vc =  AtomicConcept.new(v)
 s1 = ConceptSubsumption.new(cc,vc)
 
-p s1
+
 
 #Class: Truck subclassof: vehicle and has_part some Trailer
 
@@ -24,7 +24,7 @@ c2 = ExistentialConcept.new(hapr,Trc)
 c1 = AndConcept.new(Vc1,c2)
 s2 = ConceptSubsumption.new(Tc,c1)
 
-p s2
+
 
 #class: Rugby Subclassof: TeamSport
 
@@ -34,7 +34,7 @@ Rc = AtomicConcept.new(R)
 Tec = AtomicConcept.new(Te)
 s3 = ConceptSubsumption.new(Rc,Tec)
 
-p s3
+
 
 #class: AmericanFootball EquivalentTo: Rugby and  is_played_by only (Players and wears some Helmet)
 
@@ -55,7 +55,7 @@ c4 = UniversalConcept.new(ipr,c5)
 c3 = AndConcept.new(Rc1,C4)
 s4 = ConceptEquivalence.new(Ac,c3)
 
-p s4
+
 
 #Class: hovercraft subclassof : vehicle and travels_on some (water or land)
 
@@ -73,7 +73,6 @@ c8 = ExistentialConcept.new(Topr,c7)
 c9 = AndConcept.new(Vc1,c8)
 s5 = ConceptSubsumption.new(Hoc,c9)
 
-p s5
 #Class: LiquidCrystalDisplay subclassOf: Monitors
 
 Li = Symbols.new(CLASS,"LiquidCrystalDisplay")
@@ -129,4 +128,15 @@ s9 = ConceptEquivalence.new(Tuc,c14)
  Amc = AtomicConcept.new(Am)
  Fmc = AtomicConcept.new(Fm)
  s10 = ConceptEquivalence.new(Amc,Fmc)
+ 
+ 
+ 
+ cSet3 = Set[c,v,T,Tr,R,Te,P,H,A,Ho,Wa,L,Li,M,Ca,Va,S,Re,Tu,Am,Fm]
+ oSet3 = Set[Hap,ip,wp,Top,hp,Hhp]
+ dSet3 = Set[]
+ iSet3 = Set[]
+
+sigma3 = Signature.new(cSet3,oSet3,dSet3,iSet3)
+onto3 = Ontology.new(sigma3, [s1, s2, s3, s4, s5, s6, s7, s8, s9, s10] 
+ 
  
