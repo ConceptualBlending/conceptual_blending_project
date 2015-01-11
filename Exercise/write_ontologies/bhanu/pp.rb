@@ -11,7 +11,6 @@ CLASS = "owl:Class"
 ROLE  = "owl:ObjectProperty"
 DATA  = "owl:DatatypeProperty"
 INDIVIDUAL = "owl:NamedIndividual"
-SUBCLASSOF= "owl:Class/rdfs:subClassOf"
 
 ###### Symbols
 
@@ -21,7 +20,7 @@ class Symbols
 
  def initialize(a_kind, a_name)
   case a_kind
-  when CLASS, ROLE, DATA, INDIVIDUAL ,SUBCLASSOF
+  when CLASS, ROLE, DATA, INDIVIDUAL 
     @kind = a_kind
   else 
     raise "Not a proper kind"
@@ -30,11 +29,8 @@ class Symbols
  end
 
  def show
- 
- #	 @kind.each do |x|
+#	 @kind.each do |x|
 case @kind
-when SUBCLASSOF
-puts "SubClassOf:"+@name
 when  CLASS
 puts "Class:"+@name
 when ROLE
@@ -43,7 +39,6 @@ when DATA
 puts "DatatypeProperty"+@name
 when INDIVIDUAL
 puts "Individual:"+@name
-
 else
 puts "ERROR,false value"+@name
 end 
@@ -356,7 +351,7 @@ class ConceptSubsumption < Sentence
    end
    def show
 	components[0].show
-	#print "SubClassOf:"
+	print "SubClassOf:"
 components[1].show
 puts ''
  # @components.each do |x|
@@ -625,7 +620,7 @@ class Morphism
  end 
 end
 
-o = parseSymbols("../Pradeep/animal.owl")
+o = parseSymbols("../Pradeep/root-ontology.owl")
 o.show
 =begin 
 # Class: Mammal SubClassOf: Animal
