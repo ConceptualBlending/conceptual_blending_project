@@ -5,9 +5,9 @@ include REXML
 #load '../bhanu/pp.rb'
 
 AND = "intersectionOf"
-OR  = 
-MIN =
-MAX =
+OR  = " "
+MIN = " "
+MAX = " "
 SOME = "Restriction"
 
    def parseSymbols(file)
@@ -24,6 +24,9 @@ SOME = "Restriction"
       andString = []
       a = []
       ecConcept = []    
+      proString = []
+      acSomeString = []
+      andStr = [] 
       doc = Document.new(File.new(file))
 
       root = doc.root
@@ -42,7 +45,8 @@ SOME = "Restriction"
             i.each_recursive do |child|
                 s = child
             end
-            puts s.name.to_s
+            s = s.parent
+           # puts s.name.to_s
             begin
                case s.name.to_s
                   when AND
@@ -50,53 +54,56 @@ SOME = "Restriction"
                           andString = element_about(i, "about")
                           symStr = Symbols.new(CLASS,andString)
                           acStr = AtomicConcept.new(symStr)
-#                          andStr = AndConcept.new(acStr, ecConcept)
+                          andStr = AndConcept.new(acStr, ecConcept)
                        end         
                   when OR
+                       puts "OR :"+s.name.to_s
                   when MAX
+                       puts "MAX :"+s.name.to_s
                   when MIN
+                       puts "MIN :"+s.name.to_s
                   when SOME
                        s.elements.each("owl:onProperty") do |i|
-                          proString = elemen_about(i, "resource")
+                          proStr = element_about(i, "resource")
+                          proString = Symbols.new(ROLE,proStr)
                        end
                        s.elements.each("owl:someValuesFrom") do |i|
                           someString = element_about(i, "resource")
                           symSomStr = Symbols.new(CLASS,someString)   
-                          acSomeString = AtomicConcept.new(someString)
+                          acSomeString = AtomicConcept.new(symSomStr)
                        end
-                       ecConcept = ExistentialConcept.new(acSomeString ,acsomeString)
+                       ecConcept = ExistentialConcept.new(proString ,acSomeString)
+   
                   else
+                       puts "Else part : "+s.name.to_s
                        puts "None"
                end
                s = s.parent
                a = s.name.to_s
-            end until a.eql? "Class"
+               #puts a 
+            end until a.eql? "Class"            
             s = parseTree(s, "subClassOf")
-            puts s.previous_sibling
 =begin
-            if s.attributes["resource"].nil?
-               s = s.parent
-              # puts s.name.to_s
-            end
-#            subString = element_about(s, "resource")            
-=end
-            sub = s.parent
-            subname = sub.name.to_s
-            puts subname
-            if subname.eql? "subClassOf"  
-               sub = parseTree(sub, "Class")
-               prntString = element_about(sub, "about" )
-            end       
+=end 
+               sub = s.parent
+               subname = sub.name.to_s
+               if subname.eql? "Class"  
+                  prntString = element_about(sub, "about" )
+                  symPrntClass = Symbols.new(prntString)
+                  acprntClass = AtomicConcept.new(symPrntClass) 
+                  puts acprntClass
+               end
          end
 =begin
          symPrntClass = Symbols.new(CLASS, prntString)
          symSubClass = Symbols.new(SUBCLASSOF, subString) 
-		puts symSubClass
          acprntClass = AtomicConcept.new(symPrntClass)
          acSubClass = AtomicConcept.new(symSubClass)
-         cs1 = ConceptSubsumption.new(acSubClass, acprntClass)
-         sens.push(cs1)
-=end
+=end  
+         puts andStr
+         puts acprntClass
+#         cs1 = ConceptSubsumption.new(andStr, acprntClass)
+#         sens.push(cs1)
       end
 
       doc.elements.each("rdf:RDF/owl:ObjectProperty") do |i| # Parse ObjectProperty 
@@ -121,6 +128,8 @@ SOME = "Restriction"
 
    def parseTree(node, string)
       begin
+#         puts string
+         puts node.name.to_s
          node = node.parent
          nodename = node.name.to_s
       end until nodename.eql? string

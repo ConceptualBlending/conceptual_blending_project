@@ -625,7 +625,7 @@ class Morphism
  end 
 end
 
-o = parseSymbols("../Pradeep/animal.owl")
+o = parseSymbols("../Pradeep/NewBird.owl")
 o.show
 =begin 
 # Class: Mammal SubClassOf: Animal
