@@ -201,9 +201,9 @@ iSet2 = Set[]
 
 
 sigma1 = Signature.new(cSet1,oSet1,dSet1,iSet1)
-inputSpace_1 = Ontology.new(sigma1, [])
+inputSpace_1 = Ontology.new(sigma1, [s1,s2])
 sigma2 = Signature.new(cSet2,oSet2,dSet2,iSet2)
-inputSpace_2=Ontology.new(sigma2, [])
+inputSpace_2=Ontology.new(sigma2, [s11,s21])
 
 rs=Array.new
 rs= generate_base(inputSpace_1,inputSpace_2)
