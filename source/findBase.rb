@@ -10,25 +10,28 @@ load "pp.rb"
 
 def generate_base(inputSpace_1, inputSpace_2)
 
-# Intersection of Concepts
-
-  cSet1=inputSpace_1.o_signature.concepts
-  cSet2=inputSpace_2.o_signature.concepts
-
-  def makeconcepts(x)
+# Method to make the Symbols after Intersection
+  def makeSymbol(x,k)
     s=Set.new
-      x.each do |n|
-          s.add(Symbols.new(CLASS,n))
-      end
+    x.each do |n|
+      s.add(Symbols.new(k,n)) # Making Symbol
+    end
     return s
   end
 
-   $classes1=Array.new
+# Intersection of Concepts
+
+  cSet1=inputSpace_1.o_signature.concepts # Reading Concept Objects from Input Space 1
+  cSet2=inputSpace_2.o_signature.concepts # Reading Concept Objects from Input Space 2
+
+  # Loading all the concepts of Input Space 1 into Array
+  $classes1=Array.new
        cSet1.each do  |n|
               n=n.name
        $classes1.push(n)
        end
-   $classes2=Array.new
+  # Loading all the concepts of Input Space 2 into Array
+  $classes2=Array.new
       cSet2.each do  |n|
               n=n.name
       $classes2.push(n)
@@ -36,28 +39,21 @@ def generate_base(inputSpace_1, inputSpace_2)
 
    x= $classes1 & $classes2 # Intersection of Classes
     cSet=Set.new
-    cSet =makeconcepts(x)
-
+    cSet =makeSymbol(x,CLASS) # Call to make the Symbols of resultant Concepts after Intersection
 
 # Intersection of Object Properties
 
-  oSet1=inputSpace_1.o_signature.objProps
-  oSet2=inputSpace_2.o_signature.objProps
+  oSet1=inputSpace_1.o_signature.objProps # Reading Object Property Objects from Input Space 1
+  oSet2=inputSpace_2.o_signature.objProps # Reading Object Property Objects from Input Space 2
 
-  def makeobjProps(x)
-    s=Set.new
-    x.each do |n|
-      s.add(Symbols.new(ROLE,n))
-    end
-    return s
-  end
-
-   $objProps1=Array.new
+  # Loading all the Object Properties of Input Space 1 into Array
+  $objProps1=Array.new
       oSet1.each do  |n|
               n=n.name
        $objProps1.push(n)
       end
 
+   # Loading all the Object Properties of Input Space 2 into Array
    $objProps2=Array.new
       oSet2.each do  |n|
               n=n.name
@@ -66,27 +62,21 @@ def generate_base(inputSpace_1, inputSpace_2)
 
    x= $objProps1 & $objProps2 # Intersection of Roles
     oSet=Set.new
-    oSet =makeobjProps(x)
+    oSet =makeSymbol(x,ROLE) # Call to make the Symbols of resultant Object Properties after Intersection
 
 # Intersection of Data Properties
 
-  dSet1=inputSpace_1.o_signature.dataProps
-  dSet2=inputSpace_2.o_signature.dataProps
+  dSet1=inputSpace_1.o_signature.dataProps # Reading Data Property Objects from Input Space 1
+  dSet2=inputSpace_2.o_signature.dataProps # Reading Data Property Objects from Input Space 2
 
-  def makedataProps(x)
-    s=Set.new
-    x.each do |n|
-      s.add(Symbols.new(DATA,n))
-    end
-    return s
-  end
-
+  # Loading all the Data Properties of Input Space 1 into Array
   $dataProps1=Array.new
   dSet1.each do  |n|
     n=n.name
     $dataProps1.push(n)
   end
 
+  # Loading all the Data Properties of Input Space 2 into Array
   $dataProps2=Array.new
   dSet2.each do  |n|
     n=n.name
@@ -95,27 +85,21 @@ def generate_base(inputSpace_1, inputSpace_2)
 
   x= $dataProps1 & $dataProps2 # Intersection of Data Properties
   dSet=Set.new
-  dSet =makedataProps(x)
+  dSet =makeSymbol(x,DATA) # Call to make the Symbols of resultant Data Properties after Intersection
 
 # Intersection of Individuals
 
-  iSet1=inputSpace_1.o_signature.individuals
-  iSet2=inputSpace_2.o_signature.individuals
+  iSet1=inputSpace_1.o_signature.individuals # Reading Individual Objects from Input Space 1
+  iSet2=inputSpace_2.o_signature.individuals # Reading Individual Objects from Input Space 2
 
-  def makeindividuals(x)
-    s=Set.new
-    x.each do |n|
-      s.add(Symbols.new(INDIVIDUAL,n))
-    end
-    return s
-  end
-
+  # Loading all the Individuals of Input Space 1 into Array
   $individuals1=Array.new
   iSet1.each do  |n|
     n=n.name
     $individuals1.push(n)
   end
 
+  # Loading all the individuals of Input Space 2 into Array
   $individuals2=Array.new
   iSet2.each do  |n|
     n=n.name
@@ -124,7 +108,7 @@ def generate_base(inputSpace_1, inputSpace_2)
 
   x= $individuals1 & $individuals2 # Intersection of Individuals
   iSet=Set.new
-  iSet =makeindividuals(x)
+  iSet =makeSymbol(x,INDIVIDUAL) # Call to make the Symbols of resultant Individuals after Intersection
 
 
   # Base Ontology
@@ -133,18 +117,23 @@ def generate_base(inputSpace_1, inputSpace_2)
 
   # Morphisms
 
+  # loading all the Class symbols of generate base ontology into Array
   $osymbols=Array.new
   cSet.each do  |n|
     n=n.name
     $osymbols.push(n)
   end
-  h=[$osymbols,$osymbols].transpose.to_h
+  h=[$osymbols,$osymbols].transpose.to_h # Creation of a symbol map of Symbols from O to itself
+
+  # Creating two Instances of Morphisms
   m1=Morphism.new(o,inputSpace_1,h)
   m2=Morphism.new(o,inputSpace_2,h)
 
-  return o,m1,m2
+  return o,m1,m2 # Returns generated base Ontology and the two Instances of Morphisms
 
 end
+
+# Example Input Spaces to generate base
 
 # InputSpace1
 # Class: Mammal SubClassOf: Animal
@@ -167,6 +156,11 @@ c2 = ExistentialConcept.new(hpr, wc)
 c1 = AndConcept.new(ac2, c2)
 s2 = ConceptEquivalence.new(bc, c1)
 
+cSet1 = Set[top, a, b, w, m]
+oSet1 = Set[hp]
+dSet1 = Set[]
+iSet1 = Set[]
+
 # InputSpace2
 # Class: Mammal SubClassOf: Animal
 top1 = Symbols.new(CLASS, "Thing")
@@ -188,25 +182,21 @@ c21 = ExistentialConcept.new(hpr1, wc1)
 c11 = AndConcept.new(ac21, c21)
 s21 = ConceptEquivalence.new(bc1, c11)
 
-cSet1 = Set[top, a, b, w, m]
-oSet1 = Set[hp]
-dSet1 = Set[]
-iSet1 = Set[]
-
-
 cSet2 = Set[top1, a1, b1, w1, m1]
 oSet2 = Set[hp1]
 dSet2 = Set[]
 iSet2 = Set[]
-
 
 sigma1 = Signature.new(cSet1,oSet1,dSet1,iSet1)
 inputSpace_1 = Ontology.new(sigma1, [s1,s2])
 sigma2 = Signature.new(cSet2,oSet2,dSet2,iSet2)
 inputSpace_2=Ontology.new(sigma2, [s11,s21])
 
+
 rs=Array.new
-rs= generate_base(inputSpace_1,inputSpace_2)
+rs= generate_base(inputSpace_1,inputSpace_2) # Calling Method to generate base
+
+# Results after finding Base using Intersection
 puts "Resultant Ontology & Morphisms :",""
 puts rs
 puts "","Resultant Ontology after Intersection",""
