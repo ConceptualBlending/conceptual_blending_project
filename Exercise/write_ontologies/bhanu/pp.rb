@@ -3,8 +3,8 @@
 
 
 require 'set'
-load '../Pradeep/xmlParse.rb'
-
+#load '../Pradeep/xmlParse.rb'
+load '../Pradeep/demoXml.rb'
 ###### some constants
 
 CLASS = "owl:Class"
@@ -625,9 +625,13 @@ class Morphism
  end 
 end
 
-o = parseSymbols("../Pradeep/NewBird.owl")
-o.show
+#o = parseSymbols("../Pradeep/NewBird.owl")
+#o.show
+
+o = demoxml("../Pradeep/NewBird.owl")
+#o.show
 =begin 
+
 # Class: Mammal SubClassOf: Animal
 
 m = Symbols.new(CLASS, "Mammal")
