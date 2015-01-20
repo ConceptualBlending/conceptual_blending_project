@@ -1,0 +1,144 @@
+#########################################################################
+#      BackGround Knowledge 
+#########################################################################
+
+ObjectProperty: has_part
+
+ObjectProperty: Part_of
+   InverseOf: has_part
+
+ObjectProperty:has_fait_boundary
+   Domain: BodyPart
+   Range: FaitBoundary  
+
+ObjectProperty: Connects
+
+
+
+Class: Organisum
+
+Class: FiatBoundary
+
+Class: Mammel
+   SubClassOf: Organisum
+
+Class: BodyPart
+
+Class: UpperBodyPart
+Class: LoweerBodyPart
+
+Class: PartOfHead
+   SubClassOf: UpperBodyPart
+
+Class: Head
+   SubClassOf: PartOfHead
+   SubClassOf: has_fait_boundary exactly 1 FiatBoundary
+Class: Skull
+   SubClassOf: PartOfHead
+   SubClassOf: Head 
+Class: Teeth
+   SubClassOf: PartOfHead
+   SubClassOf: Head
+Class: Jaws
+   SubClassOf: PartOfHead
+   SubClassOf: Head   
+Class: Eye
+   SubClassOf: PartOfHead
+   SubClassOf: Head
+Class: Nose
+   SubClassOf: PartOfHead
+   SubClassOf: Head
+Class: Tongue
+   SubClassOf: PartOfHead
+   SubClassOf: Head
+
+Class: Neck
+   SubClassOf: UpperBodyPart
+Class: Cervical   
+   SubClassOf: Neck
+   SubClassOf: has_fait_boundary exactly 2 FiatBoundary
+
+Class: BackPart
+   SubClassOf: UpperBodyPart
+
+Class: Hip
+   SubClassOf: has_fait_boundary exactly 2 FiatBoundary   
+   SubClassOf: LowerBodyPart   
+Class: Dorsal
+   SubClassOf: UpperBodyPart
+   SubClassOf: BackPart
+   SubClassOf: has_fait_boundary exactly 2 FiatBoundary
+Class: Sacral
+   SubClassOf: Hip
+   SubClassOf: has_fait_boundary exactly 2 FiatBoundary
+
+Class: Tail
+   SubClassOf: LowerBodyPart
+Class: Caudal
+   SubClassOf: Tail
+
+Class: Arm 
+   SubClassOf: UpperBodyPart
+Class: Scapula
+   SubClassOf: Arm
+   SubClassOf: has_fait_boundary exactly 2 FiatBoundary
+Class: Humerus
+   SubClassOf: Arm
+   SubClassOf: has_fait_boundary exactly 2 FiatBoundary
+Class: Radius and Ulna
+   SubClassOf: has_fait_boundary exactly 1 FiatBoundary
+   SubClassOf: Arm
+Class: Carpus
+   SubClassOf: Arm
+
+
+Class: Ribs
+   SubClassOf: UpperBodyPart
+   SubClassOf: has_fait_boundary exactly 2 FiatBoundary
+   SubClassOf: Part_of exactly 1 Pubis
+Class Pubis
+   SubClassOf: Ribs
+      SubClassOf: has_fait_boundary exactly 1 FiatBoundary
+
+
+Class: Leg
+   SubClassOf: LowerBodyPart  
+Class: Tibra
+   SubClassOf: Leg
+   SubClassOf: has_fait_boundary exactly 2 FiatBoundary
+Class: Metata
+   SubClassOf: Leg
+   SubClassOf: has_fait_boundary exactly 1 FiatBoundary
+
+###############################################################################
+#   T-rex 
+###############################################################################
+Class: T-rex
+   SubClassOf: Mammel
+
+Class: T-rexHead 
+   SubClassOf: Part_of T-rex
+   SubClassOf: Head
+   SubClassOf: has_part exactly 1 Skull
+   SubClassOf: has_part exactly 1 Tongue
+   SubClassOf: has_part some Teeth and Jaws
+   SubClassOf: has_part exactly 2 Eye 
+   SubClassOf: has_part exactly 1 Nose
+
+Class: T-rexBody
+   SubClassOf: Part_of T-rex
+   SubClassOf: has_part exactly 1 Neck
+   SubClassOf: has_part exactly 1 Hip
+   SubClassOf: has_part some Ribs
+   SubClassOf: has_part exactly 2 Legs
+   SubClassOf: has_part exactly 2 Arm
+
+Class: T-rexLeg
+   SubClassOf: has_part exactly 1 Leg
+   SubClassOf: Part_of T-rex
+
+Class: T-rexArm
+   SubClassOf: has_part exactly 1 Arm
+   SubClassOf: Part_of T-rex
+
+
