@@ -1,0 +1,68 @@
+#################################################
+				TIGER ONTOLOGY
+#################################################
+
+Class:mammal
+	SubClassOf:Organism
+Class:BodyPart
+	SubClassOf:part_of some Organism
+
+Class:head
+	SubClassOf:BodyPart
+Class:RoundedEars
+	SubClassOf:head
+Class:YellowEyes
+	SubClassOf:head
+Class:whiskers
+	SubClassOf:head
+Class:legs
+	SubClassOf:BodyPart
+Class:claws
+	SubClassOf:legs
+
+Class:color
+Class:golden
+	SubClassOf:color
+Class:black
+	SubClassOf:color
+
+Class:LongTail
+	SubClassOf:BodyPart
+
+Class:Habitat
+Class:TropicalForest
+	SubClassOf:Habitat
+
+Class:animals
+	SubClassOf:mammal
+Class:cat
+	SubClassOf:mammal
+
+ObjectProperty:has_color
+ObjectProperty:has_part
+ObjectProperty:part_of
+	InverseOf:has_part
+ObjectProperty:lives_in
+	Domain:animal
+	Range:TropicalForest
+ObjectProperty:feeds_on
+
+Class:tiger
+	SubClassOf:mammal
+	SubClassOf:cat
+
+Class:tigerhead
+	SubClassOf:part_of tiger
+	SubClassOf:has exatly 2 RoundedEars
+	SubClassOf:has_part exatly 2 YellowEyes
+	SubClassOf:has_part whiskers
+	SubClassOf:has_part claws
+Class:tigerbody
+	SubClassOf:part_of tiger
+	SubClassOf:has_part exatly 4 legs
+	SubClassOf:has_part exatly 1 LongTail
+	SubClassOf:has_part claws
+class:tigercolor
+	SubClassOf:has some color
+	SubClassOf:has some color golden and black 
+	
