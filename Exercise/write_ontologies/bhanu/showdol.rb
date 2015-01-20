@@ -34,9 +34,9 @@ case @kind
 when SUBCLASSOF
 puts "SubClassOf:"+@name
 when CLASS
-puts "Class:"+@name
+return "Class:"+@name
 when ROLE
-puts "ObjectProperty:"+@name
+puts  "ObjectProperty:"+@name
 when DATA
 puts "DatatypeProperty"+@name
 when INDIVIDUAL
@@ -631,18 +631,37 @@ class Morphism
  end
 
  def showDOL
-   puts @source_sig
-   puts @target_sig
-   @symbol_map.each do |kind,value|
-      puts "\n"
-     print "\e" ;kind.show ;print "|->" ;value.show
-      
-   #  puts string 
-     
-    # puts"->"
-     #value.show
-     end
+   morformat = Array.new()
+   #puts @source_sig
+   #puts @target_sig
+   @symbol_map.each do |x|
+     begin 
+       morformat.push(x.show) #;print "|->" ;value.show
+       number = morformat.length 
+          morformat.push("|->")
+     end until  !x.eql? "nil" 
+   end
+   return morformat
  end 
+
+ def fileread(obj)
+    s_d = Array.new()
+	asdf = Array.new()
+    s_d = showDOL 
+    logicowl= File.open("blending.dol", "w")
+    logicowl.puts "ontology IO1 = <URL1>"
+    logicowl.puts "ontology IO1 = <URL2>"
+    logicowl.puts "ontology Base = <URL3>"
+    asdf.push(s_d[0..2])
+    logicowl.puts "interpretation I1 : Base to IO1"
+    logicowl.puts asdf 
+    logicowl.puts "intepretation I2 : Base to IO2 = "
+    logicowl.puts s_d[2..4]
+    logicowl.puts "ontology Blend = "
+    logicowl.puts s_d[0..2]
+    logicowl.puts s_d[2..4]
+    logicowl.close
+ end
    
 end
 
@@ -690,5 +709,6 @@ onto2 = Ontology.new(sigma2, [s2])
 #onto2.show
 
 
-mor = Morphism.new(sigma2,sigma1,[[b,w],[m,a]] )
+mor = Morphism.new(sigma2,sigma1,[b,w,m,a] )
 mor.showDOL
+mor.fileread(mor)
