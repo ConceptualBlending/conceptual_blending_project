@@ -1,0 +1,38 @@
+#<RDF::Statement:0xba4bf4(<http://www.semanticweb.org/root/ontologies/2015/0/untitled-ontology-2> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Ontology> .)>
+
+#<RDF::Statement:0xb990b0(<http://www.semanticweb.org/root/ontologies/2015/0/untitled-ontology-2#has_part> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .)>
+
+#<RDF::Statement:0x9a43b8(<http://www.semanticweb.org/root/ontologies/2015/0/untitled-ontology-2#Animal> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .)>
+
+#<RDF::Statement:0xb55220(<http://www.semanticweb.org/root/ontologies/2015/0/untitled-ontology-2#Animal> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://www.semanticweb.org/root/ontologies/2015/0/untitled-ontology-2#Human> .)>
+
+#<RDF::Statement:0xad6560(<http://www.semanticweb.org/root/ontologies/2015/0/untitled-ontology-2#Bird> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .)>
+
+#<RDF::Statement:0x9ea944(<http://www.semanticweb.org/root/ontologies/2015/0/untitled-ontology-2#Bird> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://www.semanticweb.org/root/ontologies/2015/0/untitled-ontology-2#Animal> .)>
+
+#<RDF::Statement:0x90dabc(_:g9505460 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .)>
+
+#<RDF::Statement:0x89b1d8(_:g9505460 <http://www.w3.org/2002/07/owl#intersectionOf> _:g9024200 .)>
+
+#<RDF::Statement:0x80be5c(_:g9024200 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://www.semanticweb.org/root/ontologies/2015/0/untitled-ontology-2#Animal> .)>
+
+#<RDF::Statement:0x807fa0(_:g9024200 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:g9024060 .)>
+
+#<RDF::Statement:0x7b500c(_:g7738000 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> .)>
+
+#<RDF::Statement:0x6c988c(_:g7738000 <http://www.w3.org/2002/07/owl#onProperty> <http://www.semanticweb.org/root/ontologies/2015/0/untitled-ontology-2#has_part> .)>
+
+#<RDF::Statement:0xc103f4(_:g7738000 <http://www.w3.org/2002/07/owl#someValuesFrom> <http://www.semanticweb.org/root/ontologies/2015/0/untitled-ontology-2#Wings> .)>
+
+#<RDF::Statement:0xc0f788(_:g9024060 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> _:g7738000 .)>
+
+#<RDF::Statement:0xc0f008(_:g9024060 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> .)>
+
+#<RDF::Statement:0xc0dfc8(<http://www.semanticweb.org/root/ontologies/2015/0/untitled-ontology-2#Bird> <http://www.w3.org/2000/01/rdf-schema#subClassOf> _:g9505460 .)>
+
+#<RDF::Statement:0xbfc55c(<http://www.semanticweb.org/root/ontologies/2015/0/untitled-ontology-2#Human> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .)>
+
+#<RDF::Statement:0xbf179c(<http://www.semanticweb.org/root/ontologies/2015/0/untitled-ontology-2#Wings> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .)>
+
+#<RDF::Statement:0xbe88e0(<http://www.semanticweb.org/root/ontologies/2015/0/untitled-ontology-2#Wings> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://www.semanticweb.org/root/ontologies/2015/0/untitled-ontology-2#Animal> .)>
+
