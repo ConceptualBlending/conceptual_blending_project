@@ -1,19 +1,19 @@
 ##################################################
-#################  SHARK ONTOLOGY ########################
+#################  SHARK ONTOLOGY ################
 ##################################################
 
 Object property : has_part
 Object property : part_of
 Object property : has_habitat
-Object Property : Habitat_of
+Object Property : habitat_of
 Object property : has_color
 Object property : meets
 Object Property : has_property
-Object Property : Property_of
+Object Property : property_of
 Object Property : has_head_boundary
 Object Property : has_trunk_boundary
 Object Property : has_tail_boundary 
-Object Property : Boundary_of
+Object Property : boundary_of
 
 
 Class: Organism
@@ -32,44 +32,44 @@ Class :White
  SubClassOf : Color
 
 Class : Ocean
- SubClassOf : Habitat_of some Organism 
+ SubClassOf : habitat_of some Organism 
  
 Class : Body_Part
-  SubClassOf : Part_of some Organism
+  SubClassOf : part_of some Organism
 
   
 Class : HeadBoundary
- Subclass : Boundary_of some Head
+ Subclass : boundary_of some Head
   
 Class : Head
   SubClassOf : Body_Part
-  SubClassOf : has_head_boundary Exactly 1 HeadBoundary
+  SubClassOf : has_head_boundary exactly 1 HeadBoundary
   Range : HeadBoundary
   
  
 Class : Eyes
- SubClassOf : Part_of some Head
- Facts : has_part Exactly 2 Eyes
+ SubClassOf : part_of some Head
+ Facts : has_part exactly 2 Eyes
 
  Class : Nostril 
- SubClassOf : Part_of some Head
+ SubClassOf : part_of some Head
  
 Class : Mouth 
- SubClassOf : Part_of some Head
+ SubClassOf : part_of some Head
  SubClassOf : has_part some Jaws
 
  Class : Gills
- SubClassOf : Part_of some Head
+ SubClassOf : part_of some Head
 
- Class : Jaws
- SubClassOf: Part_of some Mouth
- SubClassOf : has_property Exactly Sharp
+ Class : Tooth
+ SubClassOf: part_of some Mouth
+ SubClassOf : has_property exactly Sharp
  
 Class : Sharp
- SubClassOf: Property_of some Jaws
+SubClassOf: property_of some Tooth
  
 Class : TrunkBoundary
- SubClassOf : Boundary_of some Trunk
+ SubClassOf : boundary_of some Trunk
  
 ObjectProperty : has_pectoral_fin_Boundary 
 ObjectProperty : has_Dorsal_fin_Boundary
@@ -78,9 +78,9 @@ ObjectProperty : has_Dorsal_fin_Boundary
  
 Class : Trunk
  SubClassOf : Body_Part
- SubClassOf : has_trunk_Boundary Exactly 5 TrunkBoundary
- SubClassOf : has_trunk_Boundary Exactly 1 DorsalFinBoundary
- SubClassOf : has_trunk_Boundary Exactly 2 PectoralFinBoundary
+ SubClassOf : has_trunk_Boundary exactly 5 TrunkBoundary
+ SubClassOf : has_trunk_Boundary exactly 1 DorsalFinBoundary
+ SubClassOf : has_trunk_Boundary exactly 2 PectoralFinBoundary
  Range : Trunk Boundary
 Class : DorsalFinBoundary
  SubClassOf : TrunkBoundary
@@ -89,31 +89,31 @@ Class : PectoralFinBoundary
  SubClassOf : TrunkBoundary
  
 Class : DorsalFin
- Subclass : Part_of Some Trunk
- Subclass : has_Dorsal_Fin_Boundary Exactly 1 DorsalFinBoundary
+ Subclass : part_of Some Trunk
+ Subclass : s exactly 1 DorsalFinBoundary
  
 Class : PectoralFin
- SubClassOf : Part_of Some Trunk
- SubClassOf : has_Pectoral_Fin_Boundary Exactly 2 PectoralFinBoundary
+ SubClassOf : part_of Some Trunk
+ SubClassOf : has_Pectoral_Fin_Boundary exactly 2 PectoralFinBoundary
  
 Class : TailBoundary
- SubClassOf : Boundary_of Some Tail
+ SubClassOf : boundary_of Some Tail
 
 ObjectProperty : has_Claudal_Fin_Boundary
 
 
 Class : Tail
  SubClassOf : Body_part
- SubClassOf : has_Tail_Boundary Exactly 2 TailBoundary
- SubClassOf : has_Tail_Boundary Exactly 1 ClaudalFinBoundary
+ SubClassOf : has_Tail_Boundary exactly 2 TailBoundary
+ SubClassOf : has_Tail_Boundary exactly 1 ClaudalFinBoundary
  Range : TailBoundary
  
 Class : ClaudalFinBoundary
  SubClassOf : TailBoundary
  
 Class : ClaudalFin
- SubClassOf: Part_of some Tail
- SubClassOf: has_Claudal_Fin_Boundary Exactly 1 ClaudalFinBoundary
+ SubClassOf: part_of some Tail
+ SubClassOf: has_Claudal_Fin_Boundary exactly 1 ClaudalFinBoundary
 
 #################################################
 ############ SHARK ##############################
@@ -145,7 +145,7 @@ Typess : Shark
 
 Individual : BigHead
 Types : SharkHead
-Facts : Part_of Jaws
+Facts : part_of Jaws
         has_head_boundary h-trb
 		
 Individual : h-trb
@@ -153,7 +153,7 @@ Typess : HeadNeckBoundary
 
 Individual : BigTrunk
 Types : SharkTrunk
-Facts : Part_of Jaws
+Facts : part_of Jaws
         has_trunk_boundary tr-nb
 		has_trunk_boundary tr-db
         has_trunk_boundary tr_pb
@@ -173,7 +173,7 @@ Types : TrunkTailBoundary
 
 Individual : BigTail
 Types   : SharkTail
-Facts  : Part_of Jaws
+Facts  : part_of Jaws
          has_tail_boundary t-trb
 		 has_tail_boundary t-cb
 		 
