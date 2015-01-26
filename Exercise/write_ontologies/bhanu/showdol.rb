@@ -644,22 +644,21 @@ class Morphism
    return morformat
  end 
 
- def fileread(obj)
+ def fileread(url1,url2,url3)
     s_d = Array.new()
-	asdf = Array.new()
     s_d = showDOL 
     logicowl= File.open("blending.dol", "w")
-    logicowl.puts "ontology IO1 = <URL1>"
-    logicowl.puts "ontology IO1 = <URL2>"
-    logicowl.puts "ontology Base = <URL3>"
-    asdf.push(s_d[0..2])
+  logicowl.puts "ontology IO1 =" +url1
+    logicowl.puts "ontology IO1 = "+url2
+    logicowl.puts "ontology Base = "+url3
+		
     logicowl.puts "interpretation I1 : Base to IO1"
-    logicowl.puts asdf 
+    logicowl.puts s_d[0..2]
+    logicowl.puts ","	
     logicowl.puts "intepretation I2 : Base to IO2 = "
     logicowl.puts s_d[2..4]
-    logicowl.puts "ontology Blend = "
-    logicowl.puts s_d[0..2]
-    logicowl.puts s_d[2..4]
+    logicowl.puts "ontology Blend = combine I1, I2"
+   
     logicowl.close
  end
    
@@ -711,4 +710,4 @@ onto2 = Ontology.new(sigma2, [s2])
 
 mor = Morphism.new(sigma2,sigma1,[b,w,m,a] )
 mor.showDOL
-mor.fileread(mor)
+mor.fileread("url1","url2","url3")
