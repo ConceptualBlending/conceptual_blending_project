@@ -1,144 +1,173 @@
+Prefix: <http://ontohub.org/monster-blend/animals/T-rex#>
+Ontology: <http://ontohub.org/monster-blend/animals/T-rex>
+
 #########################################################################
 #      BackGround Knowledge 
 #########################################################################
 
 ObjectProperty: has_part
 
-ObjectProperty: Part_of
+ObjectProperty: PartOf
    InverseOf: has_part
 
-ObjectProperty:has_fait_boundary
+ObjectProperty:hasFiatBoundary
    Domain: BodyPart
-   Range: FaitBoundary  
+   Range: FaitBoundary
 
 ObjectProperty: Connects
 
-
-
-Class: Organisum
-
 Class: FiatBoundary
+Class: Organisum
 
 Class: Mammel
    SubClassOf: Organisum
 
 Class: BodyPart
-
-Class: UpperBodyPart
-Class: LoweerBodyPart
-
-Class: PartOfHead
-   SubClassOf: UpperBodyPart
+   SubClassOf: PartOf some Organism
+ 
+Class: CardinalBodyPart
+   SubClassOf: BodyPart
 
 Class: Head
-   SubClassOf: PartOfHead
-   SubClassOf: has_fait_boundary exactly 1 FiatBoundary
-Class: Skull
-   SubClassOf: PartOfHead
-   SubClassOf: Head 
-Class: Teeth
-   SubClassOf: PartOfHead
-   SubClassOf: Head
-Class: Jaws
-   SubClassOf: PartOfHead
-   SubClassOf: Head   
-Class: Eye
-   SubClassOf: PartOfHead
-   SubClassOf: Head
-Class: Nose
-   SubClassOf: PartOfHead
-   SubClassOf: Head
-Class: Tongue
-   SubClassOf: PartOfHead
-   SubClassOf: Head
+   SubClassOf: CardinalBodyPart
+   SubClassOf: hasFiatBoundary exactly 1 FiatBoundary
 
 Class: Neck
-   SubClassOf: UpperBodyPart
-Class: Cervical   
-   SubClassOf: Neck
-   SubClassOf: has_fait_boundary exactly 2 FiatBoundary
+   SubClassOf: CardinalBodyPart
+   SubClassOf: hasFiatBoundary exactly 2 FiatBoundary
 
-Class: BackPart
-   SubClassOf: UpperBodyPart
-
-Class: Hip
-   SubClassOf: has_fait_boundary exactly 2 FiatBoundary   
-   SubClassOf: LowerBodyPart   
-Class: Dorsal
-   SubClassOf: UpperBodyPart
-   SubClassOf: BackPart
-   SubClassOf: has_fait_boundary exactly 2 FiatBoundary
-Class: Sacral
-   SubClassOf: Hip
-   SubClassOf: has_fait_boundary exactly 2 FiatBoundary
-
-Class: Tail
-   SubClassOf: LowerBodyPart
-Class: Caudal
-   SubClassOf: Tail
-
-Class: Arm 
-   SubClassOf: UpperBodyPart
-Class: Scapula
-   SubClassOf: Arm
-   SubClassOf: has_fait_boundary exactly 2 FiatBoundary
-Class: Humerus
-   SubClassOf: Arm
-   SubClassOf: has_fait_boundary exactly 2 FiatBoundary
-Class: Radius and Ulna
-   SubClassOf: has_fait_boundary exactly 1 FiatBoundary
-   SubClassOf: Arm
-Class: Carpus
-   SubClassOf: Arm
-
-
-Class: Ribs
-   SubClassOf: UpperBodyPart
-   SubClassOf: has_fait_boundary exactly 2 FiatBoundary
-   SubClassOf: Part_of exactly 1 Pubis
-Class Pubis
-   SubClassOf: Ribs
-      SubClassOf: has_fait_boundary exactly 1 FiatBoundary
-
+Class: Arm
+   SubClassOf: CardinalBodyPart
+   SubClassOf: hasFiatBoundary exactly 1 FiatBoundary
 
 Class: Leg
-   SubClassOf: LowerBodyPart  
-Class: Tibra
-   SubClassOf: Leg
-   SubClassOf: has_fait_boundary exactly 2 FiatBoundary
-Class: Metata
-   SubClassOf: Leg
-   SubClassOf: has_fait_boundary exactly 1 FiatBoundary
+   SubClassOf: CardinalBodyPart
+   SubClassOf: hasFiatBoundary exactly 1 FiatBoundary
 
-###############################################################################
-#   T-rex 
-###############################################################################
+Class: Tail
+   SubClassOf: CardinalBodyPart
+   SubClassOf: hasFiatBoundary exactly 1 FiatBoundary
+
+Class: MiddlePart
+   SubClassOf: CardinalBodyPart
+   SubClassOf: hasFiatBoundary exactly 6 FiatBoundary
+   SubClassOf: hasFiatBoundary exactly 1 TailBoundary
+   SubClassOf: hasFiatBoundary exactly 1 NeckBoundary
+   SubClassOf: hasFiatBoundary exactly 2 LeftLegBoundary
+   SubClassOf: hasFiatBoundary exactly 1 RightLegBoundary
+   SubClassOf: hasFiatBoundary exactly 2 LeftArmBoundary
+   SubClassOf: hasFiatBoundary exactly 1 RightArmBoundary
+
+Class: ArmBoundary
+   
+
+Class: TailBoundary
+   SubClassOf: FiatBoundary
+Class: NeckBoundary
+   SubClassOf: FiatBoundary
+Class: ArmBoundary
+   SubClassOf: FiatBoundary
+Class: LeftArmBoundary
+   SubClassOf: ArmBoundary
+Class: RightArmBoundary
+   SubClassOf: ArmBoundary
+Class: LegBoundary
+   SubClassOf: FiatBoundary
+Class: LeftLegBoundary
+   SubClassOf: LegBoundary
+Class: RightLegBoundary
+   SubClassOf: LegBoundary
+
+#################################################################################
+#  T-rex
+#################################################################################
+
 Class: T-rex
    SubClassOf: Mammel
 
-Class: T-rexHead 
-   SubClassOf: Part_of T-rex
-   SubClassOf: Head
-   SubClassOf: has_part exactly 1 Skull
-   SubClassOf: has_part exactly 1 Tongue
-   SubClassOf: has_part some Teeth and Jaws
-   SubClassOf: has_part exactly 2 Eye 
-   SubClassOf: has_part exactly 1 Nose
+Class: T-rexHead
+   EquivalentTo: Head and PartOf some T-rex
 
-Class: T-rexBody
-   SubClassOf: Part_of T-rex
-   SubClassOf: has_part exactly 1 Neck
-   SubClassOf: has_part exactly 1 Hip
-   SubClassOf: has_part some Ribs
-   SubClassOf: has_part exactly 2 Legs
-   SubClassOf: has_part exactly 2 Arm
+Class: T-rexMiddleBody
+   EquivalentTo: MiddlePart and PartOf some T-rex
 
 Class: T-rexLeg
-   SubClassOf: has_part exactly 1 Leg
-   SubClassOf: Part_of T-rex
-
+   EquivalentTo: Leg and PartOf some T-rex
+ 
 Class: T-rexArm
-   SubClassOf: has_part exactly 1 Arm
-   SubClassOf: Part_of T-rex
+   EquivalentTo: Arm and PartOf some T-rex
+
+Class: T-rexTail
+   EquivalentTo: Tail and PartOf some T-rex
+
+
+#################################################################################
+#   Instance
+################################################################################
+
+Individual: thisAnimal
+   Types: T-rex
+
+######### Head ##########
+Individual: r-head
+   Types: T-rexHead
+   Facts: PartOf thisAnimal
+             hasFiatBoundary r-nb
+
+Individual: r-nb
+   Types: NeckBoundary 
+
+######### Tail ##########
+
+Individual: r-Tail
+   Types: T-rexTail
+   Facts: PartOf thisAnimal
+             hasFiatBoundary r-tb
+
+Individual: r-tb
+   Types: TailBoundary
+
+######### Arm ###########
+
+Individual: r-Arm
+   Types: T-rexArm
+   Facts: PartOf thisAnimal
+             hasFiatBoundary r-ab
+
+Individual: r-ab
+    Types: ArmBoundary
+
+######### Leg ###########
+
+Individual: r-Leg
+   Types: T-rexLeg
+   Facts: PartOf thisAnimal
+             hasFiatBoundary r-lb
+
+Individual: r-lb
+   Types: LegBoundary  
+
+######### Body ##########
+
+Individual: r-body
+   Types: T-rexMiddleBody
+   Facts: PartsOf thisAnimal
+              hasFiatBoundary r-nb
+              hasFiatBoundary r-tb
+              hasFiatBoundary r-lb
+              hasFiatBoundary r-ab
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
