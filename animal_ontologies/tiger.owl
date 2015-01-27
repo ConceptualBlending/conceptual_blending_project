@@ -1,68 +1,213 @@
-#################################################
-				TIGER ONTOLOGY
-#################################################
+################################################################
+						BACKGROUND KNOWLEDGE
+################################################################
 
-Class:mammal
+Class: FiatBoundary
+Class: Organism
+
+Class: mammal
 	SubClassOf:Organism
-Class:BodyPart
+Class: BodyPart
 	SubClassOf:part_of some Organism
+Class: CardinalBodyPart
+	SubClassOf: BodyPart
 
-Class:head
-	SubClassOf:BodyPart
-Class:RoundedEars
-	SubClassOf:head
-Class:YellowEyes
-	SubClassOf:head
-Class:whiskers
-	SubClassOf:head
-Class:legs
-	SubClassOf:BodyPart
-Class:claws
-	SubClassOf:legs
-
-Class:color
-Class:golden
-	SubClassOf:color
-Class:black
-	SubClassOf:color
-
-Class:LongTail
-	SubClassOf:BodyPart
-
-Class:Habitat
-Class:TropicalForest
-	SubClassOf:Habitat
-
-Class:animals
-	SubClassOf:mammal
-Class:cat
-	SubClassOf:mammal
-
-ObjectProperty:has_color
-ObjectProperty:has_part
-ObjectProperty:part_of
-	InverseOf:has_part
-ObjectProperty:lives_in
-	Domain:animal
-	Range:TropicalForest
-ObjectProperty:feeds_on
-
-Class:tiger
-	SubClassOf:mammal
-	SubClassOf:cat
-
-Class:tigerhead
-	SubClassOf:part_of tiger
-	SubClassOf:has exatly 2 RoundedEars
-	SubClassOf:has_part exatly 2 YellowEyes
-	SubClassOf:has_part whiskers
-	SubClassOf:has_part claws
-Class:tigerbody
-	SubClassOf:part_of tiger
-	SubClassOf:has_part exatly 4 legs
-	SubClassOf:has_part exatly 1 LongTail
-	SubClassOf:has_part claws
-class:tigercolor
-	SubClassOf:has some color
-	SubClassOf:has some color golden and black 
+Class: head
+	SubClassOf: CardinalBodyPart
+	SubClassOf: has_fiat_boundary exactly 1 FiatBoundary
+Class: Ears
+	SubClassOf: part_of head
+	SubClassOf: has some shape round
 	
+Class: Eyes
+	SubClassOf: part_of head
+	SubClassOf: has some color yellow
+Class: whiskers
+	SubClassOf: part_of head
+Class: Limb
+	SubClassOf: CardinalBodyPart
+	SubClassOf: has_fiat_boundary exactly 2 FiatBoundary	
+	SubClassOf: has_fiat_boundary exactly 1 ProximalBoundary 
+	SubClassOf: has_fiat_boundary exactly 1 DistalBoundary
+Class: LimbEnd 
+	SubClassOf: CardinalBodyPart
+	SubClassOf: has_fiat_boundary exactly 1 FiatBoundary
+Class: QuadrupedTrunk 
+	SubClassOf: has_fiat_boundary exactly 6 FiatBoundary
+	SubClassOf: has_fiat_boundary exactly 1 NeckBoundary 
+	SubClassOf: has_fiat_boundary exactly 1 LeftForeLimbBoundary  
+	SubClassOf: has_fiat_boundary exactly 1 RightForeLimbBoundary   
+	SubClassOf: has_fiat_boundary exactly 1 LeftHindLimbBoundary   
+	SubClassOf: has_fiat_boundary exactly 1 RightHindLimbBoundary   
+	SubClassOf: has_fiat_boundary exactly 1 TailBoundary
+Class: Tail
+	SubClassOf: CardinalBodyPart
+	SubClassOf: has_fiat_boundary exactly 1 FiatBoundary
+Class: NeckBoundary 
+	SubClassOf: FiatBoundary
+Class: LeftForeLimbBoundary  
+	SubClassOf: FiatBoundary
+Class: RightForeLimbBoundary    
+	SubClassOf: FiatBoundary
+Class: LeftHindLimbBoundary    
+	SubClassOf: FiatBoundary
+Class: RightHindLimbBoundary       
+	SubClassOf: FiatBoundary
+Class: TailBoundary
+	SubClassOf: FiatBoundary		
+Class: ProximalBoundary
+	SubClassOf: FiatBoundary	
+Class: DistalBoundary
+	SubClassOf: FiatBoundary
+
+Class: Arm 
+	SubClassOf: Limb
+Class: Leg
+	SubClassOf: Limb
+Class: Claw 
+	SubClassOf: LimbEnd 
+Class: Foot 
+	SubClassOf: LimbEnd 
+Class: Hand 
+	SubClassOf: LimbEnd 
+
+Class: shape
+Class: round
+	SubClassOf: shape
+
+Class: color
+Class: golden
+	SubClassOf: color
+Class: black
+	SubClassOf: color
+Class: yellow
+	SubClassOf: color
+
+	
+Class: Habitat
+Class: TropicalForest
+	SubClassOf: Habitat
+
+Class: animals
+	SubClassOf: mammal
+Class: cat
+	SubClassOf: mammal
+
+ObjectProperty: has_color
+ObjectProperty: has_part
+	Characteristics: Transitive
+ObjectProperty: part_of
+	InverseOf: has_part
+ObjectProperty: has_fiat_boundary
+	Domain: BodyPart
+	Range: FiatBoundary
+
+ObjectProperty: fiat_boundary_of 
+	InverseOf: has_fiat_boundary
+
+ObjectProperty: meets 
+
+##############################################################
+						TIGER
+##############################################################
+Class: tiger
+	SubClassOf: mammal
+	SubClassOf: cat
+
+Class: tigerhead
+	EquivalentTo: head and part_of some tiger
+	SubClassOf: has_part exactly 2 eyes with some color yellow
+	SubClassOf: has_part exactly 2 ears with some shape round
+	SubClassOf: has_part whiskers
+
+Class: tigertrunk
+	EquivalentTo: QuadrupedTrunk  and part_of some tiger
+
+Class: tigerLeg
+	EquivalentTo: Leg and part_of some tiger
+
+Class: tigerClaw
+	EquivalentTo: claw and part_of some tiger	
+
+Class: tigertail 
+	EquivalentTo: Tail and part_of some tiger
+	
+class: tigercolor
+	SubClassOf: has some color
+	SubClassOf: has some color golden and black 
+	
+################################################################
+					INSTANCE
+################################################################
+Individual: thisAnimal
+    Types: tiger
+	
+Individual: a 
+	 Types: tigertrunk 
+	 Facts: part_of thisAnimal, 
+	 	 	has_fiat_boundary t-nb, 
+			has_fiat_boundary t-lflb
+			has_fiat_boundary t-rflb,
+			has_fiat_boundary t-lblb,
+			has_fiat_boundary t-rblb,
+			has_fiat_boundary t-tb
+
+Individual: t-nb
+	Types: TrunkNeckBoundary 
+
+Individual: t-lflb
+	Types: LeftForeLimbBoundary  
+
+Individual: t-rflb
+	Types: RightForeLimbBoundary    
+	
+Individual: t-lblb
+	Types: LeftHindLimbBoundary    
+	
+Individual: t-rblb
+	Types: RightHindLimbBoundary       
+
+Individual: t-rblb
+	Types: RightHindLimbBoundary       
+
+Individual: t-tb	
+	Types: TailBoundary	
+
+################################################
+					HEAD
+################################################
+Individual: h
+	Types: tigerhead
+	Facts: part_of thisAnimal, 
+			has_fiat_boundary h-nb
+
+Individual: h-nb 
+	Types: ProximalBoundary  
+	Facts: meets t-nb
+###############################################
+					leg
+###############################################
+Individual: lfl
+	Types: tigerleg
+	Facts: part_of thisAnimal, 
+	 		has_fiat_boundary lfl-pb, 
+			has_fiat_boundary lfl-db 
+
+Individual: lfl-pb
+	Types: ProximalBoundary 
+	Facts: meets t-lflb
+	 
+Individual: lfl-db
+	Types: DistalBoundary 
+###################################################
+				claw
+###################################################
+
+Individual: lfh 
+	Types: tigerClaw
+	Facts: part_of thisAnimal, 
+	 		has_fiat_boundary lfh-pb 
+ 
+Individual: lhl-pb
+	Types: ProximalBoundary 
+	Facts: meets lfl-db
