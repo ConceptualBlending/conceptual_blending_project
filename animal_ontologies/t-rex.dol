@@ -1,0 +1,159 @@
+logic OWL
+
+ontology O =
+
+
+ObjectProperty: has_part
+
+ObjectProperty: PartOf
+   InverseOf: has_part
+
+ObjectProperty: hasFiatBoundary
+
+ObjectProperty: meets
+
+Class: FiatBoundary
+Class: Organism
+
+Class: Mammal
+   SubClassOf: Organism
+
+Class: BodyPart
+   SubClassOf: PartOf some Organism
+ 
+Class: CardinalBodyPart
+   SubClassOf: BodyPart
+
+Class: Head
+   SubClassOf: CardinalBodyPart
+   SubClassOf: hasFiatBoundary exactly 1 FiatBoundary
+
+Class: Neck
+   SubClassOf: CardinalBodyPart
+   SubClassOf: hasFiatBoundary exactly 2 FiatBoundary
+
+Class: Arm
+   SubClassOf: CardinalBodyPart
+   SubClassOf: hasFiatBoundary exactly 1 FiatBoundary
+
+Class: Leg
+   SubClassOf: CardinalBodyPart
+   SubClassOf: hasFiatBoundary exactly 1 FiatBoundary
+
+Class: Tail
+   SubClassOf: CardinalBodyPart
+   SubClassOf: hasFiatBoundary exactly 1 FiatBoundary
+
+Class: MiddlePart
+   SubClassOf: CardinalBodyPart
+   SubClassOf: hasFiatBoundary exactly 6 FiatBoundary
+   SubClassOf: hasFiatBoundary exactly 1 TailBoundary
+   SubClassOf: hasFiatBoundary exactly 1 NeckBoundary
+   SubClassOf: hasFiatBoundary exactly 1 LeftLegBoundary
+   SubClassOf: hasFiatBoundary exactly 1 RightLegBoundary
+   SubClassOf: hasFiatBoundary exactly 1 LeftArmBoundary
+   SubClassOf: hasFiatBoundary exactly 1 RightArmBoundary
+
+Class: ArmBoundary
+   
+
+Class: TailBoundary
+   SubClassOf: FiatBoundary
+Class: NeckBoundary
+   SubClassOf: FiatBoundary
+Class: ArmBoundary
+   SubClassOf: FiatBoundary
+Class: LeftArmBoundary
+   SubClassOf: ArmBoundary
+Class: RightArmBoundary
+   SubClassOf: ArmBoundary
+Class: LegBoundary
+   SubClassOf: FiatBoundary
+Class: LeftLegBoundary
+   SubClassOf: LegBoundary
+Class: RightLegBoundary
+   SubClassOf: LegBoundary
+
+
+Class: T-rex
+   SubClassOf: Mammal
+
+Class: T-rexHead
+   EquivalentTo: Head and PartOf some T-rex
+
+Class: T-rexMiddleBody
+   EquivalentTo: MiddlePart and PartOf some T-rex
+
+Class: T-rexLeg
+   EquivalentTo: Leg and PartOf some T-rex
+ 
+Class: T-rexArm
+   EquivalentTo: Arm and PartOf some T-rex
+
+Class: T-rexTail
+   EquivalentTo: Tail and PartOf some T-rex
+
+
+
+Individual: thisAnimal
+   Types: T-rex
+
+Individual: r-head
+   Types: T-rexHead
+   Facts: PartOf thisAnimal,
+             hasFiatBoundary r-nb
+
+Individual: r-nb
+   Types: NeckBoundary 
+
+
+Individual: r-Tail
+   Types: T-rexTail
+   Facts: PartOf thisAnimal,
+             hasFiatBoundary r-tb
+
+Individual: r-tb
+   Types: TailBoundary
+
+
+Individual: r-Arm
+   Types: T-rexArm
+   Facts: PartOf thisAnimal,
+             hasFiatBoundary r-ab
+
+Individual: r-ab
+    Types: ArmBoundary
+
+
+Individual: r-Leg
+   Types: T-rexLeg
+   Facts: PartOf thisAnimal,
+             hasFiatBoundary r-lb
+
+Individual: r-lb
+   Types: LegBoundary  
+
+
+Individual: r-body
+   Types: T-rexMiddleBody
+   Facts: PartOf thisAnimal,
+              hasFiatBoundary r-nb,
+              hasFiatBoundary r-tb,
+              hasFiatBoundary r-lb,
+              hasFiatBoundary r-ab
+
+
+end
+
+
+
+
+
+
+
+
+
+
+
+
+

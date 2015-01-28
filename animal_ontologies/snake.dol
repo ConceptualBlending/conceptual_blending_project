@@ -1,0 +1,93 @@
+logic OWL
+
+ontology O =
+
+
+ObjectProperty: has_part
+ObjectProperty: part_of 
+	InverseOf: has_part 
+ObjectProperty: has_fiat_boundary
+	Domain: BodyPart
+	Range: FiatBoundary 
+ObjectProperty: fiat_boundary_of 
+	InverseOf: has_fiat_boundary
+ObjectProperty: meets
+
+Class: FiatBoundary
+Class: Organism
+Class: Reptile
+	SubClassOf: Organism 
+Class: BodyPart 
+	SubClassOf: part_of some Organism 
+Class: Scales
+	SubClassOf: part_of some BodyPart
+Class: CardinalBodyPart
+	SubClassOf: BodyPart
+Class: Head
+	SubClassOf: CardinalBodyPart
+	SubClassOf: has_fiat_boundary exactly 1 FiatBoundary
+Class: Eye
+	SubClassOf: part_of some Head
+Class: Mouth
+	SubClassOf: part_of some Head
+Class: PoisonFang
+	SubClassOf: part_of some Mouth
+Class: Body
+	SubClassOf: CardinalBodyPart
+	SubClassOf: has_fiat_boundary exactly 2 FiatBoundary
+	SubClassOf: has_fiat_boundary exactly 1 NeckBoundary 
+	SubClassOf: has_fiat_boundary exactly 1 TailBoundary  
+Class: Tail
+	SubClassOf: CardinalBodyPart
+	SubClassOf: has_fiat_boundary exactly 1 FiatBoundary
+Class: NeckBoundary 
+	SubClassOf: FiatBoundary
+Class: TailBoundary
+	SubClassOf: FiatBoundary
+Class: ProximalBoundary
+	SubClassOf: FiatBoundary
+Class: BodyNeckBoundary
+	SubClassOf: FiatBoundary
+Class: BodyTailBoundary
+	SubClassOf: FiatBoundary
+
+Class: Snake
+	SubClassOf: Reptile
+Class: SnakeHead
+	EquivalentTo: Head  and part_of some Snake 
+Class: SnakeBody
+	EquivalentTo: Body and part_of some Snake 
+Class: SnakeTail
+	EquivalentTo: Tail and part_of some Snake
+	
+
+Individual: thisSnake
+    Types: Snake
+
+Individual: b
+	Types: SnakeBody
+	Facts: part_of thisSnake, 
+			has_fiat_boundary b-nb,
+			has_fiat_boundary b-tb
+Individual: b-nb
+	Types: BodyNeckBoundary
+Individual: b-tb
+	Types: BodyTailBoundary
+
+Individual: h
+	Types: SnakeHead
+	Facts: part_of thisSnake, 
+			has_fiat_boundary h-nb
+Individual: h-nb
+	Types: ProximalBoundary 
+	Facts: meets b-nb
+
+Individual: t
+	Types: SnakeTail
+	Facts: part_of thisSnake,
+			has_fiat_boundary t-bb
+Individual: t-bb
+	Types: ProximalBoundary 
+	Facts: meets b-tb
+
+end
