@@ -1,5 +1,7 @@
+Prefix: <http://ontohub.org/monster-blend/animals/tiger#>
+Ontology: <http://ontohub.org/monster-blend/animals/tiger>
 ################################################################
-					BACKGROUND KNOWLEDGE
+############	  BACKGROUND KNOWLEDGE    ######################
 ################################################################
 
 Class: FiatBoundary
@@ -15,12 +17,6 @@ Class: CardinalBodyPart
 Class: head
 	SubClassOf: CardinalBodyPart
 	SubClassOf: has_fiat_boundary exactly 1 FiatBoundary
-Class: Ears
-	SubClassOf: part_of head
-Class: Eyes
-	SubClassOf: part_of head
-Class: whiskers
-	SubClassOf: part_of head
 Class: Limb
 	SubClassOf: CardinalBodyPart
 	SubClassOf: has_fiat_boundary exactly 2 FiatBoundary	
@@ -75,28 +71,6 @@ Class: Foot
 Class: Hand 
 	SubClassOf: LimbEnd 
 
-Class: shape
-Class: round
-	SubClassOf: shape
-
-Class: color
-Class: golden
-	SubClassOf: color
-Class: black
-	SubClassOf: color
-Class: yellow
-	SubClassOf: color
-
-	
-Class: Habitat
-Class: TropicalForest
-	SubClassOf: Habitat
-
-Class: animals
-	SubClassOf: mammal
-Class: cat
-	SubClassOf: mammal
-
 ObjectProperty: has_color
 ObjectProperty: has_part
 	Characteristics: Transitive
@@ -112,7 +86,7 @@ ObjectProperty: fiat_boundary_of
 ObjectProperty: meets 
 
 ##############################################################
-						TIGER
+#########################  TIGER    ##########################
 ##############################################################
 Class: tiger
 	SubClassOf: mammal
@@ -120,9 +94,6 @@ Class: tiger
 
 Class: tigerhead
 	EquivalentTo: head and part_of some tiger
-	SubClassOf: has_part exactly 2 eyes with some color yellow
-	SubClassOf: has_part exactly 2 ears with some shape round
-	SubClassOf: has_part whiskers
 
 Class: tigertrunk
 	EquivalentTo: QuadrupedTrunk  and part_of some tiger
@@ -141,7 +112,7 @@ class: tigercolor
 	SubClassOf: has some color golden and black 
 	
 ################################################################
-					INSTANCE
+#########################  INSTANCE    #########################
 ################################################################
 Individual: thisAnimal
     Types: tiger
@@ -178,8 +149,8 @@ Individual: t-tb
 	Types: TailBoundary	
 
 ################################################
-					HEAD
-################################################
+#############   HEAD     #######################
+
 Individual: h
 	Types: tigerhead
 	Facts: part_of thisAnimal, 
@@ -190,8 +161,8 @@ Individual: h-nb
 	Facts: meets t-nb
 
 ###############################################
-					leg
-###############################################
+########################leg####################
+
 Individual: lfl
 	Types: tigerleg
 	Facts: part_of thisAnimal, 
@@ -204,9 +175,10 @@ Individual: lfl-pb
 	 
 Individual: lfl-db
 	Types: DistalBoundary 
+
 ###################################################
-				claw
-###################################################
+######################claw#########################
+
 
 Individual: lfh 
 	Types: tigerClaw
