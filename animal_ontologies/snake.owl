@@ -17,18 +17,18 @@ Class: Reptile
 Class: BodyPart 
 	SubClassOf: part_of some Organism 
 Class: Scales
-	SubClassOf: BodyPart
+	SubClassOf: part_of BodyPart
 Class: CardinalBodyPart
 	SubClassOf: BodyPart
 Class: Head
 	SubClassOf: CardinalBodyPart
 	SubClassOf: has_fiat_boundary exactly 1 FiatBoundary
 Class: Eye
-	SubClassOf: CardinalBodyPart and Head
+	SubClassOf: part_of Head
 Class: Mouth
-	SubClassOf: CardinalBodyPart and Head
+	SubClassOf: part_of Head
 Class: PoisonFang
-	SubClassOf: CardinalBodyPart and Mouth
+	SubClassOf: part_of Mouth
 Class: Body
 	SubClassOf: CardinalBodyPart
 	SubClassOf: has_fiat_boundary exactly 2 FiatBoundary
