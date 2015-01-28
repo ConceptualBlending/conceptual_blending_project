@@ -189,3 +189,29 @@ Individual: lhl-pb
 	Facts: meets lfl-db
 
 
+############# Leg (right front) #############
+
+Individual: rfl
+	Types: BearLeg
+	Facts: part_of thisAnimal, 
+	 		has_fiat_boundary rfl-pb, 
+			has_fiat_boundary rfl-db 
+
+Individual: rfl-pb
+	Types: ProximalBoundary 
+	Facts: meets t-rflb
+	 
+Individual: rfl-db
+	Types: DistalBoundary 
+
+############# Claw (right front) #############
+
+Individual: rfh 
+	Types: BearClaw
+	Facts: part_of thisAnimal, 
+	 		has_fiat_boundary rfh-pb 
+ 
+Individual: rhl-pb
+	Types: ProximalBoundary 
+	Facts: meets rfl-db
+
