@@ -1,5 +1,5 @@
 ################################################################
-						BACKGROUND KNOWLEDGE
+					BACKGROUND KNOWLEDGE
 ################################################################
 
 Class: FiatBoundary
@@ -17,11 +17,8 @@ Class: head
 	SubClassOf: has_fiat_boundary exactly 1 FiatBoundary
 Class: Ears
 	SubClassOf: part_of head
-	SubClassOf: has some shape round
-	
 Class: Eyes
 	SubClassOf: part_of head
-	SubClassOf: has some color yellow
 Class: whiskers
 	SubClassOf: part_of head
 Class: Limb
@@ -58,6 +55,13 @@ Class: TailBoundary
 Class: ProximalBoundary
 	SubClassOf: FiatBoundary	
 Class: DistalBoundary
+	SubClassOf: FiatBoundary
+
+Class: EyesBoundary
+	SubClassOf: FiatBoundary
+Class: EarsBoundary
+	SubClassOf: FiatBoundary
+Class: whiskersBoundary
 	SubClassOf: FiatBoundary
 
 Class: Arm 
@@ -142,7 +146,7 @@ class: tigercolor
 Individual: thisAnimal
     Types: tiger
 	
-Individual: a 
+Individual: t
 	 Types: tigertrunk 
 	 Facts: part_of thisAnimal, 
 	 	 	has_fiat_boundary t-nb, 
@@ -184,6 +188,7 @@ Individual: h
 Individual: h-nb 
 	Types: ProximalBoundary  
 	Facts: meets t-nb
+
 ###############################################
 					leg
 ###############################################
