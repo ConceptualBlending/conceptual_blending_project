@@ -1,0 +1,207 @@
+
+
+logic OWL
+
+ontology O =
+
+ObjectProperty: has_part
+ObjectProperty: part_of
+ObjectProperty: has_habitat
+ObjectProperty: habitat_of
+ObjectProperty: has_color
+ObjectProperty: meets
+ObjectProperty: has_property
+ObjectProperty: property_of
+ObjectProperty: has_head_boundary
+ObjectProperty: has_trunk_boundary
+ObjectProperty: has_tail_boundary 
+ObjectProperty: boundary_of
+
+
+Class: Organism
+
+Class: 	Chondrichthyes
+ SubClassOf: Organism
+ 
+Class: Habitat
+ SubClassOf: has_habitat some Ocean
+
+Class: Color
+Class: Grey 
+ SubClassOf: Color
+ 
+Class: White
+ SubClassOf: Color
+
+Class: Ocean
+ SubClassOf: habitat_of some Organism 
+ 
+Class: BodyPart
+  SubClassOf: part_of some Organism
+
+  
+Class: HeadBoundary
+ SubClassOf: boundary_of some Head
+  
+Class: Head
+  SubClassOf: BodyPart
+  SubClassOf: has_head_boundary exactly 1 HeadBoundary
+  
+ 
+Class: Eyes
+ SubClassOf: part_of some Head
+
+ Class: Nostril 
+ SubClassOf: part_of some Head
+ 
+Class: Mouth 
+ SubClassOf: part_of some Head
+ SubClassOf: has_part some Tooth
+
+ Class: Gills
+ SubClassOf: part_of some Head
+
+ Class: Tooth
+ SubClassOf: part_of some Mouth
+ SubClassOf: has_property exactly 1 Sharp
+ 
+Class: Sharp
+SubClassOf: property_of some Tooth
+ 
+Class: TrunkBoundary
+ SubClassOf: boundary_of some Trunk
+ 
+ObjectProperty: has_left_pectoral_fin_boundary 
+ObjectProperty: has_right_pectoral_fin_boundary
+ObjectProperty: has_dorsal_fin_boundary
+
+ 
+Class: Trunk
+ SubClassOf: BodyPart
+ SubClassOf: has_trunk_boundary exactly 5 TrunkBoundary
+ SubClassOf: has_trunk_boundary exactly 1 DorsalFinBoundary
+ SubClassOf: has_trunk_boundary exactly 1 LeftPectoralFinBoundary
+ SubClassOf: has_trunk_boundary exactly 1 RightPectoralFinBoundary
+
+Class: DorsalFinBoundary
+ SubClassOf: TrunkBoundary
+
+Class: LeftPectoralFinBoundary
+ SubClassOf: TrunkBoundary
+
+Class: RightPectoralFinBoundary
+ SubClassOf: TrunkBoundary 
+ 
+Class: DorsalFin
+ SubClassOf: part_of some Trunk
+ SubClassOf: has_dorsal_fin_boundary exactly 1 DorsalFinBoundary
+ 
+Class: LeftPectoralFin
+ SubClassOf: part_of some Trunk
+ SubClassOf: has_left_pectoral_fin_boundary exactly 1 LeftPectoralFinBoundary
+
+Class: RightPectoralFin
+ SubClassOf: part_of some Trunk
+ SubClassOf: has_right_pectoral_fin_boundary exactly 1 RightPectoralFinBoundary
+ 
+Class: TailBoundary
+ SubClassOf: boundary_of some Tail
+
+ObjectProperty: has_claudal_fin_boundary
+
+Class: HeadNeckBoundary
+Class: TrunkNeckBoundary
+Class: Tail
+ SubClassOf: BodyPart
+ SubClassOf: has_tail_boundary exactly 2 TailBoundary
+ SubClassOf: has_tail_boundary exactly 1 ClaudalFinBoundary
+ 
+Class: ClaudalFinBoundary
+ SubClassOf: TailBoundary
+ 
+Class: ClaudalFin
+ SubClassOf: part_of some Tail
+ SubClassOf: has_claudal_fin_boundary exactly 1 ClaudalFinBoundary
+
+Class: Shark
+ SubClassOf: Chondrichthyes
+ SubClassOf: has_color some (Grey or White)
+
+ Class: SharkHabitat
+ EquivalentTo: Habitat and has_habitat some Organism
+ 
+Class: SharkHead
+ EquivalentTo: Head and part_of some Organism
+
+Class: SharkTrunk
+ EquivalentTo: Trunk and  part_of some Organism
+
+Class: SharkTail
+ EquivalentTo: Tail and part_of some Organism
+
+
+Individual: Jaws
+Types: Shark
+
+
+Individual: BigHead
+Types: SharkHead
+Facts: part_of Jaws,
+        has_head_boundary h-trb
+		
+Individual: h-trb
+Types: HeadNeckBoundary
+
+Class: TrunkDorsalFinBoundary
+
+Individual: BigTrunk
+Types: SharkTrunk
+Facts: part_of Jaws,
+        has_trunk_boundary tr-nb,
+		has_trunk_boundary tr-db,
+        has_trunk_boundary tr_lpb,
+		has_trunk_boundary tr_rpb,
+		has_trunk_boundary tr_tb
+
+		
+Individual: tr-nb
+Types: TrunkNeckBoundary
+Facts: meets  h-trb
+
+Individual: tr-db
+Types: TrunkDorsalFinBoundary
+
+Class: TrunkLeftPectoralFinBoundary
+
+Individual: tr_lpb
+Types: TrunkLeftPectoralFinBoundary
+
+Class: TrunkRightPectoralFinBoundary
+
+Individual: tr_rpb
+Types: TrunkRightPectoralFinBoundary
+
+Class: TrunkTailBoundary
+
+Individual: tr_tb
+Types: TrunkTailBoundary
+
+
+Individual: BigTail
+Types: SharkTail
+Facts: part_of Jaws,
+         has_tail_boundary t-trb,
+		 has_tail_boundary t-cb
+
+Class: TailTrunkBoundary
+		 
+Individual: t-trb
+Types: TailTrunkBoundary
+Facts: meets tr-tb
+
+Class: TailCaudalFinBoundary
+
+Individual: t-cb
+Types: TailCaudalFinBoundary
+
+end
