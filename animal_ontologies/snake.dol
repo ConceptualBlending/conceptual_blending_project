@@ -1,68 +1,31 @@
 logic OWL
 
-ontology O =
-
-
-ObjectProperty: has_part
-ObjectProperty: part_of 
-	InverseOf: has_part 
-ObjectProperty: has_fiat_boundary
-	Domain: BodyPart
-	Range: FiatBoundary 
-ObjectProperty: fiat_boundary_of 
-	InverseOf: has_fiat_boundary
-ObjectProperty: meets
-
-Class: FiatBoundary
-Class: Organism
-Class: Reptile
-	SubClassOf: Organism 
-Class: BodyPart 
-	SubClassOf: part_of some Organism 
-Class: Scales
-	SubClassOf: part_of some BodyPart
-Class: CardinalBodyPart
-	SubClassOf: BodyPart
-Class: Head
-	SubClassOf: CardinalBodyPart
-	SubClassOf: has_fiat_boundary exactly 1 FiatBoundary
-Class: Eye
-	SubClassOf: part_of some Head
-Class: Mouth
-	SubClassOf: part_of some Head
-Class: PoisonFang
-	SubClassOf: part_of some Mouth
-Class: Body
-	SubClassOf: CardinalBodyPart
-	SubClassOf: has_fiat_boundary exactly 2 FiatBoundary
-	SubClassOf: has_fiat_boundary exactly 1 NeckBoundary 
-	SubClassOf: has_fiat_boundary exactly 1 TailBoundary  
-Class: Tail
-	SubClassOf: CardinalBodyPart
-	SubClassOf: has_fiat_boundary exactly 1 FiatBoundary
-Class: NeckBoundary 
-	SubClassOf: FiatBoundary
-Class: TailBoundary
-	SubClassOf: FiatBoundary
-Class: ProximalBoundary
-	SubClassOf: FiatBoundary
-Class: BodyNeckBoundary
-	SubClassOf: FiatBoundary
-Class: BodyTailBoundary
-	SubClassOf: FiatBoundary
-
+ontology Snake = 
+  </media/raj/RAJ´S/Learn/DKE/Monsters/animals.dol>
+ then
+{
+ 
 Class: Snake
 	SubClassOf: Reptile
 Class: SnakeHead
 	EquivalentTo: Head  and part_of some Snake 
 Class: SnakeBody
-	EquivalentTo: Body and part_of some Snake 
+	EquivalentTo: Trunk and part_of some Snake 
 Class: SnakeTail
 	EquivalentTo: Tail and part_of some Snake
-	
 
+}
+
+end
+
+ontology ASnake =  
+ Snake then 
+  {
+ 
 Individual: thisSnake
     Types: Snake
+
+%% Body
 
 Individual: b
 	Types: SnakeBody
@@ -70,9 +33,11 @@ Individual: b
 			has_fiat_boundary b-nb,
 			has_fiat_boundary b-tb
 Individual: b-nb
-	Types: BodyNeckBoundary
+	Types: NeckBoundary
 Individual: b-tb
-	Types: BodyTailBoundary
+	Types: TailBoundary
+
+%% Head
 
 Individual: h
 	Types: SnakeHead
@@ -82,6 +47,8 @@ Individual: h-nb
 	Types: ProximalBoundary 
 	Facts: meets b-nb
 
+%% Tail
+
 Individual: t
 	Types: SnakeTail
 	Facts: part_of thisSnake,
@@ -90,4 +57,5 @@ Individual: t-bb
 	Types: ProximalBoundary 
 	Facts: meets b-tb
 
-end
+
+  }
