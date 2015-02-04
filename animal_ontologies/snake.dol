@@ -1,7 +1,7 @@
 logic OWL
 
 ontology Snake = 
-  </media/raj/RAJ´S/Learn/DKE/Monsters/animals.dol>
+  <https://ontohub.org/animal_monster/animals.dol?Background>
  then
 {
  
