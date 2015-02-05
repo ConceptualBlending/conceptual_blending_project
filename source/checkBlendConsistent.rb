@@ -4,8 +4,17 @@ def consistent_blend?(blendResult, backgroundKnowledge)
 
   # TASK: 
   # generate a DOL file with the union of the blend and the background knowledge
+
+    # pattern
+    # logic OWL 
+    # ontology O = 
+     # <blendResult.onto_url> and <backgroundKnowledge.onto_url>
+
   # use HETS to check for consistency
-  # return the result of consistency check, as well as the conflict sets (we need to get them out of HETS)
+
+    # here is where the code from cons.rb should go   
+    
+  # return the result of consistency check
 
 
 end
