@@ -3,7 +3,6 @@
 logic OWL
 
 ontology O =
-
 ObjectProperty: has_part
 ObjectProperty: part_of
 ObjectProperty: has_habitat
@@ -13,7 +12,7 @@ ObjectProperty: meets
 ObjectProperty: has_property
 ObjectProperty: property_of
 ObjectProperty: has_head_boundary
-ObjectProperty: has_trunk_boundary
+ObjectProperty: has_trunk_with_fins_boundary
 ObjectProperty: has_tail_boundary 
 ObjectProperty: boundary_of
 
@@ -68,40 +67,40 @@ Class: Mouth
 Class: Sharp
 SubClassOf: property_of some Tooth
  
-Class: TrunkBoundary
- SubClassOf: boundary_of some Trunk
+Class: TrunkWithFinsBoundary
+ SubClassOf: boundary_of some TrunkWithFins
  
 ObjectProperty: has_left_pectoral_fin_boundary 
 ObjectProperty: has_right_pectoral_fin_boundary
 ObjectProperty: has_dorsal_fin_boundary
 
  
-Class: Trunk
+Class: TrunkWithFins
  SubClassOf: BodyPart
- SubClassOf: has_trunk_boundary exactly 5 TrunkBoundary
- SubClassOf: has_trunk_boundary exactly 1 DorsalFinBoundary
- SubClassOf: has_trunk_boundary exactly 1 LeftPectoralFinBoundary
- SubClassOf: has_trunk_boundary exactly 1 RightPectoralFinBoundary
+ SubClassOf: has_trunk_with_fins_boundary exactly 5 TrunkWithFinsBoundary
+ SubClassOf: has_trunk_with_fins_boundary exactly 1 DorsalFinBoundary
+ SubClassOf: has_trunk_with_fins_boundary exactly 1 LeftPectoralFinBoundary
+ SubClassOf: has_trunk_with_fins_boundary exactly 1 RightPectoralFinBoundary
 
 Class: DorsalFinBoundary
- SubClassOf: TrunkBoundary
+ SubClassOf: TrunkWithFinsBoundary
 
 Class: LeftPectoralFinBoundary
- SubClassOf: TrunkBoundary
+ SubClassOf: TrunkWithFinsBoundary
 
 Class: RightPectoralFinBoundary
- SubClassOf: TrunkBoundary 
+ SubClassOf: TrunkWithFinsBoundary 
  
 Class: DorsalFin
- SubClassOf: part_of some Trunk
+ SubClassOf: part_of some TrunkWithFins
  SubClassOf: has_dorsal_fin_boundary exactly 1 DorsalFinBoundary
  
 Class: LeftPectoralFin
- SubClassOf: part_of some Trunk
+ SubClassOf: part_of some TrunkWithFins
  SubClassOf: has_left_pectoral_fin_boundary exactly 1 LeftPectoralFinBoundary
 
 Class: RightPectoralFin
- SubClassOf: part_of some Trunk
+ SubClassOf: part_of some TrunkWithFins
  SubClassOf: has_right_pectoral_fin_boundary exactly 1 RightPectoralFinBoundary
  
 Class: TailBoundary
@@ -110,7 +109,7 @@ Class: TailBoundary
 ObjectProperty: has_claudal_fin_boundary
 
 Class: HeadNeckBoundary
-Class: TrunkNeckBoundary
+Class: TrunkWithFinsNeckBoundary
 Class: Tail
  SubClassOf: BodyPart
  SubClassOf: has_tail_boundary exactly 2 TailBoundary
@@ -123,7 +122,13 @@ Class: ClaudalFin
  SubClassOf: part_of some Tail
  SubClassOf: has_claudal_fin_boundary exactly 1 ClaudalFinBoundary
 
-Class: Shark
+logic OWL
+
+ontology Shark = 
+<https://ontohub.org/animal_monster/animals.dol?Background>
+then
+{
+ Class: Shark
  SubClassOf: Chondrichthyes
  SubClassOf: has_color some (Grey or White)
 
@@ -134,16 +139,23 @@ Class: SharkHead
  EquivalentTo: Head and part_of some Organism
 
 Class: SharkTrunk
- EquivalentTo: Trunk and  part_of some Organism
+ EquivalentTo: TrunkWithFins and  part_of some Organism
 
 Class: SharkTail
  EquivalentTo: Tail and part_of some Organism
+}
+end
 
 
+ontology AShark =
+
+Shark then
+
+{
 Individual: Jaws
 Types: Shark
 
-
+%%Head
 Individual: BigHead
 Types: SharkHead
 Facts: part_of Jaws,
@@ -152,51 +164,53 @@ Facts: part_of Jaws,
 Individual: h-trb
 Types: HeadNeckBoundary
 
-Class: TrunkDorsalFinBoundary
+Class: TrunkWithFinsDorsalFinBoundary
+
+%%TrunkWithFins
 
 Individual: BigTrunk
 Types: SharkTrunk
 Facts: part_of Jaws,
-        has_trunk_boundary tr-nb,
-		has_trunk_boundary tr-db,
-        has_trunk_boundary tr_lpb,
-		has_trunk_boundary tr_rpb,
-		has_trunk_boundary tr_tb
+        has_trunk_with_fins_boundary tr-nb,
+		has_trunk_with_fins_boundary tr-db,
+        has_trunk_with_fins_boundary tr_lpb,
+		has_trunk_with_fins_boundary tr_rpb,
+		has_trunk_with_fins_boundary tr_tb
 
 		
 Individual: tr-nb
-Types: TrunkNeckBoundary
+Types: TrunkWithFinsNeckBoundary
 Facts: meets  h-trb
 
 Individual: tr-db
-Types: TrunkDorsalFinBoundary
+Types: TrunkWithFinsDorsalFinBoundary
 
-Class: TrunkLeftPectoralFinBoundary
+Class: TrunkWithFinsLeftPectoralFinBoundary
 
 Individual: tr_lpb
-Types: TrunkLeftPectoralFinBoundary
+Types: TrunkWithFinsLeftPectoralFinBoundary
 
-Class: TrunkRightPectoralFinBoundary
+Class: TrunkWithFinsRightPectoralFinBoundary
 
 Individual: tr_rpb
-Types: TrunkRightPectoralFinBoundary
+Types: TrunkwithFinsRightPectoralFinBoundary
 
-Class: TrunkTailBoundary
+Class: TrunkWithFinsTailBoundary
 
 Individual: tr_tb
-Types: TrunkTailBoundary
+Types: TrunkWithFinsTailBoundary
 
-
+%%Tail
 Individual: BigTail
 Types: SharkTail
 Facts: part_of Jaws,
          has_tail_boundary t-trb,
 		 has_tail_boundary t-cb
 
-Class: TailTrunkBoundary
+Class: TailTrunkWithFinsBoundary
 		 
 Individual: t-trb
-Types: TailTrunkBoundary
+Types: TailTrunkWithFinsBoundary
 Facts: meets tr-tb
 
 Class: TailCaudalFinBoundary
@@ -205,3 +219,4 @@ Individual: t-cb
 Types: TailCaudalFinBoundary
 
 end
+}
