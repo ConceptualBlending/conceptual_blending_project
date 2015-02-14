@@ -1,0 +1,129 @@
+logic OWL
+
+ontology Lion = 
+  <https://ontohub.org/animal_monster/animals.dol?Background>
+ then
+{
+ 
+Class: Lion 
+	SubClassOf: Carnivore 
+
+Class: LionTrunk
+	EquivalentTo: QuadrupedTrunk  and part_of some Lion
+
+Class: LionHead 
+	EquivalentTo: Head and part_of some Lion 
+
+Class: LionMane 
+	EquivalentTo: Mane and part_of some Lion	
+
+Class: LionLeg
+	EquivalentTo: Leg and part_of some Lion
+
+Class: LionClaw
+	EquivalentTo: Claw and part_of some Lion 
+
+Class: LionTail 
+	EquivalentTo: Tail and part_of some Lion
+
+}
+
+end
+
+ontology ALion =  
+ Lion then 
+  {
+ 
+Individual: thisLion
+    Types: Lion
+
+%% Body
+
+Individual: t 
+	 Types: LionTrunk 
+	 Facts: part_of thisLion, 
+	 	 	has_fiat_boundary t-nb, 
+			has_fiat_boundary t-lflb,
+			has_fiat_boundary t-rflb,
+			has_fiat_boundary t-lblb,
+			has_fiat_boundary t-rblb,
+			has_fiat_boundary t-tb
+
+Individual: t-nb
+	Types: NeckBoundary 
+
+Individual: t-lflb
+	Types: LeftForeLimbBoundary  
+
+Individual: t-rflb
+	Types: RightForeLimbBoundary    
+	
+Individual: t-lhlb
+	Types: LeftHindLimbBoundary    
+	
+Individual: t-rhlb
+	Types: RightHindLimbBoundary       
+
+Individual: t-tb	
+	Types: TailBoundary
+
+%% Head
+
+Individual: h
+	Types: LionHead
+	Facts: part_of thisLion, 
+			has_fiat_boundary h-nb
+
+Individual: h-nb 
+	Types: ProximalBoundary  
+	Facts: meets t-nb
+
+%% Mane
+
+Individual: m
+	Types: LionMane
+	Facts: part_of thisLion, 
+			has_fiat_boundary m-hb
+
+Individual: m-hb 
+	Types: ProximalBoundary  
+	Facts: meets h-nb
+
+%% Leg (left front)
+
+Individual: lfl
+	Types: LionLeg
+	Facts: part_of thisLion, 
+	 		has_fiat_boundary lfl-pb, 
+			has_fiat_boundary lfl-db 
+
+Individual: lfl-pb
+	Types: ProximalBoundary 
+	Facts: meets t-lflb
+	 
+Individual: lfl-db
+	Types: DistalBoundary 
+
+%% Claw (left front)
+
+Individual: lfh 
+	Types: LionClaw
+	Facts: part_of thisLion, 
+	 		has_fiat_boundary lfh-pb 
+ 
+Individual: lfh-pb
+	Types: ProximalBoundary 
+	Facts: meets lfl-db
+
+%% Tail
+
+Individual: lt
+	Types: LionTail
+	Facts: part_of thisLion, 
+			has_fiat_boundary lt-tb
+
+Individual: lt-tb 
+	Types: ProximalBoundary  
+	Facts: meets t-tb
+
+}
