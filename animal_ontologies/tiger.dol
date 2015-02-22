@@ -1,7 +1,8 @@
 logic OWL
 
-ontology O = <https://ontohub.org/animal_monster/animals.dol?Background>
-
+ontology tiger = <https://ontohub.org/animal_monster/animals.dol?Background>
+then
+{
 Class: FiatBoundary
 Class: Organism
 
@@ -96,8 +97,14 @@ Class: TigerClaw
 
 Class: Tigertail 
 	EquivalentTo: Tail and part_of some Tiger
+
+}
+
+end
 	
-	
+ontology ttiger = tiger
+then
+{	
 Individual: thisAnimal
 	Types: Tiger
 	
@@ -166,4 +173,5 @@ Individual: lfh
 Individual: lhl-pb
 	Types: ProximalBoundary 
 	Facts: meets lfl-db
-end
+
+}
