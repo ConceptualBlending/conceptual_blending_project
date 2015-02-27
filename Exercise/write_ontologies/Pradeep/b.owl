@@ -1,0 +1,124 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE rdf:RDF [
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+]>
+
+
+<rdf:RDF xmlns="http://www.semanticweb.org/pradeep/ontologies/2015/0/untitled-ontology-3#"
+     xml:base="http://www.semanticweb.org/pradeep/ontologies/2015/0/untitled-ontology-3"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+    <owl:Ontology rdf:about="http://www.semanticweb.org/pradeep/ontologies/2015/0/untitled-ontology-3">
+        <owl:imports rdf:resource="http://www.semanticweb.org/pradeep/ontologies/2015/0/untitled-ontology-3"/>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/pradeep/ontologies/2015/0/untitled-ontology-3#has -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/pradeep/ontologies/2015/0/untitled-ontology-3#has"/>
+    
+
+
+    <!-- http://www.semanticweb.org/pradeep/ontologies/2015/0/untitled-ontology-3#has_part -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/pradeep/ontologies/2015/0/untitled-ontology-3#has_part"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/pradeep/ontologies/2015/0/untitled-ontology-3#Animal -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/pradeep/ontologies/2015/0/untitled-ontology-3#Animal"/>
+    
+
+
+    <!-- http://www.semanticweb.org/pradeep/ontologies/2015/0/untitled-ontology-3#Birds -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/pradeep/ontologies/2015/0/untitled-ontology-3#Birds">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pradeep/ontologies/2015/0/untitled-ontology-3#has_part"/>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pradeep/ontologies/2015/0/untitled-ontology-3#Wings"/>
+                <owl:qualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">2</owl:qualifiedCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pradeep/ontologies/2015/0/untitled-ontology-3#has_part"/>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pradeep/ontologies/2015/0/untitled-ontology-3#Wings"/>
+                <owl:maxQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">2</owl:maxQualifiedCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/pradeep/ontologies/2015/0/untitled-ontology-3#Legs -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/pradeep/ontologies/2015/0/untitled-ontology-3#Legs">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/pradeep/ontologies/2015/0/untitled-ontology-3#Birds"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/pradeep/ontologies/2015/0/untitled-ontology-3#has_part"/>
+                <owl:onClass rdf:resource="http://www.semanticweb.org/pradeep/ontologies/2015/0/untitled-ontology-3#Legs"/>
+                <owl:minQualifiedCardinality rdf:datatype="&xsd;nonNegativeInteger">2</owl:minQualifiedCardinality>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/pradeep/ontologies/2015/0/untitled-ontology-3#Mammel -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/pradeep/ontologies/2015/0/untitled-ontology-3#Mammel"/>
+    
+
+
+    <!-- http://www.semanticweb.org/pradeep/ontologies/2015/0/untitled-ontology-3#Tiger -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/pradeep/ontologies/2015/0/untitled-ontology-3#Tiger">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/pradeep/ontologies/2015/0/untitled-ontology-3#Animal"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/pradeep/ontologies/2015/0/untitled-ontology-3#Wings -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/pradeep/ontologies/2015/0/untitled-ontology-3#Wings">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/pradeep/ontologies/2015/0/untitled-ontology-3#Birds"/>
+    </owl:Class>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 3.5.0) http://owlapi.sourceforge.net -->
+

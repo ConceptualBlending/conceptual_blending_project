@@ -1,8 +1,8 @@
 logic OWL
 
-ontology O =
-
-
+ontology t-rex = <https://ontohub.org/animal_monster/animals.dol?Background>
+then
+{
 ObjectProperty: has_part
 
 ObjectProperty: PartOf
@@ -93,7 +93,13 @@ Class: T-rexArm
 Class: T-rexTail
    EquivalentTo: Tail and PartOf some T-rex
 
+}
 
+end
+
+ontology ttex = tiger
+then
+{
 
 Individual: thisAnimal
    Types: T-rex
@@ -142,8 +148,7 @@ Individual: r-body
               hasFiatBoundary r-lb,
               hasFiatBoundary r-ab
 
-
-end
+}
 
 
 

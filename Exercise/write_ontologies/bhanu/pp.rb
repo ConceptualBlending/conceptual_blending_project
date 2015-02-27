@@ -220,6 +220,13 @@ class MinConcept < Concept
     @cardinality = a_cardinality
 	a_concept.parent = self
   end
+  def show
+     components[0].show
+     print " Min "
+     print cardinality + " "
+     components[1].show
+     #components[1].show
+  end
 end
 
 
@@ -233,6 +240,14 @@ class MaxConcept < Concept
     @cardinality = a_cardinality
 	a_concept.parent = self
   end
+  def show
+     #components[0].show
+     components[0].show
+     print " Max "
+     print cardinality + " "
+     components[1].show
+  end
+
 end
 
 
@@ -245,6 +260,12 @@ class ExactConcept < Concept
     @components = [a_role, a_concept]   
     @cardinality = a_cardinality
 	a_concept.parent = self
+  end
+  def show
+     components[0].show
+     print " exactly "
+     print cardinality + " "
+     components[1].show
   end
 end
 
@@ -263,6 +284,9 @@ class AtomicDataProperty < DataProperty
   else 
    raise "Symbol expected"
   end
+ end
+ def show
+    @name.show
  end
 
 end
@@ -356,7 +380,7 @@ class ConceptSubsumption < Sentence
    end
    def show
 	components[0].show
-	#print "SubClassOf:"
+	print "SubClassOf:"
 components[1].show
 puts ''
  # @components.each do |x|
@@ -625,7 +649,7 @@ class Morphism
  end 
 end
 
-o = parseSymbols("../Pradeep/animal.owl")
+o = parseSymbols("../Pradeep/b.owl")
 o.show
 
 #o = demoxml("../Pradeep/NewBird.owl")
