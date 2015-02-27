@@ -3,7 +3,7 @@
 
 
 require 'set'
-load '../Pradeep/xmlParse.rb'
+load '../Pradeep/newXmlParser.rb'
 #load '../Pradeep/demoXml.rb'
 ###### some constants
 
@@ -625,7 +625,7 @@ class Morphism
  end 
 end
 
-o = parseSymbols("../Pradeep/NewBird.owl")
+o = parseSymbols("../Pradeep/animal.owl")
 o.show
 
 #o = demoxml("../Pradeep/NewBird.owl")
