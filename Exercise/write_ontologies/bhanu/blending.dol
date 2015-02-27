@@ -1,0 +1,8 @@
+ontology IO1 =url1
+ontology IO1 = url2
+ontology Base = url3
+interpretation I1 : Base to IO1
+Class:Birds |-> Class:Wing
+intepretation I2 : Base to IO2 = 
+Class:Mammal |-> Class:Animal
+ontology Blend = combine I1, I2

@@ -632,13 +632,14 @@ class Morphism
 
  def showDOL
    morformat = Array.new()
-   #puts @source_sig
+   @source_sig.show
+   @target_sig.show
    #puts @target_sig
    @symbol_map.each do |x|
      begin 
        morformat.push(x.show) #;print "|->" ;value.show
        number = morformat.length 
-          morformat.push("|->")
+          #morformat.push("|->")
      end until  !x.eql? "nil" 
    end
    return morformat
@@ -646,17 +647,18 @@ class Morphism
 
  def fileread(url1,url2,url3)
     s_d = Array.new()
-    s_d = showDOL 
+    s_d = showDOL
+    i = 0 
     logicowl= File.open("blending.dol", "w")
-  logicowl.puts "ontology IO1 =" +url1
+    logicowl.puts "ontology IO1 =" +url1
     logicowl.puts "ontology IO1 = "+url2
     logicowl.puts "ontology Base = "+url3
-		
+    puts s_d.length		
     logicowl.puts "interpretation I1 : Base to IO1"
-    logicowl.puts s_d[0..2]
-    logicowl.puts ","	
+    logicowl.puts s_d[0].to_s + " |-> " + s_d[1].to_s
+    #logicowl.puts ","	
     logicowl.puts "intepretation I2 : Base to IO2 = "
-    logicowl.puts s_d[2..4]
+    logicowl.puts s_d[2].to_s + " |-> " + s_d[3].to_s 
     logicowl.puts "ontology Blend = combine I1, I2"
    
     logicowl.close
