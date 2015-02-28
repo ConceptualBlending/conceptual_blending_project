@@ -1,21 +1,69 @@
-require 'open-uri'
-require 'uri'
-# ------ call hets to test the consistency of the blendoid
 
 def consistent_blend?(blendResult, backgroundKnowledge)
 
+ # TASK: 
+  # generate a DOL file with the union of the blend and the background knowledge
+    # pattern
+    # logic OWL 
+    # ontology O = 
+     # <blendResult.onto_url> and <backgroundKnowledge.onto_url>
+  # use HETS to check for consistency
+    # here is where the code from cons.rb should go   
+  # return the result of consistency check
 
+sig1 = blendResult.o_signature
+
+c_n=Array.new()
+o_p=Array.new()
+d_p=Array.new()
+x=Array.new()
+i=0
+j=0
+
+sig1.concepts.each do |x|
+c_n.push(x.name)
+end
+#puts c_n
+sig1.objProps.each do |x|
+o_p.push(x.name)
+end
+sig1.dataProps.each do |x|
+d_p.push(x.name)
+end
+sig1.individuals.each do |x|
+x.push(x.name)
+end
+	
+sens1 = blendResult.o_sentences
 
 File.open("union.dol","w") do |f|
   f.puts "logic OWL"
-  f.puts "ontology O = "
-  f.puts File.readlines("#{blendResult}")
-  f.puts " and "
-  f.puts File.readlines("#{backgroundKnowledge}")
-  f.close
+  f.puts "ontology O ="
+begin
+	 f.puts "Class : " + c_n[i].to_s
+   	i+=1
+end while (i<c_n.length)
+begin
+	 f.puts "ObjectProject : " + o_p[j].to_s
+   	j+=1
+end while (j<o_p.length)
+
+ 
+ 
+f.puts "\nand "
+
+fileObj = File.new(backgroundKnowledge, "r")
+	while (line = fileObj.gets)
+		f.puts line
+	end
+fileObj.close
+f.close
+
+end
 end
 
-open3.popen3('hets -I') do | stdin, stdout, stderr |
+=begin
+Open3.popen3('hets -I') do | stdin, stdout, stderr |
   case evaluate_blend("evalmb1", stdin, stdout)
     when :consistent
       puts "consistent"
@@ -49,3 +97,4 @@ end
 
 end
 consistent_blend?("blending.dol","animals.dol")
+=end

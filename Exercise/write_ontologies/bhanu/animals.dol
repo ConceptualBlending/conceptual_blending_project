@@ -1,0 +1,124 @@
+
+%% ######################################################################
+%% ###### General/Background     ########################################
+%% ######################################################################
+
+logic OWL
+
+ontology Background = 
+
+
+ObjectProperty: has_part
+	Characteristics: Transitive  
+ObjectProperty: part_of 
+	InverseOf: has_part 
+ObjectProperty: has_fiat_boundary
+	Domain: BodyPart
+	Range: FiatBoundary 
+
+ObjectProperty: fiat_boundary_of 
+	InverseOf: has_fiat_boundary
+
+ObjectProperty: meets 
+
+
+Class: FiatBoundary
+Class: Organism
+
+Class: Reptile
+	SubClassOf: Organism 
+
+Class: Arachnida					%%
+	SubClassOf: Organism 
+
+Class: Mammal
+	SubClassOf: Organism 
+
+Class: BodyPart 
+	SubClassOf: part_of some Organism 
+
+Class: Hair 
+	SubClassOf: BodyPart
+
+Class: CardinalBodyPart
+	SubClassOf: BodyPart
+	 
+Class: Head
+	SubClassOf: CardinalBodyPart
+	SubClassOf: has_fiat_boundary exactly 1 FiatBoundary		
+Class: Trunk 
+	SubClassOf: CardinalBodyPart
+Class: Limb
+	SubClassOf: CardinalBodyPart
+	SubClassOf: has_fiat_boundary exactly 2 FiatBoundary	
+	SubClassOf: has_fiat_boundary exactly 1 ProximalBoundary 
+	SubClassOf: has_fiat_boundary exactly 1 DistalBoundary 
+Class: Tail
+	SubClassOf: CardinalBodyPart
+	SubClassOf: has_fiat_boundary exactly 1 FiatBoundary	
+Class: LimbEnd 
+	SubClassOf: CardinalBodyPart
+	SubClassOf: has_fiat_boundary exactly 1 FiatBoundary		
+	
+Class: OctagonalTrunk 														%% Torso with eight legs, one neck/head-connection, two arms, tail
+	SubClassOf: has_fiat_boundary exactly 12 FiatBoundary
+
+	SubClassOf: has_fiat_boundary exactly 1 NeckBoundary 
+
+	SubClassOf: has_fiat_boundary exactly 1 LeftForeLimbBoundary  			%% arms
+	SubClassOf: has_fiat_boundary exactly 1 RightForeLimbBoundary 
+
+	
+	SubClassOf: has_fiat_boundary exactly 4 LeftHindLimbBoundary   			%% legs
+	SubClassOf: has_fiat_boundary exactly 4 RightHindLimbBoundary   
+	
+	SubClassOf: has_fiat_boundary exactly 1 TailBoundary   
+
+
+Class: QuadrupedTrunk 
+	SubClassOf: has_fiat_boundary exactly 6 FiatBoundary
+	SubClassOf: has_fiat_boundary exactly 1 NeckBoundary 
+	SubClassOf: has_fiat_boundary exactly 1 LeftForeLimbBoundary  
+	SubClassOf: has_fiat_boundary exactly 1 RightForeLimbBoundary   
+	SubClassOf: has_fiat_boundary exactly 1 LeftHindLimbBoundary   
+	SubClassOf: has_fiat_boundary exactly 1 RightHindLimbBoundary   
+	SubClassOf: has_fiat_boundary exactly 1 TailBoundary   
+
+Class: NeckBoundary 
+	SubClassOf: FiatBoundary
+Class: LeftForeLimbBoundary  
+	SubClassOf: FiatBoundary
+Class: RightForeLimbBoundary    
+	SubClassOf: FiatBoundary
+Class: LeftHindLimbBoundary    
+	SubClassOf: FiatBoundary
+Class: RightHindLimbBoundary       
+	SubClassOf: FiatBoundary
+Class: TailBoundary
+	SubClassOf: FiatBoundary		
+Class: ProximalBoundary
+	SubClassOf: FiatBoundary	
+Class: DistalBoundary
+	SubClassOf: FiatBoundary		
+	
+Class: Arm 
+	SubClassOf: Limb
+Class: Leg
+	SubClassOf: Limb
+Class: Hoof 
+	SubClassOf: LimbEnd 
+Class: Claw 
+	SubClassOf: LimbEnd
+
+Class: Paw 
+	SubClassOf: LimbEnd 
+Class: Foot 
+	SubClassOf: LimbEnd 
+Class: Hand 
+	SubClassOf: LimbEnd 
+
+Class: Pincer %% was missing
+
+end
+
+
