@@ -649,3 +649,4 @@ onto1 = Ontology.new(sigma1, [s1, s2])
 onto1.show
 
 
+

@@ -1,7 +1,6 @@
 #!/usr/bin/env ruby
 
 require 'set'
-
 ###### some constants
 
 CLASS = "owl:Class"
@@ -654,5 +653,4 @@ iSet1 = Set[]
 sigma1 = Signature.new(cSet1,oSet1,dSet1,iSet1)
 onto1 = Ontology.new(sigma1, [s1, s2])
 onto1.show
-
 
