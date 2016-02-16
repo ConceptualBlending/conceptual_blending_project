@@ -85,12 +85,10 @@ class Workflow
 
   def set_consistent
     @mutex.synchronize { @consistent = true }
-    puts __method__
   end
 
   def set_inconsistent
     @mutex.synchronize { @consistent = false }
-    puts __method__
   end
 
   def handle_consistency_check_not_finished_error
@@ -98,7 +96,6 @@ class Workflow
   end
 
   def handle_consistency
-    puts __method__
     # do nothing
   end
 
@@ -106,7 +103,6 @@ class Workflow
     axiom = let_user_select_axiom_to_remove
     input_space, input_axiom = identify_axiom_in_input_spaces(axiom)
     remove_axiom_from_input_space(input_space, input_axiom)
-    puts __method__
   end
 
   def let_user_select_axiom_to_remove
