@@ -1,3 +1,4 @@
+require_relative 'consistency_check.rb'
 require_relative 'inconsistency_check.rb'
 
 class Workflow
@@ -61,14 +62,20 @@ class Workflow
   end
 
   def check_consistency
-    # TODO actually check consistency and set local variable `consistent`
+    # TODO specify SOME_URL
+    result = ConsistencyCheck.new(SOME_URL).run
+    consistent = result == true
+    inconsistent = result == false
+    # TODO what to do on a timeout? (:consistency_could_not_be_determined)
     set_consistent_and_terminate_other_thread if consistent
   end
 
   def check_inconsistency
     # TODO specify SOME_URL
     result = InconsistencyCheck.new(SOME_URL).run
-    inconsistent = result != :theory_is_consistent
+    consistent = result == :theory_is_consistent
+    inconsistent = result.is_a?(Array)
+    # TODO what to do on a timeout? (:consistency_could_not_be_determined)
     set_inconsistent_and_terminate_other_thread if inconsistent
     @used_axioms = result
   end
