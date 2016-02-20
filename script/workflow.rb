@@ -7,7 +7,8 @@ class Workflow
   def initialize(input_space1, input_space2)
     self.input_space1 = input_space1
     self.input_space2 = input_space2
-    @mutex = Mutex.new
+    @consistent_attribute_mutex = Mutex.new
+    @user_interaction_mutex = Mutex.new
   end
 
   def run
@@ -63,7 +64,7 @@ class Workflow
 
   def check_consistency
     # TODO specify SOME_URL
-    result = ConsistencyCheck.new(SOME_URL).run
+    result = ConsistencyCheck.new(SOME_URL, @user_interaction_mutex).run
     consistent = result == true
     inconsistent = result == false
     # TODO what to do on a timeout? (:consistency_could_not_be_determined)
@@ -72,7 +73,7 @@ class Workflow
 
   def check_inconsistency
     # TODO specify SOME_URL
-    result = InconsistencyCheck.new(SOME_URL).run
+    result = InconsistencyCheck.new(SOME_URL, @user_interaction_mutex).run
     consistent = result == :theory_is_consistent
     inconsistent = result.is_a?(Array)
     # TODO what to do on a timeout? (:consistency_could_not_be_determined)
@@ -91,11 +92,11 @@ class Workflow
   end
 
   def set_consistent
-    @mutex.synchronize { @consistent = true }
+    @consistent_attribute_mutex.synchronize { @consistent = true }
   end
 
   def set_inconsistent
-    @mutex.synchronize { @consistent = false }
+    @consistent_attribute_mutex.synchronize { @consistent = false }
   end
 
   def handle_consistency_check_not_finished_error
