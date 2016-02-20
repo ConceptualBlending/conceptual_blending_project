@@ -21,10 +21,11 @@ HET
                   includeProof: 'false',
                   includeDetails: 'false'}
 
-  attr_accessor :theory_url, :provers, :prover, :result
+  attr_accessor :theory_url, :provers, :prover, :result, :mutex
 
-  def initialize(theory_url)
+  def initialize(theory_url, mutex = nil)
     self.theory_url = theory_url
+    self.mutex = mutex
   end
 
   def run
@@ -63,7 +64,7 @@ HET
   def select_prover
     index = UserInteraction.
       new("Please select a prover for the inconsistency check.",
-          provers.map { |cc| cc['name'] }).run
+          provers.map { |cc| cc['name'] }, mutex).run
     self.prover = provers[index]['identifier']
   end
 

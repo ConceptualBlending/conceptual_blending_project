@@ -14,10 +14,11 @@ class ConsistencyCheck
                                     includeDetails: 'false'}
 
   attr_accessor :theory_url, :consistency_checkers, :consistency_checker,
-                :result
+                :result, :mutex
 
-  def initialize(theory_url)
+  def initialize(theory_url, mutex = nil)
     self.theory_url = theory_url
+    self.mutex = mutex
   end
 
   def run
@@ -46,9 +47,9 @@ class ConsistencyCheck
 
   def select_consistency_checker
     index = UserInteraction.
-      new("Please select a consistency checker.",
-          consistency_checkers.map { |cc| cc['name'] }).run
-    self.consistency_checker = consistency_checkers[index]
+      new("Please select a consistency checker for the consistency check.",
+          consistency_checkers.map { |cc| cc['name'] }, mutex).run
+    self.consistency_checker = consistency_checkers[index]['identifier']
   end
 
   def check_consistency(timeout)
@@ -59,7 +60,7 @@ class ConsistencyCheck
 
   def consistency_check_request_data(timeout)
     CONSISTENCY_CHECK_REQUEST_DATA.
-      merge('consistency-checker' => consistency_checker['identifier'],
+      merge('consistency-checker' => consistency_checker,
             timeout: timeout.to_s).to_json
   end
 
@@ -91,16 +92,16 @@ class ConsistencyCheck
     ->(try_count) { BASE_TIMEOUT * try_count }
   end
 
-  def theory_open?
-    result.nil? || !(theory_consistent? || theory_inconsistent?)
-  end
-
   def theory_consistent?
     proving_data['result'] == 'Consistent'
   end
 
   def theory_inconsistent?
     proving_data['result'] == 'Inconsistent'
+  end
+
+  def theory_open?
+    result.nil? || !(theory_consistent? || theory_inconsistent?)
   end
 
   def proving_data

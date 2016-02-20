@@ -1,12 +1,22 @@
 class UserInteraction
-  attr_accessor :question, :options, :selection_index
+  attr_accessor :question, :options, :selection_index, :mutex
 
-  def initialize(question, options)
+  def initialize(question, options, mutex = nil)
     self.question = question
     self.options = options
   end
 
   def run
+    if mutex
+      mutex.synchronize { execute }
+    else
+      execute
+    end
+  end
+
+  protected
+
+  def execute
     print_question_with_options
     self.selection_index = from_print_index($stdin.gets.strip.to_i)
 
@@ -18,8 +28,6 @@ class UserInteraction
       run
     end
   end
-
-  protected
 
   def selected_option
     options[selection_index]
