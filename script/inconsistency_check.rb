@@ -1,8 +1,10 @@
 require 'tempfile'
 require 'rest-client'
+require_relative 'hets_basics.rb'
 
 class InconsistencyCheck
-  HETS_URL = "http://localhost:8000"
+  include HetsBasics
+
   FILE_CONTENT = <<HET
 spec Inconsistency =
   <URL>
@@ -10,11 +12,13 @@ spec Inconsistency =
     . false %implied %(inconsistency)%
   end
 HET
+  MAX_TRIES = 3
+  BASE_TIMEOUT = 10
   REQUEST_DATA = {format: 'json',
                   theorems: ['inconsistency'],
                   node: 'Inconsistency',
                   includeProof: 'false',
-                  includeDetails: 'false'}.to_json
+                  includeDetails: 'false'}
 
   attr_accessor :theory_url, :result
 
@@ -23,10 +27,14 @@ HET
   end
 
   def run
-    call_hets
+    try_until_limit_reached_or_solved(limit: MAX_TRIES) do |timeout|
+      check_inconsistency(timeout)
+    end
 
     if theory_inconsistent?
       used_axioms
+    elsif theory_open?
+      :consistency_could_not_be_determined
     else
       :theory_is_consistent
     end
@@ -34,22 +42,20 @@ HET
 
   protected
 
-  def call_hets
-    with_tempfile do |filepath|
-      begin
-        response = RestClient.post(hets_prove_url(filepath), REQUEST_DATA,
-                                   content_type: :json,
-                                   accept: :json)
-        self.result = JSON.parse(response)
-      rescue
-        if response
-          $stderr.puts "Received response:"
-          $stderr.puts response
-        end
-        raise
-      end
-    end
+  def solved_check
+    ->() { !theory_open? }
+  end
 
+  def timeout_increment
+    ->(try_count) { BASE_TIMEOUT * try_count }
+  end
+
+  def check_inconsistency(timeout)
+    with_tempfile do |filepath|
+      self.result = call_hets_api(:post,
+                                  hets_action_url(filepath),
+                                  request_data(timeout))
+    end
   end
 
   def with_tempfile
@@ -60,21 +66,25 @@ HET
     end
   end
 
+  def request_data(timeout)
+    REQUEST_DATA.merge(timeout: timeout.to_s).to_json
+  end
+
   def file_content
     FILE_CONTENT.sub('URL', theory_url)
   end
 
-  def hets_prove_url(filepath)
+  def hets_action_url(filepath)
     url = "file://#{filepath}"
-    "#{HETS_URL}/prove/#{escape(url)}/auto"
-  end
-
-  def escape(url)
-    URI.encode_www_form_component(url)
+    "#{HetsBasics::HETS_URL}/prove/#{escape(url)}/auto"
   end
 
   def theory_inconsistent?
-    proving_data['result'] == 'Proved'
+    proving_data['result'].start_with?('Proved')
+  end
+
+  def theory_open?
+    result.nil? || proving_data['result'].start_with?('Open')
   end
 
   def used_axioms
