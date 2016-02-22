@@ -1,7 +1,7 @@
 require 'tempfile'
 
 class Translate
-  HETS_EXECUTABLE = 'hets-self'
+  HETS_EXECUTABLE = 'hets'
 
   attr_accessor :theory_url, :comorphisms
   attr_accessor :stdin, :stdout, :stderr
