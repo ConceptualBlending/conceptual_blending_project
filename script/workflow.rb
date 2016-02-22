@@ -22,8 +22,9 @@ class Workflow
   protected
 
   def translate_input_spaces_to_casl
-    # TODO specify URL
-    translated_text = Translate.new(SOME_URL).run
+    # TODO specify SOME_URL
+    translated_text =
+      Translate.new(SOME_URL, 'OWL22CASL', 'CASL2Skolem', 'CASL2Prenex').run
   end
 
   def format_casl_for_hdtp
