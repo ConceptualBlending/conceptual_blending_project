@@ -1,6 +1,7 @@
 require_relative 'blend.rb'
 require_relative 'consistency_check.rb'
 require_relative 'inconsistency_check.rb'
+require_relative 'translate.rb'
 
 class Workflow
   attr_accessor :input_space1, :input_space2
@@ -21,7 +22,8 @@ class Workflow
   protected
 
   def translate_input_spaces_to_casl
-    # TODO
+    # TODO specify URL
+    translated_text = Translate.new(SOME_URL).run
   end
 
   def format_casl_for_hdtp
