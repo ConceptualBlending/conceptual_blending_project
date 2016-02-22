@@ -1,3 +1,4 @@
+require_relative 'blend.rb'
 require_relative 'consistency_check.rb'
 require_relative 'inconsistency_check.rb'
 
@@ -47,7 +48,8 @@ class Workflow
   end
 
   def compute_generic_space_and_blend
-    # TODO
+    # TODO specify URLs
+    Blend.new(URL1, URL2).run
   end
 
   def run_checks
