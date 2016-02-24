@@ -1,3 +1,5 @@
+require 'rest-client'
+
 class Blend
   BLEND_URL = '148.251.85.37:8300/cmd/blend'
 
