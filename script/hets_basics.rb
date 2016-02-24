@@ -18,10 +18,28 @@ module HetsBasics
         end
       result = JSON.parse(response)
     rescue
+      $stderr.puts "Error!"
+      $stderr.puts
       if response
         $stderr.puts "Received response:"
         $stderr.puts response
+        $stderr.puts "With the following request (rebuilt with curl):"
+      else
+        $stderr.puts "No processable responsee received from Hets."
+        $stderr.puts "This may be due to an error in Hets."
+        $stderr.puts "You can see Hets' behavior by manually executing this command:"
       end
+      command = "curl -X #{http_method.to_s.upcase}"
+      command << ' -H "Accept: application/json"'
+      unless http_method == :get
+        command << ' -H "Content-Type: application/json"'
+        command << " -d #{data}"
+      end
+      command << " #{url}"
+      $stderr.puts
+      $stderr.puts command
+      $stderr.puts
+
       raise
     end
     result
