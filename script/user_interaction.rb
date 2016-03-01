@@ -44,6 +44,8 @@ class UserInteraction
 
   def print_selection
     puts "Selected option #{to_print_index(selection_index)}: #{selected_option}"
+    puts
+    puts
   end
 
   def print_error_message
