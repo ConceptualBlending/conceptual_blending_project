@@ -4,6 +4,7 @@ class UserInteraction
   def initialize(question, options, mutex = nil)
     self.question = question
     self.options = options
+    self.mutex = mutex
   end
 
   def run

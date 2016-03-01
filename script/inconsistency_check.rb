@@ -13,8 +13,8 @@ spec Inconsistency =
     . false %implied %(inconsistency)%
   end
 HET
-  MAX_TRIES = 3
-  BASE_TIMEOUT = 10
+  MAX_TRIES = 1
+  BASE_TIMEOUT = 30
   REQUEST_DATA = {format: 'json',
                   theorems: ['inconsistency'],
                   node: 'Inconsistency',
@@ -29,12 +29,10 @@ HET
   end
 
   def run
-    with_tempfile do |filepath|
-      retrieve_provers(filepath)
+      retrieve_provers
       select_prover
       try_until_limit_reached_or_solved(limit: MAX_TRIES) do |timeout|
-        check_inconsistency(filepath, timeout)
-      end
+        check_inconsistency(timeout)
     end
 
     if theory_inconsistent?
@@ -56,9 +54,9 @@ HET
     ->(try_count) { BASE_TIMEOUT * try_count }
   end
 
-  def retrieve_provers(filepath)
+  def retrieve_provers
     self.provers =
-      call_hets_api(:get, hets_action_url_provers(filepath))['provers']
+      call_hets_api(:get, hets_action_url_provers(theory_url))['provers']
   end
 
   def select_prover
@@ -68,18 +66,10 @@ HET
     self.prover = provers[index]['identifier']
   end
 
-  def check_inconsistency(filepath, timeout)
+  def check_inconsistency(timeout)
     self.result = call_hets_api(:post,
-                                hets_action_url_prove(filepath),
+                                hets_action_url_prove(theory_url),
                                 request_data(timeout))
-  end
-
-  def with_tempfile
-    Tempfile.create(['inconsistency_check', '.het']) do |f|
-      f.write file_content
-      f.close
-      yield(f.path)
-    end
   end
 
   def request_data(timeout)
@@ -87,17 +77,11 @@ HET
                       prover: prover).to_json
   end
 
-  def file_content
-    FILE_CONTENT.sub('URL', theory_url)
-  end
-
-  def hets_action_url_provers(filepath)
-    url = "file://#{filepath}"
+  def hets_action_url_provers(url)
     "#{HetsBasics::HETS_URL}/provers/#{escape(url)}/auto?format=json"
   end
 
-  def hets_action_url_prove(filepath)
-    url = "file://#{filepath}"
+  def hets_action_url_prove(url)
     "#{HetsBasics::HETS_URL}/prove/#{escape(url)}/auto"
   end
 
@@ -119,8 +103,8 @@ HET
 end
 
 
-if ARGV[0]
-  puts InconsistencyCheck.new(ARGV[0]).run.inspect
-else
-  $stderr.puts 'Specify a URL to an ontology.'
-end
+# if ARGV[0]
+#   puts InconsistencyCheck.new(ARGV[0]).run.inspect
+# else
+#   $stderr.puts 'Specify a URL to an ontology.'
+# end

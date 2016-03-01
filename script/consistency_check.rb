@@ -6,10 +6,11 @@ require_relative 'user_interaction.rb'
 class ConsistencyCheck
   include HetsBasics
 
-  MAX_TRIES = 3
-  BASE_TIMEOUT = 10
+  MAX_TRIES = 1
+  BASE_TIMEOUT = 30
 
   CONSISTENCY_CHECK_REQUEST_DATA = {format: 'json',
+                                    node: 'Blend',
                                     includeProof: 'false',
                                     includeDetails: 'false'}
 
@@ -53,9 +54,11 @@ class ConsistencyCheck
   end
 
   def check_consistency(timeout)
-    self.result = call_hets_api(:post,
-                                hets_action_url_consistency_check(theory_url),
-                                consistency_check_request_data(timeout))
+    response = call_hets_api(:post,
+                             hets_action_url_consistency_check(theory_url),
+                             consistency_check_request_data(timeout),
+                             parse_json: false)
+    self.result = response.match(/<result state="(?<result>\w+)">/)
   end
 
   def consistency_check_request_data(timeout)
@@ -105,13 +108,13 @@ class ConsistencyCheck
   end
 
   def proving_data
-    result.first['goals'].first
+    result
   end
 end
 
 
-if ARGV[0]
-  puts ConsistencyCheck.new(ARGV[0]).run.inspect
-else
-  $stderr.puts 'Specify a URL to an ontology.'
-end
+# if ARGV[0]
+#   puts ConsistencyCheck.new(ARGV[0]).run.inspect
+# else
+#   $stderr.puts 'Specify a URL to an ontology.'
+# end

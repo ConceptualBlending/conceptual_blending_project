@@ -5,7 +5,7 @@ module HetsBasics
     URI.encode_www_form_component(url)
   end
 
-  def call_hets_api(http_method, url, data = {})
+  def call_hets_api(http_method, url, data = {}, parse_json: true)
     result = nil
     begin
       response =
@@ -16,7 +16,7 @@ module HetsBasics
                           content_type: :json,
                           accept: :json)
         end
-      result = JSON.parse(response)
+      result = parse_json ? JSON.parse(response) : response
     rescue
       $stderr.puts "Error!"
       $stderr.puts
@@ -29,20 +29,24 @@ module HetsBasics
         $stderr.puts "This may be due to an error in Hets."
         $stderr.puts "You can see Hets' behavior by manually executing this command:"
       end
-      command = "curl -X #{http_method.to_s.upcase}"
-      command << ' -H "Accept: application/json"'
-      unless http_method == :get
-        command << ' -H "Content-Type: application/json"'
-        command << " -d #{data}"
-      end
-      command << " #{url}"
       $stderr.puts
-      $stderr.puts command
+      $stderr.puts hets_curl_command(http_method, url, data)
       $stderr.puts
 
       raise
     end
     result
+  end
+
+  def hets_curl_command(http_method, url, data = {})
+    command = "curl -X #{http_method.to_s.upcase}"
+    command << ' -H "Accept: application/json"'
+    unless http_method == :get
+      command << ' -H "Content-Type: application/json"'
+      command << " -d '#{data}'"
+    end
+    command << " #{url}"
+    command
   end
 
   def try_until_limit_reached_or_solved(limit: 1)
