@@ -1,10 +1,11 @@
 class UserInteraction
-  attr_accessor :question, :options, :selection_index, :mutex
+  attr_accessor :question, :options, :selection_index, :mutex, :print_proc
 
-  def initialize(question, options, mutex = nil)
+  def initialize(question, options, mutex = nil, print_proc = nil)
     self.question = question
     self.options = options
     self.mutex = mutex
+    self.print_proc = print_proc
   end
 
   def run
@@ -37,13 +38,13 @@ class UserInteraction
   def print_question_with_options
     puts question
     options.each_with_index do |option, index|
-      puts "[#{to_print_index(index)}] #{option}"
+      puts "[#{to_print_index(index)}] #{format(option)}"
     end
     puts "Enter a number between 1 and #{options.size}."
   end
 
   def print_selection
-    puts "Selected option #{to_print_index(selection_index)}: #{selected_option}"
+    puts "Selected option #{to_print_index(selection_index)}: #{format(selected_option)}"
     puts
     puts
   end
@@ -58,5 +59,13 @@ class UserInteraction
 
   def from_print_index(index)
     index - 1
+  end
+
+  def format(option)
+    if print_proc
+      print_proc.call(option)
+    else
+      option
+    end
   end
 end

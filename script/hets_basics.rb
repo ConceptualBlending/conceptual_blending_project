@@ -25,7 +25,7 @@ module HetsBasics
         $stderr.puts response
         $stderr.puts "With the following request (rebuilt with curl):"
       else
-        $stderr.puts "No processable responsee received from Hets."
+        $stderr.puts "No processable response received from Hets."
         $stderr.puts "This may be due to an error in Hets."
         $stderr.puts "You can see Hets' behavior by manually executing this command:"
       end
