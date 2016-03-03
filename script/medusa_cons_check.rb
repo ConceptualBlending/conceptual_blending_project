@@ -20,7 +20,7 @@ def medusa_consistency_check(markupURL, repoURL)
         markup_hash['Relations'].each do |r|
            if ((r['Individual1'] == i) and (r['Point1'] == p[0])) or ((r['Individual2'] == i) and (r['Point2'] == p[0]))
              occ = occ + 1
-             arr.push r
+             arr.push(r)
            end # if
         end # r
         if occ > 0 
