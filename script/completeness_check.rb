@@ -1,31 +1,31 @@
 require 'json'
 
-def completeness_check(markupURL, repoURL)
+class CompletenessCheck
+  def self.run(markupURL, repoURL)
 
- markup = File.read(markupURL) 
- repo = File.read(repoURL)
- markup_hash = JSON.parse(markup)
- repo_hash = JSON.parse(repo)
+    markup = File.read(markupURL)
+    repo = File.read(repoURL)
+    markup_hash = JSON.parse(markup)
+    repo_hash = JSON.parse(repo)
 
- missingPairs = Hash.new
+    missingPairs = Hash.new
 
- markup_hash['Definitions'].each do |h|
-  i = h['Identifier']
-  t = h['Type']
-  repo_hash['RepositoryContent'].each do |x|
-    if x['Type'] == t
-      x['Points'].each do |p|
-        unless markup_hash['Relations'].any? do |r|
-            ((r['Individual1'] == i) and (r['Point1'] == p[0])) or ((r['Individual2'] == i) and (r['Point2'] == p[0]))
-          end # r
-          missingPairs[i] = p[0]
-        end # if
-       end # p
-    end  # if 
-  end # x
- end # h
+    markup_hash['Definitions'].each do |h|
+      i = h['Identifier']
+      t = h['Type']
+      repo_hash['RepositoryContent'].each do |x|
+        if x['Type'] == t
+          x['Points'].each do |p|
+            unless markup_hash['Relations'].any? do |r|
+              ((r['Individual1'] == i) and (r['Point1'] == p[0])) or ((r['Individual2'] == i) and (r['Point2'] == p[0]))
+            end # r
+            missingPairs[i] = p[0]
+            end # if
+          end # p
+        end  # if
+      end # x
+    end # h
 
- return missingPairs
-
+    return missingPairs
+  end
 end
-

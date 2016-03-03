@@ -1,5 +1,6 @@
 require 'fileutils'
 require_relative 'analysis.rb'
+require_relative 'completeness_check.rb'
 require_relative 'consistency_check.rb'
 require_relative 'inconsistency_check.rb'
 require_relative 'temp_theory.rb'
