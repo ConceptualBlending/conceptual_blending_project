@@ -27,7 +27,7 @@ class UserInteraction
       selection_index
     else
       print_error_message
-      run
+      execute
     end
   end
 

@@ -152,7 +152,10 @@ class Workflow
   def identify_axiom_in_input_spaces(axiom)
     # determine automatically
     if axiom[:originals].any?
-      if axiom[:originals]['InputSpace1']
+      if axiom[:originals]['InputSpace1'] && axiom[:originals]['InputSpace2']
+        return [['InputSpace1', 'InputSpace2'],
+                [axiom[:originals]['InputSpace1'].first, axiom[:originals]['InputSpace2'].first]]
+      elsif axiom[:originals]['InputSpace1']
         return ['InputSpace1', axiom[:originals]['InputSpace1'].first]
       elsif axiom[:originals]['InputSpace2']
         return ['InputSpace2', axiom[:originals]['InputSpace2'].first]
@@ -175,7 +178,10 @@ class Workflow
   end
 
   def remove_axiom_from_input_space(input_space, axiom)
-    if input_space == 'InputSpace1'
+    if input_space == ['InputSpace1', 'InputSpace2']
+      temp_theory.reject1(axiom[0][:name])
+      temp_theory.reject2(axiom[1][:name])
+    elsif input_space == 'InputSpace1'
       temp_theory.reject1(axiom[:name])
     else
       temp_theory.reject2(axiom[:name])
@@ -190,13 +196,17 @@ class Workflow
 
   def print_blend_axiom(blend_axiom)
     if blend_axiom[:originals]
+      origin = ''
       if blend_axiom[:originals]['InputSpace1']
         ax = blend_axiom[:originals]['InputSpace1'].first
-        "From InputSpace1 (#{input_space1}):\n#{ax[:text]}\n"
-      elsif blend_axiom[:originals]['InputSpace2']
-        ax = blend_axiom[:originals]['InputSpace2'].first
-        "From InputSpace2 (#{input_space2}):\n#{ax[:text]}\n"
+        origin += "InputSpace1 (#{input_space1})"
       end
+      if blend_axiom[:originals]['InputSpace2']
+        ax = blend_axiom[:originals]['InputSpace2'].first
+        origin += ' and ' unless origin.empty?
+        origin += "InputSpace2 (#{input_space2})"
+      end
+      "From #{origin}:\n#{ax[:text]}\n"
     else
       "Input space not identified:\n#{blend_axiom[:text]}"
     end
