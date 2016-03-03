@@ -24,8 +24,6 @@ ontology Blend =
   combine InputSpace1, InputSpace2, Base
 end
 
-logic CASL
-
 ontology Inconsistency =
   Blend
   then
