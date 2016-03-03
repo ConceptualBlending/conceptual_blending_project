@@ -1,4 +1,5 @@
 class HetsMedusa
+  HETS_BINARY = ENV['HETS_BINARY'] || 'hets'
   MEDUSA_ROOT = File.join(File.dirname(__FILE__), '../medusa/Medusa')
   MEDUSA_BINARY = ENV['MEDUSA_BINARY'] || File.join(MEDUSA_ROOT, 'Binaries/Release/medusa.exe')
   MEDUSA_REPOSITORY = ENV['MEDUSA_REPOSITORY'] || File.join(MEDUSA_ROOT, 'Examples/Repository/Repository.json')
@@ -18,7 +19,7 @@ class HetsMedusa
   protected
 
   def create_medusa_json(filepath)
-    output = %x(hets --full-signatures -a none -v2 +RTS -K1G -RTS --full-theories -A -n Blend -o medusa.json -O "#{File.dirname(filepath)}" "#{filepath}")
+    output = %x(#{HETS_BINARY} --full-signatures -a none -v2 +RTS -K1G -RTS --full-theories -A -n Blend -o medusa.json -O "#{File.dirname(filepath)}" "#{filepath}")
     match = output.match(/Writing file: (?<out_filepath>.*)$/)
     match[:out_filepath]
   end
