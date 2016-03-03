@@ -29,13 +29,18 @@ class Analysis
   protected
 
   def on_analysis_result
+    command = nil
     Tempfile.create(['result', '.xml']) do |tempfile|
-      output = %x(#{HETS_BINARY} -o xml --full-signatures -a none -v +RTS -K1G -RTS --full-theories -A -O #{File.dirname(tempfile.path)} #{original_file_url})
+      command = %(#{HETS_BINARY} -o xml --full-signatures -a none -v +RTS -K1G -RTS --full-theories -A -O "#{File.dirname(tempfile.path)}" "#{original_file_url}")
+      output = %x(#{command})
       match = output.match(/Writing file: (?<out_filepath>.*)$/)
       tempfile.close
       FileUtils.mv(match[:out_filepath], tempfile.path)
       yield(tempfile.path)
     end
+  rescue
+    $stderr.puts "Tried and failed to call:\n#{command}"
+    raise
   end
 
   def axioms(doc, node)

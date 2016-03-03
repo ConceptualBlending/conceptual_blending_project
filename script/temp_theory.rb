@@ -5,15 +5,13 @@ class TempTheory
   TEMPFILE_NAME = ['blend', '.dol']
   TEMPFILE_CONTENT = <<DOL
 logic OWL
-
+FROMGET1FROMGET2
 ontology InputSpace1 =
-  <URL1>
-  REJECTS1
+  ONTOLOGY1REJECTS1
 end
 
 ontology InputSpace2 =
-  <URL2>
-  REJECTS2
+  ONTOLOGY2REJECTS2
 end
 
 ontology Base =
@@ -51,7 +49,7 @@ DOL
       tempfile.close
       begin
         yield(tempfile.path)
-      rescue => e
+      rescue Exception => e
         filepath = tempfile.path
         filecontents = File.open(tempfile.path, 'r').read
         error = e
@@ -75,16 +73,36 @@ DOL
   protected
 
   def file_content
-    TEMPFILE_CONTENT.
-      sub('URL1', url1).
-      sub('URL2', url2).
+    content = TEMPFILE_CONTENT.
       sub('REJECTS1', rejects_string1).
       sub('REJECTS2', rejects_string2)
+
+    if match = url1.match(%r|(?<url>.*)//(?<node>[^/]+)|)
+      content.
+        sub!('FROMGET1', "\nfrom <#{match[:url]}> get #{match[:node]}").
+        sub!('ONTOLOGY1', match[:node])
+    else
+      content.
+        sub!('FROMGET1', '').
+        sub!('ONTOLOGY1', "<#{url1}>")
+    end
+
+    if match = url2.match(%r|(?<url>.*)//(?<node>[^/]+)|)
+      content.
+        sub!('FROMGET2', "\nfrom <#{match[:url]}> get #{match[:node]}").
+        sub!('ONTOLOGY2', match[:node])
+    else
+      content.
+        sub!('FROMGET2', '').
+        sub!('ONTOLOGY2', "<#{url2}>")
+    end
+
+    content
   end
 
   def rejects_string1
     if rejects1.any?
-      "reject #{rejects1.join(', ')}"
+      "\n  reject #{rejects1.join(', ')}"
     else
       ""
     end
@@ -92,7 +110,7 @@ DOL
 
   def rejects_string2
     if rejects2.any?
-      "reject #{rejects2.join(', ')}"
+      "\n  reject #{rejects2.join(', ')}"
     else
       ""
     end

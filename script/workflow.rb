@@ -125,7 +125,7 @@ class Workflow
   end
 
   def write_blend_to_png_file(temp_filepath)
-    target_png_path = File.join(File.dirname(__FILE__), "blend-#{now}.png"
+    target_png_path = File.join(File.dirname(__FILE__), "blend-#{now}.png")
     HetsMedusa.new(temp_filepath, target_png_path).run
 
     puts "Successfully created the blend picture!"
@@ -189,14 +189,16 @@ class Workflow
   end
 
   def print_blend_axiom(blend_axiom)
-    if blend_axiom[:originals].any?
+    if blend_axiom[:originals]
       if blend_axiom[:originals]['InputSpace1']
         ax = blend_axiom[:originals]['InputSpace1'].first
-        "From InputSpace1:\n#{ax[:text]}\n"
+        "From InputSpace1 (#{input_space1}):\n#{ax[:text]}\n"
       elsif blend_axiom[:originals]['InputSpace2']
         ax = blend_axiom[:originals]['InputSpace2'].first
-        "From InputSpace2:\n#{ax[:text]}\n"
+        "From InputSpace2 (#{input_space2}):\n#{ax[:text]}\n"
       end
+    else
+      "Input space not identified:\n#{blend_axiom[:text]}"
     end
   end
 end
