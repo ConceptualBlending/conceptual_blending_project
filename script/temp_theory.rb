@@ -79,7 +79,7 @@ DOL
       sub('URL1', url1).
       sub('URL2', url2).
       sub('REJECTS1', rejects_string1).
-      sub('REJECTS2', rejects_string1)
+      sub('REJECTS2', rejects_string2)
   end
 
   def rejects_string1

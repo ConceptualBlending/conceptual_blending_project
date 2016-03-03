@@ -15,26 +15,27 @@ class ConsistencyCheck
                                     includeDetails: 'false'}
 
   attr_accessor :theory_url, :consistency_checkers, :consistency_checker,
-                :result, :mutex
+                :result, :mutex, :checker
 
-  def initialize(theory_url, mutex = nil)
+  def initialize(theory_url, mutex = nil, checker = nil)
     self.theory_url = theory_url
     self.mutex = mutex
+    self.checker = checker
   end
 
   def run
-    retrieve_consistency_checkers
-    select_consistency_checker
+    retrieve_consistency_checkers unless checker
+    select_consistency_checker unless checker
     try_until_limit_reached_or_solved(limit: MAX_TRIES) do |timeout|
       check_consistency(timeout)
     end
 
     if theory_consistent?
-      true
+      [true, checker]
     elsif theory_inconsistent?
-      false
+      [false, checker]
     else
-      :consistency_could_not_be_determined
+      [:consistency_could_not_be_determined, checker]
     end
   end
 

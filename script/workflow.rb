@@ -6,15 +6,19 @@ require_relative 'temp_theory.rb'
 require_relative 'user_interaction.rb'
 
 class Workflow
-  attr_accessor :input_space1, :input_space2, :temp_theory, :axioms
+  attr_accessor :input_space1, :input_space2, :temp_theory, :axioms,
+                :consistent_attribute_mutex, :user_interaction_mutex,
+                :consistency_checker, :prover
 
   def initialize(input_space1, input_space2)
     self.input_space1 = input_space1
     self.input_space2 = input_space2
     self.axioms = []
     self.temp_theory = TempTheory.new(input_space1, input_space2)
-    @consistent_attribute_mutex = Mutex.new
-    @user_interaction_mutex = Mutex.new
+    self.consistent_attribute_mutex = Mutex.new
+    self.user_interaction_mutex = Mutex.new
+    self.consistency_checker = nil
+    self.prover = nil
   end
 
   def run
@@ -57,7 +61,9 @@ class Workflow
   end
 
   def check_consistency(file_url)
-    result = ConsistencyCheck.new(file_url, @user_interaction_mutex).run
+    result, self.consistency_checker =
+      ConsistencyCheck.new(file_url, user_interaction_mutex,
+                           consistency_checker).run
     @consistent = result == true
     @inconsistent = result == false
     # TODO what to do on a timeout? (:consistency_could_not_be_determined)
@@ -65,7 +71,8 @@ class Workflow
   end
 
   def check_inconsistency(file_url)
-    result = InconsistencyCheck.new(file_url, @user_interaction_mutex).run
+    result, self.prover =
+      InconsistencyCheck.new(file_url, user_interaction_mutex, prover).run
     @consistent = result == :theory_is_consistent
     @inconsistent = result.is_a?(Array)
     # TODO what to do on a timeout? (:consistency_could_not_be_determined)
@@ -84,13 +91,13 @@ class Workflow
   end
 
   def set_consistent
-    @consistent_attribute_mutex.synchronize do
+    consistent_attribute_mutex.synchronize do
       @consistent = true
     end
   end
 
   def set_inconsistent
-    @consistent_attribute_mutex.synchronize do
+    consistent_attribute_mutex.synchronize do
       @consistent = false
     end
   end
@@ -122,7 +129,7 @@ class Workflow
     print_proc = -> (blend_axiom) { print_blend_axiom(blend_axiom) }
     index = UserInteraction.
       new("Please select an axiom to drop to restore consistency.",
-          used_blend_axioms, @user_interaction_mutex, print_proc).run
+          used_blend_axioms, user_interaction_mutex, print_proc).run
     used_blend_axioms[index]
   end
 
@@ -140,12 +147,12 @@ class Workflow
     input_spaces = [['InputSpace1', input_space1], ['InputSpace2', input_space2]]
     index = UserInteraction.
       new(%(Please select the input space where the selected axiom "#{axiom}" is originated (could not determine it automatically).),
-         input_spaces, @user_interaction_mutex).run
+         input_spaces, user_interaction_mutex).run
     input_space = input_spaces[index].first
 
     index = UserInteraction.
       new(%(Please select the axiom "#{axiom}" from this input space.),
-         axioms[input_space], @user_interaction_mutex).run
+         axioms[input_space], user_interaction_mutex).run
     axiom = axioms[input_space][index]
 
     [input_space, axiom]

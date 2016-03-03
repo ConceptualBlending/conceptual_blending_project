@@ -21,26 +21,27 @@ HET
                   includeProof: 'false',
                   includeDetails: 'false'}
 
-  attr_accessor :theory_url, :provers, :prover, :result, :mutex
+  attr_accessor :theory_url, :provers, :prover, :result, :mutex, :prover
 
-  def initialize(theory_url, mutex = nil)
+  def initialize(theory_url, mutex = nil, prover = nil)
     self.theory_url = theory_url
     self.mutex = mutex
+    self.prover = prover
   end
 
   def run
-      retrieve_provers
-      select_prover
+      retrieve_provers unless prover
+      select_prover unless prover
       try_until_limit_reached_or_solved(limit: MAX_TRIES) do |timeout|
         check_inconsistency(timeout)
     end
 
     if theory_inconsistent?
-      used_axioms
+      [used_axioms, prover]
     elsif theory_open?
-      :consistency_could_not_be_determined
+      [:consistency_could_not_be_determined, prover]
     else
-      :theory_is_consistent
+      [:theory_is_consistent, prover]
     end
   end
 
