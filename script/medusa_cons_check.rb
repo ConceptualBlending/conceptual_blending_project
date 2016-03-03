@@ -7,7 +7,7 @@ def medusa_consistency_check(markupURL, repoURL)
  markup_hash = JSON.parse(markup)
  repo_hash = JSON.parse(repo)
 
- missingPairs = Hash.new
+ multipleRelations = Hash.new
 
  markup_hash['Definitions'].each do |h|
   i = h['Identifier']
@@ -19,18 +19,18 @@ def medusa_consistency_check(markupURL, repoURL)
         arr = []
         markup_hash['Relations'].each do |r|
            if ((r['Individual1'] == i) and (r['Point1'] == p[0])) or ((r['Individual2'] == i) and (r['Point2'] == p[0]))
-             occ = occ + 1
+             occ += 1
              arr.push(r)
            end # if
         end # r
         if occ > 1 
-         missingPairs[i] = arr
+         multipleRelations[i] = arr
         end # if
        end # p
     end  # if 
   end # x
  end # h
 
- return missingPairs
+ return multipleRelations
 
 end
