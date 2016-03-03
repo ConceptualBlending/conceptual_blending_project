@@ -1,11 +1,12 @@
 require 'fileutils'
 require 'tempfile'
+require_relative 'hets_extraction.rb'
 
 class TempTheory
   TEMPFILE_NAME = ['blend', '.dol']
   TEMPFILE_CONTENT = <<DOL
 logic OWL
-FROMGET1FROMGET2
+
 ontology InputSpace1 =
   ONTOLOGY1REJECTS1
 end
@@ -31,13 +32,15 @@ ontology Inconsistency =
 end
 DOL
 
-  attr_accessor :url1, :url2, :rejects1, :rejects2
+  attr_accessor :url1, :url2, :rejects1, :rejects2, :ontology1, :ontology2
 
   def initialize(url1, url2)
     self.url1 = url1
     self.url2 = url2
     self.rejects1 = []
     self.rejects2 = []
+    self.ontology1 = nil
+    self.ontology2 = nil
   end
 
   def run
@@ -77,25 +80,24 @@ DOL
       sub('REJECTS1', rejects_string1).
       sub('REJECTS2', rejects_string2)
 
-    if match = url1.match(%r|(?<url>.*)//(?<node>[^/]+)$|)
-      content.
-        sub!('FROMGET1', "\nfrom <#{match[:url]}> get #{match[:node]}").
-        sub!('ONTOLOGY1', match[:node])
-    else
-      content.
-        sub!('FROMGET1', '').
-        sub!('ONTOLOGY1', "<#{url1}>")
-    end
+    self.ontology1 ||=
+      if match = url1.match(%r|(?<url>.*)//(?<node>[^/]+)$|)
+        indent(HetsExtraction.new(match[:url],
+                                  [match[:node]]).run[match[:node]], 1)
+      else
+        indent(HetsExtraction.new(url1, []).run, 1)
+      end
 
-    if match = url2.match(%r|(?<url>.*)//(?<node>[^/]+)$|)
-      content.
-        sub!('FROMGET2', "\nfrom <#{match[:url]}> get #{match[:node]}").
-        sub!('ONTOLOGY2', match[:node])
-    else
-      content.
-        sub!('FROMGET2', '').
-        sub!('ONTOLOGY2', "<#{url2}>")
-    end
+    self.ontology2 ||=
+      if match = url2.match(%r|(?<url>.*)//(?<node>[^/]+)$|)
+        indent(HetsExtraction.new(match[:url],
+                                  [match[:node]]).run[match[:node]], 1)
+      else
+        indent(HetsExtraction.new(url2, []).run, 1)
+      end
+
+    content.sub!('ONTOLOGY1', ontology1)
+    content.sub!('ONTOLOGY2', ontology2)
 
     content
   end
@@ -122,5 +124,9 @@ DOL
       f.write(filecontents)
     end
     $stderr.puts "The tempfile has been kept at #{filepath}"
+  end
+
+  def indent(string, level)
+    string.lines.map { |l| l.strip.empty? ? "\n" : "#{'  ' * level}#{l}" }.join
   end
 end
