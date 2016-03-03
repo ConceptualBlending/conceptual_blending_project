@@ -3,8 +3,7 @@ require 'nokogiri'
 require 'tempfile'
 
 class Analysis
-  # TODO
-  HETS_BINARY = 'hets-self'
+  HETS_BINARY = ENV['HETS_BINARY'] || 'hets'
 
   attr_accessor :original_file_url
 
