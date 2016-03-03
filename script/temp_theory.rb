@@ -77,7 +77,7 @@ DOL
       sub('REJECTS1', rejects_string1).
       sub('REJECTS2', rejects_string2)
 
-    if match = url1.match(%r|(?<url>.*)//(?<node>[^/]+)|)
+    if match = url1.match(%r|(?<url>.*)//(?<node>[^/]+)$|)
       content.
         sub!('FROMGET1', "\nfrom <#{match[:url]}> get #{match[:node]}").
         sub!('ONTOLOGY1', match[:node])
@@ -87,7 +87,7 @@ DOL
         sub!('ONTOLOGY1', "<#{url1}>")
     end
 
-    if match = url2.match(%r|(?<url>.*)//(?<node>[^/]+)|)
+    if match = url2.match(%r|(?<url>.*)//(?<node>[^/]+)$|)
       content.
         sub!('FROMGET2', "\nfrom <#{match[:url]}> get #{match[:node]}").
         sub!('ONTOLOGY2', match[:node])
