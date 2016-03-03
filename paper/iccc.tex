@@ -1,8 +1,14 @@
 %!TEX TS-program = pdflatex 
 %% for textmate acceleration only
 
-\documentclass{ecai2012}
+\documentclass[letterpaper]{article}
+\usepackage{iccc}
+
 \usepackage{times}
+\usepackage{helvet}
+\usepackage{courier}
+\setcounter{secnumdepth}{0}
+ 
 \usepackage{graphicx}
 \usepackage{latexsym}
 \usepackage{amssymb}
@@ -70,7 +76,7 @@
 %% Theorems
 
 %\theoremstyle{plain}
-%\newtheorem{theorem}{Theorem}
+\newtheorem{theorem}{Theorem}
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{corollary}[theorem]{Corollary}
 \newtheorem{proposition}[theorem]{Proposition}
@@ -129,19 +135,39 @@
 %\usepackage[pdftitle={},pdfauthor={},linkbordercolor=white,pdffitwindow=true]{hyperref}
 
 %%%%
-\begin{document}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{authblk}
 
-\title{Fabricating Monsters is Hard\\ \LARGE Towards the Automation of Conceptual Blending}
+\pdfinfo{
+/Title (Fabricating Monsters is Hard. Towards the Automation of Conceptual Blending)
+/Subject (Proceedings of ICCC)
+/Author (Mihai Codescu, Maria Hedblom, Eugen Kuksa, Ewen Maclean, Till Mossakowski, Fabian Neuhaus, Marcus Pinnecke)}
+\title{Fabricating Monsters is Hard Towards the Automation of Conceptual Blending}
 %\title{Manufacturing Monsters\\ \LARGE Blending the Lionman and other Curious Creatures\\ length = 6 + 1 for refs}
 
 %\subtitle{A Formal Model with DOL}
 
-\author{Fabian Neuhaus, Oliver Kutz, Mihai Codescu, Till Mossakowski
-\institute{Institute for Knowledge and Language Engineering,  Otto-von-Guericke University of Magdeburg. Corresponding author: oliver.kutz@ovgu.de}}
+\author[1]{Mihai Codescu}
+\author[1]{Maria Hedblom}
+\author[2]{Eugen Kuksa}
+\author[3]{Ewen Maclean}
+\author[1]{Till Mossakowski}
+\author[1]{Fabian Neuhaus}
+\author[1]{Marcus Pinnecke}
+\affil[1]{Institute for Cooperating Intelligent Systems,  Otto-von-Guericke University of Magdeburg, Germany}
+\affil[2]{Department of Computer Science, University of Bremen, Germany}
+\affil[3]{Centre for Intelligent Systems and their Applications, University of Edinburgh, UK}
+
+\renewcommand\Authands{ and }
+
+\begin{document}
 
 
 
-\maketitle
+
+
+%\maketitle
 
 
 
@@ -560,7 +586,7 @@ The project COINVENT acknowledges the financial support of the Future and Emergi
 %\vspace{-3mm}
 %\bibliographystyle{ecai2012}
 \bibliographystyle{apalike} 
-\bibliography{c3gi-14}
+\bibliography{c3gi-16}
 \end{document}
 
 
