@@ -23,7 +23,7 @@ def medusa_consistency_check(markupURL, repoURL)
              arr.push(r)
            end # if
         end # r
-        if occ > 0 
+        if occ > 1 
          missingPairs[i] = arr
         end # if
        end # p
