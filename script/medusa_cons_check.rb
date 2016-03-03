@@ -21,7 +21,7 @@ def medusa_consistency_check(markupURL, repoURL)
              occ = occ + 1
            end # if
         end # r
-        iff occ > 0 
+        if occ > 0 
          missingPairs[i] = p[0]
        end # p
     end  # if 
