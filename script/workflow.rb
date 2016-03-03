@@ -75,6 +75,7 @@ class Workflow
   def check_inconsistency(file_url)
     result, self.prover =
       InconsistencyCheck.new(file_url, user_interaction_mutex, prover).run
+    puts "Result:", result.inspect, self.prover.inspect
     @consistent = result == :theory_is_consistent
     @inconsistent = result.is_a?(Array)
     # TODO what to do on a timeout? (:consistency_could_not_be_determined)
