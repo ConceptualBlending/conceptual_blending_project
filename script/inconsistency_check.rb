@@ -30,10 +30,10 @@ HET
   end
 
   def run
-      retrieve_provers unless prover
-      select_prover unless prover
-      try_until_limit_reached_or_solved(limit: MAX_TRIES) do |timeout|
-        check_inconsistency(timeout)
+    retrieve_provers unless prover
+    select_prover unless prover
+    try_until_limit_reached_or_solved(limit: MAX_TRIES) do |timeout|
+      check_inconsistency(timeout)
     end
 
     if theory_inconsistent?

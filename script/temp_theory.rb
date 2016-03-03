@@ -3,6 +3,7 @@ require 'tempfile'
 require_relative 'hets_extraction.rb'
 
 class TempTheory
+  INDENTATION_LEVEL = 2
   TEMPFILE_NAME = ['blend', '.dol']
   TEMPFILE_CONTENT = <<DOL
 logic OWL
@@ -65,6 +66,16 @@ DOL
     end
   end
 
+  def remove1(axioms, name)
+    axiom_text = axioms['InputSpace1'].select { |ax| ax[:name] == name }.first[:text]
+    ontology1.sub!(indent(axiom_text, INDENTATION_LEVEL), '')
+  end
+
+  def remove2(axioms, name)
+    axiom_text = axioms['InputSpace2'].select { |ax| ax[:name] == name }.first[:text]
+    ontology2.sub!(indent(axiom_text, INDENTATION_LEVEL), '')
+  end
+
   def reject1(name)
     rejects1 << name
   end
@@ -83,7 +94,7 @@ DOL
     self.ontology1 ||=
       if match = url1.match(%r|(?<url>.*)//(?<node>[^/]+)$|)
         indent(HetsExtraction.new(match[:url],
-                                  [match[:node]]).run[match[:node]], 1)
+                                  [match[:node]]).run[match[:node]], INDENTATION_LEVEL)
       else
         indent(HetsExtraction.new(url1, []).run, 1)
       end
@@ -91,7 +102,7 @@ DOL
     self.ontology2 ||=
       if match = url2.match(%r|(?<url>.*)//(?<node>[^/]+)$|)
         indent(HetsExtraction.new(match[:url],
-                                  [match[:node]]).run[match[:node]], 1)
+                                  [match[:node]]).run[match[:node]], INDENTATION_LEVEL)
       else
         indent(HetsExtraction.new(url2, []).run, 1)
       end
