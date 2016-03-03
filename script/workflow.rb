@@ -139,7 +139,7 @@ class Workflow
       if axiom[:originals]['InputSpace1']
         return ['InputSpace1', axiom[:originals]['InputSpace1'].first]
       elsif axiom[:originals]['InputSpace2']
-        return ['InputSpace1', axiom[:originals]['InputSpace1'].first]
+        return ['InputSpace2', axiom[:originals]['InputSpace2'].first]
       end
     end
 
