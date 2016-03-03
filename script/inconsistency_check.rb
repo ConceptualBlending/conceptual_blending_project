@@ -16,7 +16,7 @@ HET
   MAX_TRIES = 1
   BASE_TIMEOUT = 30
   REQUEST_DATA = {format: 'json',
-                  theorems: ['inconsistency'],
+                  theorems: ['Ax1'],
                   node: 'Inconsistency',
                   includeProof: 'false',
                   includeDetails: 'false'}

@@ -28,7 +28,7 @@ logic CASL
 ontology Inconsistency =
   Blend
   then
-    . false %implied %(inconsistency)%
+    Class: owl:Thing SubClassOf: Annotations: Implied "true"^^xsd:string owl:Nothing
 end
 DOL
 
