@@ -29,10 +29,8 @@ class Analysis
   protected
 
   def on_analysis_result
-    # TODO
-    # yield('/Users/eugen/Work/papers/monsterBlend/ontologies/template_test.xml')
     Tempfile.create(['result', '.xml']) do |tempfile|
-      output = %x(#{HETS_BINARY} -o xml --full-signatures -a none -v2 +RTS -K1G -RTS --full-theories -A -O #{File.dirname(tempfile.path)} #{original_file_url})
+      output = %x(#{HETS_BINARY} -o xml --full-signatures -a none -v +RTS -K1G -RTS --full-theories -A -O #{File.dirname(tempfile.path)} #{original_file_url})
       match = output.match(/Writing file: (?<out_filepath>.*)$/)
       tempfile.close
       FileUtils.mv(match[:out_filepath], tempfile.path)

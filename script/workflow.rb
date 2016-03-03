@@ -8,7 +8,8 @@ require_relative 'user_interaction.rb'
 class Workflow
   attr_accessor :input_space1, :input_space2, :temp_theory, :axioms,
                 :consistent_attribute_mutex, :user_interaction_mutex,
-                :consistency_checker, :prover
+                :consistency_checker, :prover,
+                :now
 
   def initialize(input_space1, input_space2)
     self.input_space1 = input_space1
@@ -19,6 +20,7 @@ class Workflow
     self.user_interaction_mutex = Mutex.new
     self.consistency_checker = nil
     self.prover = nil
+    self.now = Time.now.strftime("%Y-%m-%d_%H-%M-%S-%9N")
   end
 
   def run
@@ -29,14 +31,14 @@ class Workflow
 
   def basic_loop
     while !consistency_found?
-      temp_theory.run do |filepath|
-        self.axioms = Analysis.new(filepath).run if !axioms.any?
-        run_checks("file://#{filepath}")
+      temp_theory.run do |temp_filepath|
+        self.axioms = Analysis.new(temp_filepath).run if !axioms.any?
+        run_checks("file://#{temp_filepath}")
 
         if @consistent.nil?
           handle_consistency_check_not_finished_error
         elsif @consistent
-          return handle_consistency(filepath)
+          return handle_consistency(temp_filepath)
         else
           handle_inconsistency
         end
@@ -106,15 +108,29 @@ class Workflow
     raise "[In]Consistency check did not properly finish."
   end
 
-  def handle_consistency(filepath)
-    now = Time.now.strftime("%Y-%m-%d_%H-%M-%S-%9N")
-    target_filepath = File.join(File.dirname(__FILE__), "blend-#{now}.dol")
-    FileUtils.cp(filepath, target_filepath)
-
-    puts "Success!"
-    puts "The Blend has been stored at #{target_filepath}"
+  def handle_consistency(temp_filepath)
+    blend_filepath = write_blend_to_dol_file(temp_filepath)
+    png_filepath = write_blend_to_pngl_file(temp_filepath)
 
     true
+  end
+
+  def write_blend_to_dol_file(temp_filepath)
+    target_filepath = File.join(File.dirname(__FILE__), "blend-#{now}.dol")
+    FileUtils.cp(temp_filepath, target_filepath)
+
+    puts "Successfully created a consistent blend!"
+    puts "The blend has been stored at #{target_filepath}"
+    target_filepath
+  end
+
+  def write_blend_to_png_file(temp_filepath)
+    target_png_path = File.join(File.dirname(__FILE__), "blend-#{now}.png"
+    HetsMedusa.new(temp_filepath, target_png_path).run
+
+    puts "Successfully created the blend picture!"
+    puts "The blend picture has been stored at #{target_png_path}"
+    target_png_path
   end
 
   def handle_inconsistency
