@@ -16,13 +16,15 @@ def medusa_consistency_check(markupURL, repoURL)
     if x['Type'] == t
       x['Points'].each do |p|
         occ = 0
+        arr = []
         markup_hash['Relations'].each do |r|
            if ((r['Individual1'] == i) and (r['Point1'] == p[0])) or ((r['Individual2'] == i) and (r['Point2'] == p[0]))
              occ = occ + 1
+             arr.push r
            end # if
         end # r
         if occ > 0 
-         missingPairs[i] = p[0]
+         missingPairs[i] = arr
        end # p
     end  # if 
   end # x
