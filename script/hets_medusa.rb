@@ -40,7 +40,11 @@ class HetsMedusa
   def create_png_using_medusa(medusa_markup_filepath)
     output = %x(mono "#{MEDUSA_BINARY}" --overwrite "#{MEDUSA_REPOSITORY}" "#{medusa_markup_filepath}" "#{png_target_filepath}")
     success = output.strip.empty?
-    raise "Medusa could not create the blend picture:\n#{output}\n" unless success
+    if !success
+      raise "Medusa could not create the blend picture:\n"\
+        "#{output}\n"\
+        "The Medusa markup file was stored at #{medusa_markup_filepath}"
+    end
   end
 
   def complete?(medusa_markup_filepath)
