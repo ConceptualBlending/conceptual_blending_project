@@ -105,7 +105,7 @@ class ConsistencyCheck
   end
 
   def theory_open?
-    result.nil? || !(theory_consistent? || theory_inconsistent?)
+    result.nil? || !(theory_consistent? || theory_inconsistent?)
   end
 
   def proving_data
