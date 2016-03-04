@@ -1,0 +1,80 @@
+{
+  "Definitions": [
+    {
+      "Identifier": "OwlHead",
+      "Type": "OwlHead"
+    },
+    {
+      "Identifier": "OwlTrunk",
+      "Type": "OwlTrunk"
+    },
+    {
+      "Identifier": "LeftHindOwlPaw",
+      "Type": "LeftHindOwlPaw"
+    },
+    {
+      "Identifier": "RightHindOwlPaw",
+      "Type": "RightHindOwlPaw"
+    },
+    {
+      "Identifier": "LeftHindOwlLeg",
+      "Type": "LeftHindOwlLeg"
+    },
+    {
+      "Identifier": "RightHindOwlLeg",
+      "Type": "RightHindOwlLeg"
+    },
+    {
+      "Identifier": "LeftOwlWing",
+      "Type": "LeftOwlWing"
+    },
+    {
+      "Identifier": "RightOwlWing",
+      "Type": "RightOwlWing"
+    }
+  ],
+  "Relations": [
+    {
+      "Individual1": "OwlTrunk",
+      "Point1": "NeckBoundary",
+      "Individual2": "OwlHead",
+      "Point2": "ProximalBoundary"
+    },
+    {
+      "Individual1": "OwlTrunk",
+      "Point1": "LeftHindLimbBoundary",
+      "Individual2": "LeftHindOwlLeg",
+      "Point2": "ProximalBoundary"
+    },
+    {
+      "Individual1": "OwlTrunk",
+      "Point1": "RightHindLimbBoundary",
+      "Individual2": "RightHindOwlLeg",
+      "Point2": "ProximalBoundary"
+    },
+    {
+      "Individual1": "OwlTrunk",
+      "Point1": "LeftForeLimbBoundary",
+      "Individual2": "LeftOwlWing",
+      "Point2": "ProximalBoundary"
+    },
+    {
+      "Individual1": "OwlTrunk",
+      "Point1": "RightForeLimbBoundary",
+      "Individual2": "RightOwlWing",
+      "Point2": "ProximalBoundary"
+    },
+    {
+      "Individual1": "LeftHindOwlLeg",
+      "Point1": "DistalBoundary",
+      "Individual2": "LeftHindOwlPaw",
+      "Point2": "ProximalBoundary"
+    },
+    {
+      "Individual1": "RightHindOwlLeg",
+      "Point1": "DistalBoundary",
+      "Individual2": "RightHindOwlPaw",
+      "Point2": "ProximalBoundary"
+    }
+  ]
+}

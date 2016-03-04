@@ -1,0 +1,100 @@
+{
+  "Definitions": [
+    {
+      "Identifier": "PandaTorso",
+      "Type": "PandaTorso"
+    },
+    {
+      "Identifier": "PandaHead",
+      "Type": "PandaHead"
+    },
+    {
+      "Identifier": "LeftHindPandaLeg",
+      "Type": "LeftHindPandaLeg"
+    },
+    {
+      "Identifier": "RightHindPandaLeg",
+      "Type": "RightHindPandaLeg"
+    },
+    {
+      "Identifier": "LeftForePandaLeg",
+      "Type": "LeftForePandaLeg"
+    },
+    {
+      "Identifier": "RightForePandaLeg",
+      "Type": "RightForePandaLeg"
+    },
+    {
+      "Identifier": "LeftHindPandaPaw",
+      "Type": "LeftHindPandaPaw"
+    },
+    {
+      "Identifier": "RightHindPandaPaw",
+      "Type": "RightHindPandaPaw"
+    },
+    {
+      "Identifier": "LeftForePandaPaw",
+      "Type": "LeftForePandaPaw"
+    },
+    {
+      "Identifier": "RightForePandaPaw",
+      "Type": "RightForePandaPaw"
+    }
+  ],
+  "Relations": [
+    {
+      "Individual1": "PandaTorso",
+      "Point1": "NeckBoundary",
+      "Individual2": "PandaHead",
+      "Point2": "ProximalBoundary"
+    },
+    {
+      "Individual1": "PandaTorso",
+      "Point1": "LeftHindLimbBoundary",
+      "Individual2": "LeftHindPandaLeg",
+      "Point2": "ProximalBoundary"
+    },
+    {
+      "Individual1": "PandaTorso",
+      "Point1": "RightHindLimbBoundary",
+      "Individual2": "RightHindPandaLeg",
+      "Point2": "ProximalBoundary"
+    },
+    {
+      "Individual1": "PandaTorso",
+      "Point1": "LeftForeLimbBoundary",
+      "Individual2": "LeftForePandaLeg",
+      "Point2": "ProximalBoundary"
+    },
+    {
+      "Individual1": "PandaTorso",
+      "Point1": "RightForeLimbBoundary",
+      "Individual2": "RightForePandaLeg",
+      "Point2": "ProximalBoundary"
+    },
+    {
+      "Individual1": "LeftHindPandaPaw",
+      "Point1": "ProximalBoundary",
+      "Individual2": "LeftHindPandaLeg",
+      "Point2": "DistalBoundary"
+    },
+    {
+      "Individual1": "RightHindPandaPaw",
+      "Point1": "ProximalBoundary",
+      "Individual2": "RightHindPandaLeg",
+      "Point2": "DistalBoundary"
+    },
+    {
+      "Individual1": "RightForePandaLeg",
+      "Point1": "DistalBoundary",
+      "Individual2": "RightForePandaPaw",
+      "Point2": "ProximalBoundary"
+    },
+    {
+      "Individual1": "LeftForePandaLeg",
+      "Point1": "DistalBoundary",
+      "Individual2": "LeftForePandaPaw",
+      "Point2": "ProximalBoundary"
+    }
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "Definitions": [
+    {
+      "Identifier": "TigerTorso",
+      "Type": "TigerTorso"
+    },
+    {
+      "Identifier": "TigerHead",
+      "Type": "TigerHead"
+    },
+    {
+      "Identifier": "LeftForeTigerLeg",
+      "Type": "LeftForeTigerLeg"
+    },
+    {
+      "Identifier": "LeftHindTigerPaw",
+      "Type": "LeftHindTigerPaw"
+    },
+    {
+      "Identifier": "LeftForeTigerPaw",
+      "Type": "LeftForeTigerPaw"
+    },
+    {
+      "Identifier": "LeftHindTigerLeg",
+      "Type": "LeftHindTigerLeg"
+    },
+    {
+      "Identifier": "RightForeTigerLeg",
+      "Type": "RightForeTigerLeg"
+    },
+    {
+      "Identifier": "RightHindTigerPaw",
+      "Type": "RightHindTigerPaw"
+    },
+    {
+      "Identifier": "RightForeTigerPaw",
+      "Type": "RightForeTigerPaw"
+    },
+    {
+      "Identifier": "RightHindTigerLeg",
+      "Type": "RightHindTigerLeg"
+    }
+  ],
+  "Relations": [
+    {
+      "Individual2": "TigerTorso",
+      "Point2": "LeftHindLimbBoundary",
+      "Individual1": "LeftHindTigerLeg",
+      "Point1": "ProximalBoundary"      
+    },
+    {
+      "Individual1": "TigerTorso",
+      "Point1": "RightHindLimbBoundary",
+      "Individual2": "RightHindTigerLeg",
+      "Point2": "ProximalBoundary"
+    },
+    {
+      "Individual1": "TigerTorso",
+      "Point1": "NeckBoundary",
+      "Individual2": "TigerHead",
+      "Point2": "ProximalBoundary"
+    },
+    {
+      "Individual1": "TigerTorso",
+      "Point1": "LeftForeLimbBoundary",
+      "Individual2": "LeftForeTigerLeg",
+      "Point2": "ProximalBoundary"
+    },
+    {
+      "Individual1": "TigerTorso",
+      "Point1": "RightForeLimbBoundary",
+      "Individual2": "RightForeTigerLeg",
+      "Point2": "ProximalBoundary"
+    },
+    {
+      "Individual1": "LeftHindTigerLeg",
+      "Point1": "DistalBoundary",
+      "Individual2": "LeftHindTigerPaw",
+      "Point2": "ProximalBoundary"
+    },
+    {
+      "Individual1": "RightHindTigerLeg",
+      "Point1": "DistalBoundary",
+      "Individual2": "RightHindTigerPaw",
+      "Point2": "ProximalBoundary"
+    },
+    {
+      "Individual1": "RightForeTigerLeg",
+      "Point1": "DistalBoundary",
+      "Individual2": "RightForeTigerPaw",
+      "Point2": "ProximalBoundary"
+    },
+    {
+      "Individual1": "LeftForeTigerLeg",
+      "Point1": "DistalBoundary",
+      "Individual2": "LeftForeTigerPaw",
+      "Point2": "ProximalBoundary"
+    }
+  ]
+}

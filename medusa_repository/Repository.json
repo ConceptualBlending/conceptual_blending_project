@@ -1,0 +1,975 @@
+{
+  "MedusaFormatToken": "REP_TYPE_FORMAT_1",
+  "RepositoryContent": [
+    {
+      "Type": "MonkeyTrunk",
+      "ImageFile": "Assets/MonkeyTrunk.png",
+      "Points": {
+        "NeckBoundary": {
+          "x": 338,
+          "y": 463
+        }, 
+        "LeftForeLimbBoundary": {
+          "x": 296,
+          "y": 499
+        },
+        "RightForeLimbBoundary": {
+          "x": 379,
+          "y": 499
+        },
+        "LeftHindLimbBoundary": {
+          "x": 292,
+          "y": 675
+        },
+        "RightHindLimbBoundary": {
+          "x": 397,
+          "y": 675
+        },
+        "TailBoundary": {
+          "x": 280,
+          "y": 657
+        }
+      }
+    },
+    {
+      "Type": "MonkeyHead",
+      "ImageFile": "Assets/MonkeyHead.png",
+      "Points": {
+        "ProximalBoundary": {
+          "x": 367,
+          "y": 618
+        }
+      }
+    },
+    {
+      "Type": "LeftMonkeyArm",
+      "ImageFile": "Assets/MonkeyLeftArm.png",
+      "Points": {
+        "ProximalBoundary": {
+          "x": 418,
+          "y": 463
+        }, 
+        "DistalBoundary": {
+          "x": 332,
+          "y": 630
+        }
+      }
+    },
+    {
+      "Type": "LeftMonkeyFoot",
+      "ImageFile": "Assets/MonkeyLeftFoot.png",
+      "Points": {
+        "ProximalBoundary": {
+          "x": 409,
+          "y": 565
+        }
+      }
+    },
+    {
+      "Type": "LeftMonkeyHand",
+      "ImageFile": "Assets/MonkeyLeftHand.png",
+      "Points": {
+        "ProximalBoundary": {
+          "x": 368,
+          "y": 547
+        }
+      }
+    },
+    {
+      "Type": "LeftMonkeyLeg",
+      "ImageFile": "Assets/MonkeyLeftLeg.png",
+      "Points": {
+        "ProximalBoundary": {
+          "x": 370,
+          "y": 483
+        }, 
+        "DistalBoundary": {
+          "x": 359,
+          "y": 568
+        }
+      }
+    },
+    {
+      "Type": "RightMonkeyArm",
+      "ImageFile": "Assets/MonkeyRightArm.png",
+      "Points": {
+        "ProximalBoundary": {
+          "x": 337,
+          "y": 420
+        }, 
+        "DistalBoundary": {
+          "x": 418,
+          "y": 582
+        }
+      }
+    },
+    {
+      "Type": "RightMonkeyFoot",
+      "ImageFile": "Assets/MonkeyRightFoot.png",
+      "Points": {
+        "ProximalBoundary": {
+          "x": 350,
+          "y": 565
+        }
+      }
+    },
+    {
+      "Type": "RightMonkeyHand",
+      "ImageFile": "Assets/MonkeyRightHand.png",
+      "Points": {
+        "ProximalBoundary": {
+          "x": 370,
+          "y": 546
+        }
+      }
+    },
+    {
+      "Type": "RightMonkeyLeg",
+      "ImageFile": "Assets/MonkeyRightLeg.png",
+      "Points": {
+        "ProximalBoundary": {
+          "x": 361,
+          "y": 486
+        }, 
+        "DistalBoundary": {
+          "x": 371,
+          "y": 567
+        }
+      }
+    },
+    {
+      "Type": "MonkeyTail",
+      "ImageFile": "Assets/MonkeyTail.png",
+      "Points": {
+        "ProximalBoundary": {
+          "x": 449,
+          "y": 669
+        }
+      }
+    },
+    {
+      "Type": "OrcHead",
+      "ImageFile": "Assets/OrcHead.png",
+      "Points": {
+        "ProximalBoundary": {
+          "x": 368,
+          "y": 591
+        }
+      }
+    },
+    {
+      "Type": "LeftOrcArm",
+      "ImageFile": "Assets/OrcLeftArm.png",
+      "Points": {
+        "ProximalBoundary": {
+          "x": 445,
+          "y": 555
+        }, 
+        "DistalBoundary": {
+          "x": 350,
+          "y": 706
+        }
+      }
+    },
+    {
+      "Type": "LeftOrcFoot",
+      "ImageFile": "Assets/OrcLeftFoot.png",
+      "Points": {
+        "ProximalBoundary": {
+          "x": 397,
+          "y": 568
+        }
+      }
+    },
+    {
+      "Type": "LeftOrcHand",
+      "ImageFile": "Assets/OrcLeftHand.png",
+      "Points": {
+        "ProximalBoundary": {
+          "x": 376,
+          "y": 513
+        }
+      }
+    },
+    {
+      "Type": "LeftOrcLeg",
+      "ImageFile": "Assets/OrcLeftLeg.png",
+      "Points": {
+        "ProximalBoundary": {
+          "x": 343,
+          "y": 459
+        }, 
+        "DistalBoundary": {
+          "x": 302,
+          "y": 621
+        }
+      }
+    },
+    {
+      "Type": "RightOrcArm",
+      "ImageFile": "Assets/OrcRightArm.png",
+      "Points": {
+        "ProximalBoundary": {
+          "x": 304,
+          "y": 486
+        }, 
+        "DistalBoundary": {
+          "x": 392,
+          "y": 634
+        }
+      }
+    },
+    {
+      "Type": "RightOrcFoot",
+      "ImageFile": "Assets/OrcRightFoot.png",
+      "Points": {
+        "ProximalBoundary": {
+          "x": 332,
+          "y": 565
+        }
+      }
+    },
+    {
+      "Type": "RightOrcHand",
+      "ImageFile": "Assets/OrcRightHand.png",
+      "Points": {
+        "ProximalBoundary": {
+          "x": 361,
+          "y": 513
+        }
+      }
+    },
+    {
+      "Type": "RightOrcLeg",
+      "ImageFile": "Assets/OrcRightLeg.png",
+      "Points": {
+        "ProximalBoundary": {
+          "x": 323,
+          "y": 456
+        }, 
+        "DistalBoundary": {
+          "x": 364,
+          "y": 616
+        }
+      }
+    },
+    {
+      "Type": "OrcTrunk",
+      "ImageFile": "Assets/OrcTrunk.png",
+      "Points": {
+        "NeckBoundary": {
+          "x": 364,
+          "y": 411
+        }, 
+        "LeftForeLimbBoundary": {
+          "x": 253,
+          "y": 451
+        },
+        "RightForeLimbBoundary": {
+          "x": 460,
+          "y": 451
+        },
+        "LeftHindLimbBoundary": {
+          "x": 316,
+          "y": 616
+        },
+        "RightHindLimbBoundary": {
+          "x": 397,
+          "y": 616
+        },
+        "TailBoundary": {
+          "x": 304,
+          "y": 585
+        }
+      }
+    },
+    {
+      "Type": "SnakeTrunk",
+      "ImageFile": "Assets/SnakeTrunk.png",
+      "Points": {
+        "NeckBoundary": {
+          "x": 362,
+          "y": 381
+        }, 
+        "LeftForeLimbBoundary": {
+          "x": 323,
+          "y": 483
+        },
+        "RightForeLimbBoundary": {
+          "x": 397,
+          "y": 483
+        },
+        "LeftHindLimbBoundary": {
+          "x": 338,
+          "y": 729
+        },
+        "RightHindLimbBoundary": {
+          "x": 413,
+          "y": 729
+        },
+        "TailBoundary": {
+          "x": 355,
+          "y": 789
+        }
+      }
+    },
+    {
+      "Type": "SnakeHead",
+      "ImageFile": "Assets/SnakeHead.png",
+      "Points": {
+        "ProximalBoundary": {
+          "x": 340,
+          "y": 631
+        }
+      }
+    },
+    {
+      "Type": "SnakeTail",
+      "ImageFile": "Assets/SnakeTail.png",
+      "Points": {
+        "ProximalBoundary": {
+          "x": 491,
+          "y": 586
+        }
+      }
+    },
+    {
+      "Type": "TigerHead",
+      "ImageFile": "Assets/TigerHead.png",
+      "Points": {
+        "ProximalBoundary": {
+          "x": 349,
+          "y": 520
+        }
+      }
+    },
+    {
+      "Type": "LeftHindTigerPaw",
+      "ImageFile": "Assets/TigerLeftFoot.png",
+      "Points": {
+        "ProximalBoundary": {
+          "x": 359,
+          "y": 640
+        }
+      }
+    },
+    {
+      "Type": "LeftForeTigerPaw",
+      "ImageFile": "Assets/TigerLeftHand.png",
+      "Points": {
+        "ProximalBoundary": {
+          "x": 337,
+          "y": 634
+        }
+      }
+    },
+    {
+      "Type": "LeftHindTigerLeg",
+      "ImageFile": "Assets/TigerLeftLeg.png",
+      "Points": {
+        "ProximalBoundary": {
+          "x": 367,
+          "y": 562
+        }, 
+        "DistalBoundary": {
+          "x": 367,
+          "y": 705
+        }
+      }
+    },
+    {
+      "Type": "RightForeTigerLeg",
+      "ImageFile": "Assets/TigerRightArm.png",
+      "Points": {
+        "ProximalBoundary": {
+          "x": 235,
+          "y": 582
+        }, 
+        "DistalBoundary": {
+          "x": 358,
+          "y": 607
+        }
+      }
+    },
+    {
+      "Type": "LeftForeTigerLeg",
+      "ImageFile": "Assets/TigerLeftArm.png",
+      "Points": {
+        "ProximalBoundary": {
+          "x": 359,
+          "y": 585
+        }, 
+        "DistalBoundary": {
+          "x": 254,
+          "y": 606
+        }
+      }
+    },
+    {
+      "Type": "RightHindTigerPaw",
+      "ImageFile": "Assets/TigerRightFoot.png",
+      "Points": {
+        "ProximalBoundary": {
+          "x": 283,
+          "y": 642
+        }
+      }
+    },
+    {
+      "Type": "RightForeTigerPaw",
+      "ImageFile": "Assets/TigerRightHand.png",
+      "Points": {
+        "ProximalBoundary": {
+          "x": 334,
+          "y": 636
+        }
+      }
+    },
+    {
+      "Type": "RightHindTigerLeg",
+      "ImageFile": "Assets/TigerRightLeg.png",
+      "Points": {
+        "ProximalBoundary": {
+          "x": 340,
+          "y": 567
+        }, 
+        "DistalBoundary": {
+          "x": 340,
+          "y": 705
+        }
+      }
+    },
+    {
+      "Type": "TigerTail",
+      "ImageFile": "Assets/TigerTail.png",
+      "Points": {
+        "ProximalBoundary": {
+          "x": 431,
+          "y": 598
+        }
+      }
+    },
+    {
+      "Type": "TigerTrunk",
+      "ImageFile": "Assets/TigerTrunk.png",
+      "Points": {
+         "NeckBoundary": {
+          "x": 337,
+          "y": 522
+        }, 
+        "LeftForeLimbBoundary": {
+          "x": 272,
+          "y": 567
+        },
+        "RightForeLimbBoundary": {
+          "x": 391,
+          "y": 567
+        },
+        "LeftHindLimbBoundary": {
+          "x": 301,
+          "y": 738
+        },
+        "RightHindLimbBoundary": {
+          "x": 370,
+          "y": 738
+        },
+        "TailBoundary": {
+          "x": 284,
+          "y": 709
+        }
+      }
+    },
+    {
+      "Type": "PandaTrunk",
+      "ImageFile": "Assets/PandaTrunk.png",
+      "Points": {
+        "NeckBoundary": {
+          "x": 374,
+          "y": 369
+        }, 
+        "LeftForeLimbBoundary": {
+          "x": 238,
+          "y": 418
+        },
+        "RightForeLimbBoundary": {
+          "x": 509,
+          "y": 417
+        },
+        "LeftHindLimbBoundary": {
+          "x": 301,
+          "y": 621
+        },
+        "RightHindLimbBoundary": {
+          "x": 431,
+          "y": 621
+        },
+        "TailBoundary": {
+          "x": 373,
+          "y": 688
+        }
+      }
+    },
+
+    {
+      "Type": "PandaHead",
+      "ImageFile": "Assets/PandaHead.png",
+      "Points": {
+        "ProximalBoundary": {
+          "x": 356,
+          "y": 552
+        }
+      }
+    },
+
+    {
+      "Type": "LeftHindPandaLeg",
+      "ImageFile": "Assets/LeftHindPandaLeg.png",
+      "Points": {
+        "ProximalBoundary": {
+          "x": 389,
+          "y": 450
+        }, 
+        "DistalBoundary": {
+          "x": 400,
+          "y": 646
+        }
+      }
+    },
+
+    {
+      "Type": "RightHindPandaLeg",
+      "ImageFile": "Assets/RightHindPandaLeg.png",
+      "Points": {
+        "ProximalBoundary": {
+          "x": 353,
+          "y": 448
+        }, 
+        "DistalBoundary": {
+          "x": 346,
+          "y": 646
+        }
+      }
+    },
+
+    {
+      "Type": "LeftForePandaLeg",
+      "ImageFile": "Assets/LeftForePandaLeg.png",
+      "Points": {
+        "ProximalBoundary": {
+          "x": 388,
+          "y": 420
+        },
+         "DistalBoundary": {
+          "x": 388,
+          "y": 607
+        }
+      }
+    },
+
+    {
+      "Type": "RightForePandaLeg",
+      "ImageFile": "Assets/RightForePandaLeg.png",
+      "Points": {
+        "ProximalBoundary": {
+          "x": 352,
+          "y": 418
+        }, 
+        "DistalBoundary": {
+          "x": 355,
+          "y": 594
+        }
+      }
+    },
+
+    {
+      "Type": "LeftHindPandaPaw",
+      "ImageFile": "Assets/LeftHindPandaPaw.png",
+      "Points": {
+        "ProximalBoundary": {
+          "x": 382,
+          "y": 511
+        }
+      }
+    },
+
+    {
+      "Type": "RightHindPandaPaw",
+      "ImageFile": "Assets/RightHindPandaPaw.png",
+      "Points": {
+        "ProximalBoundary": {
+          "x": 350,
+          "y": 507
+        }
+      }
+    },
+
+    {
+      "Type": "LeftForePandaPaw",
+      "ImageFile": "Assets/LeftForePandaPaw.png",
+      "Points": {
+        "ProximalBoundary": {
+          "x": 364,
+          "y": 487
+        }
+      }
+    },
+
+    {
+      "Type": "RightForePandaPaw",
+      "ImageFile": "Assets/RightForePandaPaw.png",
+      "Points": {
+        "ProximalBoundary": {
+          "x": 369,
+          "y": 491
+        }
+      }
+    },
+
+    {
+      "Type": "LeftHindHorseLeg",
+      "ImageFile": "Assets/LeftHindHorseLeg.png",
+      "Points": {
+        "ProximalBoundary": {
+          "x": 365,
+          "y": 480
+        }, 
+        "DistalBoundary": {
+          "x": 343,
+          "y": 742
+        }
+      }
+    },
+
+    {
+      "Type": "RightHindHorseLeg",
+      "ImageFile": "Assets/RightHindHorseLeg.png",
+      "Points": {
+        "ProximalBoundary": {
+          "x": 359,
+          "y": 470
+        }, 
+        "DistalBoundary": {
+          "x": 343,
+          "y": 742
+        }
+      }
+    },
+
+    {
+      "Type": "LeftForeHorseLeg",
+      "ImageFile": "Assets/LeftForeHorseLeg.png",
+      "Points": {
+        "ProximalBoundary": {
+          "x": 370,
+          "y": 427
+        }, 
+        "DistalBoundary": {
+          "x": 358,
+          "y": 648
+        }
+      }
+    },
+
+    {
+      "Type": "RightForeHorseLeg",
+      "ImageFile": "Assets/RightForeHorseLeg.png",
+      "Points": {
+        "ProximalBoundary": {
+          "x": 367,
+          "y": 426
+        }, 
+        "DistalBoundary": {
+          "x": 358,
+          "y": 648
+        }
+      }
+    },
+
+    {
+      "Type": "HorseHead",
+      "ImageFile": "Assets/HorseHead.png",
+      "Points": {
+        "ProximalBoundary": {
+          "x": 317,
+          "y": 534
+        }
+      }
+    },
+
+    {
+      "Type": "HorseHoof",
+      "ImageFile": "Assets/HorseHoof.png",
+      "Points": {
+        "ProximalBoundary": {
+          "x": 370,
+          "y": 561
+        }
+      }
+    },
+
+    {
+      "Type": "HorseTail",
+      "ImageFile": "Assets/HorseTail.png",
+      "Points": {
+        "ProximalBoundary": {
+          "x": 364,
+          "y": 423
+        }
+      }
+    },
+
+    {
+      "Type": "HorseTrunk",
+      "ImageFile": "Assets/HorseTrunk.png",
+      "Points": {
+        "NeckBoundary": {
+          "x": 524,
+          "y": 400
+        }, 
+        "LeftForeLimbBoundary": {
+          "x": 400,
+          "y": 621
+        },
+        "RightForeLimbBoundary": {
+          "x": 436,
+          "y": 627
+        },
+        "LeftHindLimbBoundary": {
+          "x": 185,
+          "y": 621
+        },
+        "RightHindLimbBoundary": {
+          "x": 208,
+          "y": 609
+        },
+        "TailBoundary": {
+          "x": 158,
+          "y": 537
+        }
+
+      }
+    },
+
+    {
+      "Type": "OwlHead",
+      "ImageFile": "Assets/OwlHead.png",
+      "Points": {
+        "ProximalBoundary": {
+          "x": 308,
+          "y": 627
+        }
+      }
+    },
+
+    {
+      "Type": "OwlTrunk",
+      "ImageFile": "Assets/OwlTrunk.png",
+      "Points": {
+        "NeckBoundary": {
+          "x": 305,
+          "y": 486
+        },  
+        "LeftForeLimbBoundary": {
+          "x": 247,
+          "y": 522
+        },
+         "RightForeLimbBoundary": {
+          "x": 365,
+          "y": 526
+        },
+         "LeftHindLimbBoundary": {
+          "x": 265,
+          "y": 654
+        },
+         "RightHindLimbBoundary": {
+          "x": 340,
+          "y": 654
+        },
+         "TailBoundary": {
+          "x": 305,
+          "y": 681
+        }
+      }
+    },
+
+    {
+      "Type": "LeftHindOwlPaw",
+      "ImageFile": "Assets/OwlLeftFoot.png",
+      "Points": {
+        "ProximalBoundary": {
+          "x": 299,
+          "y": 520
+        }
+      }
+    },
+
+    {
+      "Type": "RightHindOwlPaw",
+      "ImageFile": "Assets/OwlRightFoot.png",
+      "Points": {
+        "ProximalBoundary": {
+          "x": 305,
+          "y": 519
+        }
+      }
+    },
+
+    {
+      "Type": "LeftHindOwlLeg",
+      "ImageFile": "Assets/OwlLeftLeg.png",
+      "Points": {
+        "ProximalBoundary": {
+          "x": 302,
+          "y": 570
+        }, 
+        "DistalBoundary": {
+          "x": 311,
+          "y": 624
+        }
+      }
+    },
+
+    {
+      "Type": "RightHindOwlLeg",
+      "ImageFile": "Assets/OwlRightLeg.png",
+      "Points": {
+        "ProximalBoundary": {
+          "x": 310,
+          "y": 562
+        }, 
+        "DistalBoundary": {
+          "x": 304,
+          "y": 619
+        }
+      }
+    },
+
+    {
+      "Type": "LeftOwlWing",
+      "ImageFile": "Assets/OwlLeftWing.png",
+      "Points": {
+        "ProximalBoundary": {
+          "x": 336,
+          "y": 442
+        }
+      }
+    },
+
+    {
+      "Type": "RightOwlWing",
+      "ImageFile": "Assets/OwlRightWing.png",
+      "Points": {
+        "ProximalBoundary": {
+          "x": 166,
+          "y": 574
+        }
+      }
+    },
+
+    {
+      "Type": "ScorpionHead",
+      "ImageFile": "Assets/ScorpionHead.png",
+      "Points": {
+        "ProximalBoundary": {
+          "x": 281,
+          "y": 585
+        }
+      }
+    },
+
+    {
+      "Type": "LeftScorpionLegs",
+      "ImageFile": "Assets/ScorpionLeftLegs.png",
+      "Points": {
+        "ProximalBoundary": {
+          "x": 457,
+          "y": 522
+        }
+      }
+    },
+
+    {
+      "Type": "RightScorpionClaw",
+      "ImageFile": "Assets/ScorpionRightClaw.png",
+      "Points": {
+        "ProximalBoundary": {
+          "x": 311,
+          "y": 601
+        }
+      }
+    },
+
+    {
+      "Type": "LeftScorpionClaw",
+      "ImageFile": "Assets/ScorpionLeftClaw.png",
+      "Points": {
+        "ProximalBoundary": {
+          "x": 437,
+          "y": 603
+        }
+      }
+    },
+
+    {
+      "Type": "RightScorpionLegs",
+      "ImageFile": "Assets/ScorpionRightLegs.png",
+      "Points": {
+        "ProximalBoundary": {
+          "x": 296,
+          "y": 520
+        }
+      }
+    },
+
+    {
+      "Type": "ScorpionTail",
+      "ImageFile": "Assets/ScorpionTail.png",
+      "Points": {
+        "ProximalBoundary": {
+          "x": 289,
+          "y": 522
+        }
+      }
+    },
+
+    {
+      "Type": "ScorpionTrunk",
+      "ImageFile": "Assets/ScorpionTrunk.png",
+      "Points": {
+        "NeckBoundary": {
+          "x": 352,
+          "y": 412
+        },  
+        "LeftForeLimbBoundary": {
+          "x": 320,
+          "y": 460
+        },  
+        "LeftHindLimbBoundary": {
+          "x": 313,
+          "y": 600
+        },  
+        "RightHindLimbBoundary": {
+          "x": 389,
+          "y": 600
+        },   
+        "LeftHindLimbBoundary": {
+          "x": 311,
+          "y": 600
+        },  
+        "TailBoundary": {
+          "x": 352,
+          "y": 679
+        }
+      }
+    }
+  ],
+  "RepositoryName": "DemoRepository",
+  "RepositoryDescription": "Demo",
+  "Version": 1,
+  "Autors": [
+    {
+      "Name": "Marcus Pinnecke",
+      "EMail": "marcus.pinnecke@ovgu.de"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "Definitions": [
+    {
+      "Identifier": "SnakeTorso",
+      "Type": "SnakeTorso"
+    },
+    {
+      "Identifier": "SnakeHead",
+      "Type": "SnakeHead"
+    },
+    {
+      "Identifier": "SnakeTail",
+      "Type": "SnakeTail"
+    }
+  ],
+  "Relations": [
+    {
+      "Individual2": "SnakeTorso",
+      "Point2": "NeckBoundary",
+      "Individual1": "SnakeHead",
+      "Point1": "ProximalBoundary"      
+    },
+    {
+      "Individual1": "SnakeTorso",
+      "Point1": "TailBoundary",
+      "Individual2": "SnakeTail",
+      "Point2": "ProximalBoundary"
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "Definitions": [
+    {
+      "Identifier": "ScorpionHead",
+      "Type": "ScorpionHead"
+    },
+    {
+      "Identifier": "LeftScorpionLegs",
+      "Type": "LeftScorpionLegs"
+    },
+    {
+      "Identifier": "RightScorpionClaw",
+      "Type": "RightScorpionClaw"
+    },
+    {
+      "Identifier": "LeftScorpionClaw",
+      "Type": "LeftScorpionClaw"
+    },
+    {
+      "Identifier": "RightScorpionLegs",
+      "Type": "RightScorpionLegs"
+    },
+    {
+      "Identifier": "ScorpionTail",
+      "Type": "ScorpionTail"
+    },
+    {
+      "Identifier": "ScorpionTrunk",
+      "Type": "ScorpionTrunk"
+    }
+  ],
+  "Relations": [
+    {
+      "Individual1": "ScorpionTrunk",
+      "Point1": "NeckBoundary",
+      "Individual2": "ScorpionHead",
+      "Point2": "ProximalBoundary"
+    },
+    {
+      "Individual1": "ScorpionTrunk",
+      "Point1": "LeftHindLimbBoundary",
+      "Individual2": "LeftScorpionLegs",
+      "Point2": "ProximalBoundary"
+    },
+    {
+      "Individual1": "ScorpionTrunk",
+      "Point1": "RightHindLimbBoundary",
+      "Individual2": "RightScorpionLegs",
+      "Point2": "ProximalBoundary"
+    },
+    {
+      "Individual1": "ScorpionTrunk",
+      "Point1": "LeftForeLimbBoundary",
+      "Individual2": "LeftScorpionClaw",
+      "Point2": "ProximalBoundary"
+    },
+    {
+      "Individual1": "ScorpionTrunk",
+      "Point1": "RightForeLimbBoundary",
+      "Individual2": "RightScorpionClaw",
+      "Point2": "ProximalBoundary"
+    },
+    {
+      "Individual1": "ScorpionTrunk",
+      "Point1": "TailBoundary",
+      "Individual2": "ScorpionTail",
+      "Point2": "ProximalBoundary"
+    }
+  ]
+}

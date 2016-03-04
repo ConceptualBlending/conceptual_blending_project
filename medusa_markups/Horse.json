@@ -1,0 +1,114 @@
+{
+  "Definitions": [
+    {
+      "Identifier": "LeftHindHorseLeg",
+      "Type": "LeftHindHorseLeg"
+    },
+    {
+      "Identifier": "RightHindHorseLeg",
+      "Type": "RightHindHorseLeg"
+    },
+    {
+      "Identifier": "LeftForeHorseLeg",
+      "Type": "LeftForeHorseLeg"
+    },
+    {
+      "Identifier": "RightHindPandaLeg",
+      "Type": "RightHindPandaLeg"
+    },
+    {
+      "Identifier": "RightForeHorseLeg",
+      "Type": "RightForeHorseLeg"
+    },
+    {
+      "Identifier": "HorseHead",
+      "Type": "HorseHead"
+    },
+    {
+      "Identifier": "HorseHoof1",
+      "Type": "HorseHoof"
+    },
+    {
+      "Identifier": "HorseHoof2",
+      "Type": "HorseHoof"
+    },
+    {
+      "Identifier": "HorseHoof3",
+      "Type": "HorseHoof"
+    },
+    {
+      "Identifier": "HorseHoof4",
+      "Type": "HorseHoof"
+    },
+    {
+      "Identifier": "HorseTail",
+      "Type": "HorseTail"
+    },
+    {
+      "Identifier": "HorseTrunk",
+      "Type": "HorseTrunk"
+    }
+  ],
+  "Relations": [
+    {
+      "Individual2": "LeftHindHorseLeg",
+      "Point2": "ProximalBoundary",
+      "Individual1": "HorseTrunk",
+      "Point1": "LeftHindLimbBoundary"      
+    },
+    {
+      "Individual1": "HorseTrunk",
+      "Point1": "RightHindLimbBoundary",
+      "Individual2": "RightHindHorseLeg",
+      "Point2": "ProximalBoundary"
+    },
+    {
+      "Individual1": "HorseTrunk",
+      "Point1": "NeckBoundary",
+      "Individual2": "HorseHead",
+      "Point2": "ProximalBoundary"
+    },
+    {
+      "Individual1": "HorseTrunk",
+      "Point1": "LeftForeLimbBoundary",
+      "Individual2": "LeftForeHorseLeg",
+      "Point2": "ProximalBoundary"
+    },
+    {
+      "Individual1": "HorseTrunk",
+      "Point1": "RightForeLimbBoundary",
+      "Individual2": "RightForeHorseLeg",
+      "Point2": "ProximalBoundary"
+    },
+    {
+      "Individual1": "LeftHindHorseLeg",
+      "Point1": "DistalBoundary",
+      "Individual2": "HorseHoof1",
+      "Point2": "ProximalBoundary"
+    },
+    {
+      "Individual1": "RightHindHorseLeg",
+      "Point1": "DistalBoundary",
+      "Individual2": "HorseHoof2",
+      "Point2": "ProximalBoundary"
+    },
+    {
+      "Individual1": "LeftForeHorseLeg",
+      "Point1": "DistalBoundary",
+      "Individual2": "HorseHoof3",
+      "Point2": "ProximalBoundary"
+    },
+    {
+      "Individual1": "RightForeHorseLeg",
+      "Point1": "DistalBoundary",
+      "Individual2": "HorseHoof4",
+      "Point2": "ProximalBoundary"
+    },
+    {
+      "Individual1": "HorseTail",
+      "Point1": "ProximalBoundary",
+      "Individual2": "HorseTrunk",
+      "Point2": "TailBoundary"
+    }
+  ]
+}

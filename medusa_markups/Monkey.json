@@ -1,0 +1,110 @@
+{
+  "Definitions": [
+    {
+      "Identifier": "MonkeyTorso",
+      "Type": "MonkeyTorso"
+    },
+    {
+      "Identifier": "MonkeyHead",
+      "Type": "MonkeyHead"
+    },
+    {
+      "Identifier": "LeftMonkeyArm",
+      "Type": "LeftMonkeyArm"
+    },
+    {
+      "Identifier": "LeftMonkeyFoot",
+      "Type": "LeftMonkeyFoot"
+    },
+    {
+      "Identifier": "LeftMonkeyHand",
+      "Type": "LeftMonkeyHand"
+    },
+    {
+      "Identifier": "LeftMonkeyLeg",
+      "Type": "LeftMonkeyLeg"
+    },
+    {
+      "Identifier": "RightMonkeyArm",
+      "Type": "RightMonkeyArm"
+    },
+    {
+      "Identifier": "RightMonkeyFoot",
+      "Type": "RightMonkeyFoot"
+    },
+    {
+      "Identifier": "RightMonkeyHand",
+      "Type": "RightMonkeyHand"
+    },
+    {
+      "Identifier": "RightMonkeyLeg",
+      "Type": "RightMonkeyLeg"
+    },
+    {
+      "Identifier": "MonkeyTail",
+      "Type": "MonkeyTail"
+    }
+  ],
+  "Relations": [
+    {
+      "Individual2": "MonkeyTorso",
+      "Point2": "LeftHindLimbBoundary",
+      "Individual1": "LeftMonkeyLeg",
+      "Point1": "ProximalBoundary"      
+    },
+    {
+      "Individual1": "MonkeyTorso",
+      "Point1": "RightHindLimbBoundary",
+      "Individual2": "RightMonkeyLeg",
+      "Point2": "ProximalBoundary"
+    },
+    {
+      "Individual1": "MonkeyTorso",
+      "Point1": "NeckBoundary",
+      "Individual2": "MonkeyHead",
+      "Point2": "ProximalBoundary"
+    },
+    {
+      "Individual1": "MonkeyTorso",
+      "Point1": "LeftForeLimbBoundary",
+      "Individual2": "LeftMonkeyArm",
+      "Point2": "ProximalBoundary"
+    },
+    {
+      "Individual1": "MonkeyTorso",
+      "Point1": "RightForeLimbBoundary",
+      "Individual2": "RightMonkeyArm",
+      "Point2": "ProximalBoundary"
+    },
+    {
+      "Individual1": "MonkeyTorso",
+      "Point1": "TailBoundary",
+      "Individual2": "MonkeyTail",
+      "Point2": "ProximalBoundary"
+    },
+    {
+      "Individual1": "LeftMonkeyLeg",
+      "Point1": "DistalBoundary",
+      "Individual2": "LeftMonkeyFoot",
+      "Point2": "ProximalBoundary"
+    },
+    {
+      "Individual1": "RightMonkeyLeg",
+      "Point1": "DistalBoundary",
+      "Individual2": "RightMonkeyFoot",
+      "Point2": "ProximalBoundary"
+    },
+    {
+      "Individual1": "RightMonkeyArm",
+      "Point1": "DistalBoundary",
+      "Individual2": "RightMonkeyHand",
+      "Point2": "ProximalBoundary"
+    },
+    {
+      "Individual1": "LeftMonkeyArm",
+      "Point1": "DistalBoundary",
+      "Individual2": "LeftMonkeyHand",
+      "Point2": "ProximalBoundary"
+    }
+  ]
+}
