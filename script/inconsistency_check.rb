@@ -1,6 +1,7 @@
 require 'tempfile'
 require 'rest-client'
 require_relative 'hets_basics.rb'
+require_relative 'temp_theory.rb'
 require_relative 'user_interaction.rb'
 
 class InconsistencyCheck
@@ -16,7 +17,7 @@ HET
   MAX_TRIES = 1
   BASE_TIMEOUT = 30
   REQUEST_DATA = {format: 'json',
-                  theorems: ['Ax1'],
+                  theorems: [TempTheory::INCONSISTENCY_THEOREM_NAME],
                   node: 'Inconsistency',
                   includeProof: 'false',
                   includeDetails: 'false'}

@@ -4,6 +4,7 @@ require_relative 'hets_extraction.rb'
 
 class TempTheory
   INDENTATION_LEVEL = 2
+  INCONSISTENCY_THEOREM_NAME = 'inconsistency'
   TEMPFILE_NAME = ['blend', '.dol']
   TEMPFILE_CONTENT = <<DOL
 logic OWL
@@ -24,10 +25,12 @@ ontology Blend =
   combine InputSpace1, InputSpace2, Base
 end
 
+logic CASL
+
 ontology Inconsistency =
   Blend
   then
-    Class: owl:Thing SubClassOf: Annotations: Implied "true"^^xsd:string owl:Nothing
+    . false %implied %(#{INCONSISTENCY_THEOREM_NAME})%
 end
 DOL
 
