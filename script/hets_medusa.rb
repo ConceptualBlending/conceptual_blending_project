@@ -8,10 +8,11 @@ class HetsMedusa
 
   attr_accessor :blend_temp_filepath, :png_target_filepath, :missing_pairs
 
-  def initialize(blend_temp_filepath, png_target_filepath)
+  def initialize(blend_temp_filepath, png_target_filepath, node = nil)
     self.blend_temp_filepath = blend_temp_filepath
     self.png_target_filepath = png_target_filepath
     self.missing_pairs = []
+    @node = node
   end
 
   def run
@@ -32,9 +33,14 @@ class HetsMedusa
   protected
 
   def create_medusa_json(filepath)
-    output = %x(#{HETS_BINARY} --full-signatures -a none -v2 +RTS -K1G -RTS --full-theories -A -n Blend -o medusa.json -O "#{File.dirname(filepath)}" "#{filepath}")
+    output = %x(#{HETS_BINARY} --full-signatures -a none -v2 +RTS -K1G -RTS --full-theories -A -n #{node} -o medusa.json -O "#{File.dirname(filepath)}" "#{filepath}")
     match = output.match(/Writing file: (?<out_filepath>.*)$/)
-    match[:out_filepath]
+    if match
+      match[:out_filepath]
+    else
+      raise "Hets could not process the file.\n"\
+        "Its output is:\n#{output}"
+    end
   end
 
   def create_png_using_medusa(medusa_markup_filepath)
@@ -52,5 +58,9 @@ class HetsMedusa
       run(medusa_markup_filepath, MEDUSA_REPOSITORY)
 
     missing_pairs.empty?
+  end
+
+  def node
+    @node.nil? ? 'Blend' : @node
   end
 end
