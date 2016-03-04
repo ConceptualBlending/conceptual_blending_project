@@ -67,6 +67,22 @@ DOL
     end
   end
 
+  def drop1(axioms, name)
+    if ENV['AXIOM_DROP_METHOD'] == 'remove'
+      remove1(axioms, name)
+    else
+      reject1(axioms, name)
+    end
+  end
+
+  def drop2(axioms, name)
+    if ENV['AXIOM_DROP_METHOD'] == 'remove'
+      remove2(axioms, name)
+    else
+      reject2(axioms, name)
+    end
+  end
+
   def remove1(axioms, name)
     axiom_text = axioms['InputSpace1'].select { |ax| ax[:name] == name }.first[:text]
     ontology1.sub!(indent(axiom_text, INDENTATION_LEVEL), '')

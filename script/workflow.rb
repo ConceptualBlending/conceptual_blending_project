@@ -182,16 +182,12 @@ class Workflow
 
   def remove_axiom_from_input_space(input_space, axiom)
     if input_space == ['InputSpace1', 'InputSpace2']
-      # temp_theory.remove1(axioms, axiom[0][:name])
-      # temp_theory.remove2(axioms, axiom[1][:name])
-      temp_theory.reject1(axiom[0][:name])
-      temp_theory.reject2(axiom[1][:name])
+      temp_theory.drop1(axioms, axiom[0][:name])
+      temp_theory.drop2(axioms, axiom[1][:name])
     elsif input_space == 'InputSpace1'
-      # temp_theory.remove1(axioms, axiom[:name])
-      temp_theory.reject1(axiom[:name])
+      temp_theory.drop1(axioms, axiom[:name])
     else
-      # temp_theory.remove2(axioms, axiom[:name])
-      temp_theory.reject2(axiom[:name])
+      temp_theory.drop2(axioms, axiom[:name])
     end
   end
 
