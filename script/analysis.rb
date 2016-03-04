@@ -20,6 +20,7 @@ class Analysis
         'InputSpace2' => axioms(doc, 'InputSpace2'),
         'Base' => axioms(doc, 'Base'),
         'Blend' => axioms(doc, 'Blend'),
+        'Inconsistency' => axioms(doc, 'Inconsistency'),
       }
     end
     annotate_axioms_with_their_origin(axioms)
