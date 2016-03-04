@@ -2,7 +2,7 @@ class HetsMedusa
   HETS_BINARY = ENV['HETS_BINARY'] || 'hets'
   MEDUSA_ROOT = File.join(File.dirname(__FILE__), '../medusa/Medusa')
   MEDUSA_BINARY = ENV['MEDUSA_BINARY'] || File.join(MEDUSA_ROOT, 'Binaries/Release/medusa.exe')
-  MEDUSA_REPOSITORY = ENV['MEDUSA_REPOSITORY'] || File.join(MEDUSA_ROOT, 'Examples/Repository/Repository.json')
+  MEDUSA_REPOSITORY = ENV['MEDUSA_REPOSITORY'] || File.join(MEDUSA_ROOT, 'Examples/Repository/Repository.json')
 
   attr_accessor :blend_temp_filepath, :png_target_filepath
 
