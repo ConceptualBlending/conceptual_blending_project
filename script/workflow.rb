@@ -19,8 +19,8 @@ class Workflow
     self.temp_theory = TempTheory.new(input_space1, input_space2)
     self.consistent_attribute_mutex = Mutex.new
     self.user_interaction_mutex = Mutex.new
-    self.consistency_checker = nil
-    self.prover = nil
+    self.consistency_checker = ENV['CONSISTENCY_CHECKER']
+    self.prover = ENV['PROVER']
     self.now = Time.now.strftime("%Y-%m-%d_%H-%M-%S-%9N")
   end
 
