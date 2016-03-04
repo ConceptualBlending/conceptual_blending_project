@@ -67,20 +67,48 @@ class Workflow
     result, self.consistency_checker =
       ConsistencyCheck.new(file_url, user_interaction_mutex,
                            consistency_checker).run
-    @consistent = result == true
-    @inconsistent = result == false
-    # TODO what to do on a timeout? (:consistency_could_not_be_determined)
-    set_consistent_and_terminate_other_thread if @consistent
+    if result == :consistency_could_not_be_determined
+      index = UserInteraction.
+        new("A timeout occurred in the consistency check with #{consistency_checker}.\n"\
+              "Do you want to retry (you may choose another consistency checker)?",
+            %w(Yes No), user_interaction_mutex).run
+      if index == 0 # retry
+        self.consistency_checker = nil
+        check_consistency(file_url)
+      else
+        @inconsistency_thread.kill
+        raise "Aborted by user."
+      end
+    else
+      @consistent = result == true
+      @inconsistent = result == false
+      # TODO what to do on a timeout? (:consistency_could_not_be_determined)
+      set_consistent_and_terminate_other_thread if @consistent
+    end
   end
 
   def check_inconsistency(file_url)
     result, self.prover =
       InconsistencyCheck.new(file_url, user_interaction_mutex, prover).run
-    @consistent = result == :theory_is_consistent
-    @inconsistent = result.is_a?(Array)
-    # TODO what to do on a timeout? (:consistency_could_not_be_determined)
-    set_inconsistent_and_terminate_other_thread if @inconsistent
-    @used_axioms = result if @inconsistent
+    if result == :consistency_could_not_be_determined
+      index = UserInteraction.
+        new("A timeout occurred in the inconsistency check with #{prover}.\n"\
+              "Do you want to retry (you may choose another prover)?",
+            %w(Yes No), user_interaction_mutex).run
+      if index == 0 # retry
+        self.prover = nil
+        check_inconsistency(file_url)
+      else
+        @consistency_thread.kill
+        raise "Aborted by user."
+      end
+    else
+      @consistent = result == :theory_is_consistent
+      @inconsistent = result.is_a?(Array)
+      # TODO what to do on a timeout? (:consistency_could_not_be_determined)
+      set_inconsistent_and_terminate_other_thread if @inconsistent
+      @used_axioms = result if @inconsistent
+    end
   end
 
   def set_consistent_and_terminate_other_thread
