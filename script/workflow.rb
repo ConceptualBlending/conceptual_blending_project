@@ -2,6 +2,7 @@ require 'fileutils'
 require_relative 'analysis.rb'
 require_relative 'consistency_check.rb'
 require_relative 'hets_medusa.rb'
+require_relative 'hets_server.rb'
 require_relative 'inconsistency_check.rb'
 require_relative 'temp_theory.rb'
 require_relative 'user_interaction.rb'
@@ -10,6 +11,7 @@ class Workflow
   attr_accessor :input_space1, :input_space2, :temp_theory, :axioms,
                 :consistent_attribute_mutex, :user_interaction_mutex,
                 :consistency_checker, :prover,
+                :hets_consistency_check, :hets_inconsistency_check,
                 :now
 
   def initialize(input_space1, input_space2)
@@ -22,19 +24,25 @@ class Workflow
     self.consistency_checker = ENV['CONSISTENCY_CHECKER']
     self.prover = ENV['PROVER']
     self.now = Time.now.strftime("%Y-%m-%d_%H-%M-%S-%9N")
+    self.hets_consistency_check = HetsServer.new('Hets-Server for consistency checks')
+    self.hets_inconsistency_check = HetsServer.new('Hets-Server for inconsistency checks')
   end
 
   def run
-    basic_loop
+    hets_consistency_check.run do |hets_consistency_check_url|
+      hets_inconsistency_check.run do |hets_inconsistency_check_url|
+        basic_loop(hets_consistency_check_url, hets_inconsistency_check_url)
+      end
+    end
   end
 
   protected
 
-  def basic_loop
+  def basic_loop(hets_consistency_check_url, hets_inconsistency_check_url)
     while !consistency_found?
       temp_theory.run do |temp_filepath|
         self.axioms = Analysis.new(temp_filepath).run
-        run_checks("file://#{temp_filepath}")
+        run_checks("file://#{temp_filepath}", hets_consistency_check_url, hets_inconsistency_check_url)
 
         if @consistent.nil?
           handle_consistency_check_not_finished_error
@@ -51,22 +59,22 @@ class Workflow
     @consistent == true
   end
 
-  def run_checks(file_url)
+  def run_checks(file_url, hets_consistency_check_url, hets_inconsistency_check_url)
     @consistent = nil
     @inconsistent = nil
     @used_axioms = nil
 
-    @consistency_thread = Thread.new { check_consistency(file_url) }
-    @inconsistency_thread = Thread.new { check_inconsistency(file_url) }
+    @consistency_thread = Thread.new { check_consistency(file_url, hets_consistency_check_url) }
+    @inconsistency_thread = Thread.new { check_inconsistency(file_url, hets_inconsistency_check_url) }
 
     @consistency_thread.join
     @inconsistency_thread.join
   end
 
-  def check_consistency(file_url)
+  def check_consistency(file_url, hets_consistency_check_url)
     result, self.consistency_checker =
-      ConsistencyCheck.new(file_url, user_interaction_mutex,
-                           consistency_checker).run
+      ConsistencyCheck.new(hets_consistency_check_url, file_url,
+                           user_interaction_mutex, consistency_checker).run
     if result == :consistency_could_not_be_determined
       index = UserInteraction.
         new("A timeout occurred in the consistency check with #{consistency_checker}.\n"\
@@ -87,9 +95,10 @@ class Workflow
     end
   end
 
-  def check_inconsistency(file_url)
+  def check_inconsistency(file_url, hets_inconsistency_check_url)
     result, self.prover =
-      InconsistencyCheck.new(file_url, user_interaction_mutex, prover).run
+      InconsistencyCheck.new(hets_inconsistency_check_url, file_url,
+                             user_interaction_mutex, prover).run
     if result == :consistency_could_not_be_determined
       index = UserInteraction.
         new("A timeout occurred in the inconsistency check with #{prover}.\n"\

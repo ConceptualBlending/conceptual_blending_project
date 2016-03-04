@@ -1,6 +1,4 @@
 module HetsBasics
-  HETS_URL = ENV['HETS_URL'] || "http://localhost:8000"
-
   def escape(url)
     URI.encode_www_form_component(url)
   end

@@ -22,9 +22,12 @@ HET
                   includeProof: 'false',
                   includeDetails: 'false'}
 
-  attr_accessor :theory_url, :provers, :prover, :result, :mutex, :prover
+  attr_accessor :hets_url, :theory_url,
+                :provers, :prover,
+                :result, :mutex
 
-  def initialize(theory_url, mutex = nil, prover = nil)
+  def initialize(hets_url, theory_url, mutex = nil, prover = nil)
+    self.hets_url = hets_url
     self.theory_url = theory_url
     self.mutex = mutex
     self.prover = prover
@@ -80,11 +83,11 @@ HET
   end
 
   def hets_action_url_provers(url)
-    "#{HetsBasics::HETS_URL}/provers/#{escape(url)}/auto?format=json"
+    "#{hets_url}/provers/#{escape(url)}/auto?format=json"
   end
 
   def hets_action_url_prove(url)
-    "#{HetsBasics::HETS_URL}/prove/#{escape(url)}/auto"
+    "#{hets_url}/prove/#{escape(url)}/auto"
   end
 
   def theory_inconsistent?

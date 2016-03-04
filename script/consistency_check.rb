@@ -14,10 +14,12 @@ class ConsistencyCheck
                                     includeProof: 'false',
                                     includeDetails: 'false'}
 
-  attr_accessor :theory_url, :consistency_checkers, :consistency_checker,
+  attr_accessor :hets_url, :theory_url,
+                :consistency_checkers, :consistency_checker,
                 :result, :mutex, :consistency_checker
 
-  def initialize(theory_url, mutex = nil, consistency_checker = nil)
+  def initialize(hets_url, theory_url, mutex = nil, consistency_checker = nil)
+    self.hets_url = hets_url
     self.theory_url = theory_url
     self.mutex = mutex
     self.consistency_checker = consistency_checker
@@ -75,7 +77,7 @@ class ConsistencyCheck
       else
         filepath
       end
-    "#{HetsBasics::HETS_URL}/consistency-checkers/#{escape(url)}/auto?format=json"
+    "#{hets_url}/consistency-checkers/#{escape(url)}/auto?format=json"
   end
 
   def hets_action_url_consistency_check(filepath)
@@ -85,7 +87,7 @@ class ConsistencyCheck
       else
         filepath
       end
-    "#{HetsBasics::HETS_URL}/consistency-check/#{escape(url)}/auto"
+    "#{hets_url}/consistency-check/#{escape(url)}/auto"
   end
 
   def solved_check
