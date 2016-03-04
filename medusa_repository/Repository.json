@@ -2,8 +2,8 @@
   "MedusaFormatToken": "REP_TYPE_FORMAT_1",
   "RepositoryContent": [
     {
-      "Type": "MonkeyTorso",
-      "ImageFile": "Assets/MonkeyTorso.png",
+      "Type": "MonkeyTrunk",
+      "ImageFile": "Assets/MonkeyTrunk.png",
       "Points": {
         "NeckBoundary": {
           "x": 338,
@@ -254,8 +254,8 @@
       }
     },
     {
-      "Type": "OrcTorso",
-      "ImageFile": "Assets/OrcTorso.png",
+      "Type": "OrcTrunk",
+      "ImageFile": "Assets/OrcTrunk.png",
       "Points": {
         "NeckBoundary": {
           "x": 364,
@@ -284,8 +284,8 @@
       }
     },
     {
-      "Type": "SnakeTorso",
-      "ImageFile": "Assets/SnakeTorso.png",
+      "Type": "SnakeTrunk",
+      "ImageFile": "Assets/SnakeTrunk.png",
       "Points": {
         "NeckBoundary": {
           "x": 362,
@@ -450,8 +450,8 @@
       }
     },
     {
-      "Type": "TigerTorso",
-      "ImageFile": "Assets/TigerTorso.png",
+      "Type": "TigerTrunk",
+      "ImageFile": "Assets/TigerTrunk.png",
       "Points": {
          "NeckBoundary": {
           "x": 337,
@@ -480,7 +480,7 @@
       }
     },
     {
-      "Type": "PandaTorso",
+      "Type": "PandaTrunk",
       "ImageFile": "Assets/PandaTrunk.png",
       "Points": {
         "NeckBoundary": {
@@ -720,7 +720,7 @@
 
     {
       "Type": "HorseTrunk",
-      "ImageFile": "Assets/HorseTorso.png",
+      "ImageFile": "Assets/HorseTrunk.png",
       "Points": {
         "NeckBoundary": {
           "x": 524,
@@ -763,7 +763,7 @@
 
     {
       "Type": "OwlTrunk",
-      "ImageFile": "Assets/OwlTorso.png",
+      "ImageFile": "Assets/OwlTrunk.png",
       "Points": {
         "NeckBoundary": {
           "x": 305,
@@ -934,7 +934,7 @@
 
     {
       "Type": "ScorpionTrunk",
-      "ImageFile": "Assets/ScorpionTorso.png",
+      "ImageFile": "Assets/ScorpionTrunk.png",
       "Points": {
         "NeckBoundary": {
           "x": 352,
