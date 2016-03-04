@@ -55,7 +55,11 @@ module HetsBasics
         break
       else
         # the try count starts with 0, we want to count from 1
-        yield(timeout_increment.call(try_count + 1))
+        new_timeout = timeout_increment.call(try_count + 1)
+        if try_count > 0
+          puts "A timeout occurred. Trying again with a timeout of #{new_timeout} seconds."
+        end
+        yield(new_timeout)
       end
     end
   end

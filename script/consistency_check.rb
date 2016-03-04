@@ -6,7 +6,7 @@ require_relative 'user_interaction.rb'
 class ConsistencyCheck
   include HetsBasics
 
-  MAX_TRIES = 1
+  MAX_TRIES = 3
   BASE_TIMEOUT = 30
 
   CONSISTENCY_CHECK_REQUEST_DATA = {format: 'json',
@@ -93,7 +93,7 @@ class ConsistencyCheck
   end
 
   def timeout_increment
-    ->(try_count) { BASE_TIMEOUT * try_count }
+    ->(try_count) { BASE_TIMEOUT * (try_count ** 2) }
   end
 
   def theory_consistent?

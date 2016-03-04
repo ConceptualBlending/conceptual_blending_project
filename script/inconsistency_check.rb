@@ -14,7 +14,7 @@ spec Inconsistency =
     . false %implied %(inconsistency)%
   end
 HET
-  MAX_TRIES = 1
+  MAX_TRIES = 3
   BASE_TIMEOUT = 30
   REQUEST_DATA = {format: 'json',
                   theorems: [TempTheory::INCONSISTENCY_THEOREM_NAME],
@@ -53,7 +53,7 @@ HET
   end
 
   def timeout_increment
-    ->(try_count) { BASE_TIMEOUT * try_count }
+    ->(try_count) { BASE_TIMEOUT * (try_count ** 2) }
   end
 
   def retrieve_provers
