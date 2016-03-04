@@ -1,0 +1,100 @@
+{
+  "Definitions": [
+    {
+      "Identifier": "OrcTorso",
+      "Type": "OrcTorso"
+    },
+    {
+      "Identifier": "OrcHead",
+      "Type": "OrcHead"
+    },
+    {
+      "Identifier": "LeftOrcArm",
+      "Type": "LeftOrcArm"
+    },
+    {
+      "Identifier": "LeftOrcFoot",
+      "Type": "LeftOrcFoot"
+    },
+    {
+      "Identifier": "LeftOrcHand",
+      "Type": "LeftOrcHand"
+    },
+    {
+      "Identifier": "LeftOrcLeg",
+      "Type": "LeftOrcLeg"
+    },
+    {
+      "Identifier": "RightOrcArm",
+      "Type": "RightOrcArm"
+    },
+    {
+      "Identifier": "RightOrcFoot",
+      "Type": "RightOrcFoot"
+    },
+    {
+      "Identifier": "RightOrcHand",
+      "Type": "RightOrcHand"
+    },
+    {
+      "Identifier": "RightOrcLeg",
+      "Type": "RightOrcLeg"
+    }
+  ],
+  "Relations": [
+    {
+      "Individual2": "OrcTorso",
+      "Point2": "LeftHindLimbBoundary",
+      "Individual1": "LeftOrcLeg",
+      "Point1": "ProximalBoundary"      
+    },
+    {
+      "Individual1": "OrcTorso",
+      "Point1": "RightHindLimbBoundary",
+      "Individual2": "RightOrcLeg",
+      "Point2": "ProximalBoundary"
+    },
+    {
+      "Individual1": "OrcTorso",
+      "Point1": "NeckBoundary",
+      "Individual2": "OrcHead",
+      "Point2": "ProximalBoundary"
+    },
+    {
+      "Individual1": "OrcTorso",
+      "Point1": "LeftForeLimbBoundary",
+      "Individual2": "LeftOrcArm",
+      "Point2": "ProximalBoundary"
+    },
+    {
+      "Individual1": "OrcTorso",
+      "Point1": "RightForeLimbBoundary",
+      "Individual2": "RightOrcArm",
+      "Point2": "ProximalBoundary"
+    },
+    {
+      "Individual1": "LeftOrcLeg",
+      "Point1": "DistalBoundary",
+      "Individual2": "LeftOrcFoot",
+      "Point2": "ProximalBoundary"
+    },
+    {
+      "Individual1": "RightOrcLeg",
+      "Point1": "DistalBoundary",
+      "Individual2": "RightOrcFoot",
+      "Point2": "ProximalBoundary"
+    },
+    {
+      "Individual1": "RightOrcArm",
+      "Point1": "DistalBoundary",
+      "Individual2": "RightOrcHand",
+      "Point2": "ProximalBoundary"
+    },
+    {
+      "Individual1": "LeftOrcArm",
+      "Point1": "DistalBoundary",
+      "Individual2": "LeftOrcHand",
+      "Point2": "ProximalBoundary"
+    }
+  ]
+}
