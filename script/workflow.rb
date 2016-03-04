@@ -33,7 +33,7 @@ class Workflow
   def basic_loop
     while !consistency_found?
       temp_theory.run do |temp_filepath|
-        self.axioms = Analysis.new(temp_filepath).run if !axioms.any?
+        self.axioms = Analysis.new(temp_filepath).run
         run_checks("file://#{temp_filepath}")
 
         if @consistent.nil?
@@ -145,10 +145,11 @@ class Workflow
 
   def let_user_select_axiom_to_remove
     print_proc = -> (blend_axiom) { print_blend_axiom(blend_axiom) }
+    used_blend_axioms_cached = used_blend_axioms
     index = UserInteraction.
       new("Please select an axiom to drop to restore consistency.",
-          used_blend_axioms, user_interaction_mutex, print_proc).run
-    used_blend_axioms[index]
+          used_blend_axioms_cached, user_interaction_mutex, print_proc).run
+    used_blend_axioms_cached[index]
   end
 
   def identify_axiom_in_input_spaces(axiom)
@@ -195,7 +196,7 @@ class Workflow
   end
 
   def used_blend_axioms
-    @used_blend_axioms ||= axioms['Blend'].select do |blend_axiom|
+    axioms['Blend'].select do |blend_axiom|
       @used_axioms.include?(blend_axiom[:name])
     end
   end
