@@ -1,19 +1,32 @@
+require_relative 'completeness_check.rb'
+
 class HetsMedusa
   HETS_BINARY = ENV['HETS_BINARY'] || 'hets'
   MEDUSA_ROOT = File.join(File.dirname(__FILE__), '../medusa/Medusa')
   MEDUSA_BINARY = ENV['MEDUSA_BINARY'] || File.join(MEDUSA_ROOT, 'Binaries/Release/medusa.exe')
   MEDUSA_REPOSITORY = ENV['MEDUSA_REPOSITORY'] || File.join(MEDUSA_ROOT, 'Examples/Repository/Repository.json')
 
-  attr_accessor :blend_temp_filepath, :png_target_filepath
+  attr_accessor :blend_temp_filepath, :png_target_filepath, :missing_pairs
 
   def initialize(blend_temp_filepath, png_target_filepath)
     self.blend_temp_filepath = blend_temp_filepath
     self.png_target_filepath = png_target_filepath
+    self.missing_pairs = []
   end
 
   def run
     medusa_markup_filepath = create_medusa_json(blend_temp_filepath)
-    medusa_png_filepath = create_png_using_medusa(medusa_markup_filepath)
+    if complete?(medusa_markup_filepath)
+      medusa_png_filepath = create_png_using_medusa(medusa_markup_filepath)
+
+      true
+    else
+      puts 'Medusa markup is not complete. Please add axioms to complete it.'
+      puts 'The following pairs are missing:'
+      puts missing_pairs.inspect
+
+      false
+    end
   end
 
   protected
@@ -25,6 +38,15 @@ class HetsMedusa
   end
 
   def create_png_using_medusa(medusa_markup_filepath)
-    %x(mono "#{MEDUSA_BINARY}" --overwrite "#{MEDUSA_REPOSITORY}" "#{medusa_markup_filepath}" "#{png_target_filepath}")
+    output = %x(mono "#{MEDUSA_BINARY}" --overwrite "#{MEDUSA_REPOSITORY}" "#{medusa_markup_filepath}" "#{png_target_filepath}")
+    success = output.strip.empty?
+    raise "Medusa could not create the blend picture:\n#{output}\n" unless success
+  end
+
+  def complete?(medusa_markup_filepath)
+    self.missing_pairs = CompletenessCheck.
+      run(medusa_markup_filepath, MEDUSA_REPOSITORY)
+
+    missing_pairs.empty?
   end
 end

@@ -1,6 +1,5 @@
 require 'fileutils'
 require_relative 'analysis.rb'
-require_relative 'completeness_check.rb'
 require_relative 'consistency_check.rb'
 require_relative 'hets_medusa.rb'
 require_relative 'inconsistency_check.rb'
@@ -113,8 +112,6 @@ class Workflow
   def handle_consistency(temp_filepath)
     blend_filepath = write_blend_to_dol_file(temp_filepath)
     png_filepath = write_blend_to_png_file(temp_filepath)
-
-    true
   end
 
   def write_blend_to_dol_file(temp_filepath)
@@ -128,11 +125,14 @@ class Workflow
 
   def write_blend_to_png_file(temp_filepath)
     target_png_path = File.join(File.dirname(__FILE__), "blend-#{now}.png")
-    HetsMedusa.new(temp_filepath, target_png_path).run
-
-    puts "Successfully created the blend picture!"
-    puts "The blend picture has been stored at #{target_png_path}"
-    target_png_path
+    if HetsMedusa.new(temp_filepath, target_png_path).run
+      puts "Successfully created the blend picture!"
+      puts "The blend picture has been stored at #{target_png_path}"
+      target_png_path
+    else
+      puts "Failed to create the Medusa picture."
+      nil
+    end
   end
 
   def handle_inconsistency
