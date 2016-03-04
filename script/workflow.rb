@@ -111,7 +111,7 @@ class Workflow
 
   def handle_consistency(temp_filepath)
     blend_filepath = write_blend_to_dol_file(temp_filepath)
-    png_filepath = write_blend_to_pngl_file(temp_filepath)
+    png_filepath = write_blend_to_png_file(temp_filepath)
 
     true
   end
