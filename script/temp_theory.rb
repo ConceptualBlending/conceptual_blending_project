@@ -79,7 +79,7 @@ DOL
     if ENV['AXIOM_DROP_METHOD'] == 'remove'
       remove2(axioms, name)
     else
-      reject2(axioms, name)
+      reject2(name)
     end
   end
 
