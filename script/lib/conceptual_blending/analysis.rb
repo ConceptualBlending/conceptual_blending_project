@@ -12,7 +12,7 @@ module ConceptualBlending
       self.original_file_url = original_file_url
     end
 
-    def run
+    def call
       axioms = nil
       on_analysis_result do |filepath|
         doc = File.open(filepath) { |f| Nokogiri::XML(f) }

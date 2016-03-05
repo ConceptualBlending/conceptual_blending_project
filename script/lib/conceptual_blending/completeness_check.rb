@@ -2,7 +2,7 @@ require 'json'
 
 module ConceptualBlending
   class CompletenessCheck
-    def self.run(markupURL, repoURL)
+    def self.call(markupURL, repoURL)
 
       markup = File.read(markupURL)
       repo = File.read(repoURL)

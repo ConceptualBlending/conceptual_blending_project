@@ -12,7 +12,7 @@ module ConceptualBlending
       self.nodes = nodes
     end
 
-    def run
+    def call
       result = {}
       Tempfile.create(['source', File.extname(file)]) do |source_tempfile|
         if file.include?('://')

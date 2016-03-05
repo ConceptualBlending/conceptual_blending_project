@@ -27,7 +27,7 @@ module ConceptualBlending
       self.prover = prover
     end
 
-    def run
+    def call
       retrieve_provers unless prover
       select_prover unless prover
       try_until_limit_reached_or_solved(limit: MAX_TRIES) do |timeout|
@@ -61,7 +61,7 @@ module ConceptualBlending
     def select_prover
       index = UserInteraction.
         new("Please select a prover for the inconsistency check.",
-            provers.map { |cc| cc['name'] }, mutex).run
+            provers.map { |cc| cc['name'] }, mutex).call
       self.prover = provers[index]['identifier']
     end
 

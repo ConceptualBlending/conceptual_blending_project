@@ -46,7 +46,7 @@ DOL
       self.ontology2 = nil
     end
 
-    def run
+    def call
       error = nil
       filepath = nil
       filecontents = nil
@@ -112,17 +112,17 @@ DOL
       self.ontology1 ||=
         if match = url1.match(%r|(?<url>.*)//(?<node>[^/]+)$|)
           indent(HetsExtraction.new(match[:url],
-                                    [match[:node]]).run[match[:node]], INDENTATION_LEVEL)
+                                    [match[:node]]).call[match[:node]], INDENTATION_LEVEL)
         else
-          indent(HetsExtraction.new(url1, []).run, 1)
+          indent(HetsExtraction.new(url1, []).call, 1)
         end
 
       self.ontology2 ||=
         if match = url2.match(%r|(?<url>.*)//(?<node>[^/]+)$|)
           indent(HetsExtraction.new(match[:url],
-                                    [match[:node]]).run[match[:node]], INDENTATION_LEVEL)
+                                    [match[:node]]).call[match[:node]], INDENTATION_LEVEL)
         else
-          indent(HetsExtraction.new(url2, []).run, 1)
+          indent(HetsExtraction.new(url2, []).call, 1)
         end
 
       content.sub!('ONTOLOGY1', ontology1)

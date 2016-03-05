@@ -29,9 +29,9 @@ module ConceptualBlending
       self.hets_inconsistency_check = HetsServer.new('Hets-Server for inconsistency checks')
     end
 
-    def run
-      hets_consistency_check.run do |hets_consistency_check_url|
-        hets_inconsistency_check.run do |hets_inconsistency_check_url|
+    def call
+      hets_consistency_check.call do |hets_consistency_check_url|
+        hets_inconsistency_check.call do |hets_inconsistency_check_url|
           basic_loop(hets_consistency_check_url, hets_inconsistency_check_url)
         end
       end
@@ -41,8 +41,8 @@ module ConceptualBlending
 
     def basic_loop(hets_consistency_check_url, hets_inconsistency_check_url)
       while !consistency_found?
-        temp_theory.run do |temp_filepath|
-          self.axioms = Analysis.new(temp_filepath).run
+        temp_theory.call do |temp_filepath|
+          self.axioms = Analysis.new(temp_filepath).call
           run_checks("file://#{temp_filepath}", hets_consistency_check_url, hets_inconsistency_check_url)
 
           if @consistent.nil?
@@ -75,12 +75,12 @@ module ConceptualBlending
     def check_consistency(file_url, hets_consistency_check_url)
       result, self.consistency_checker =
         ConsistencyCheck.new(hets_consistency_check_url, file_url,
-                             user_interaction_mutex, consistency_checker).run
+                             user_interaction_mutex, consistency_checker).call
       if result == :consistency_could_not_be_determined
         index = UserInteraction.
           new("A timeout occurred in the consistency check with #{consistency_checker}.\n"\
                 "Do you want to retry (you may choose another consistency checker)?",
-              %w(Yes No), user_interaction_mutex).run
+              %w(Yes No), user_interaction_mutex).call
         if index == 0 # retry
           self.consistency_checker = nil
           check_consistency(file_url)
@@ -99,12 +99,12 @@ module ConceptualBlending
     def check_inconsistency(file_url, hets_inconsistency_check_url)
       result, self.prover =
         InconsistencyCheck.new(hets_inconsistency_check_url, file_url,
-                               user_interaction_mutex, prover).run
+                               user_interaction_mutex, prover).call
       if result == :consistency_could_not_be_determined
         index = UserInteraction.
           new("A timeout occurred in the inconsistency check with #{prover}.\n"\
                 "Do you want to retry (you may choose another prover)?",
-              %w(Yes No), user_interaction_mutex).run
+              %w(Yes No), user_interaction_mutex).call
         if index == 0 # retry
           self.prover = nil
           check_inconsistency(file_url)
@@ -163,7 +163,7 @@ module ConceptualBlending
 
     def write_blend_to_png_file(temp_filepath)
       target_png_path = File.join(File.dirname(__FILE__), "blend-#{now}.png")
-      if HetsMedusa.new(temp_filepath, target_png_path).run
+      if HetsMedusa.new(temp_filepath, target_png_path).call
         puts "Successfully created the blend picture!"
         puts "The blend picture has been stored at #{target_png_path}"
         target_png_path
@@ -186,7 +186,7 @@ module ConceptualBlending
       used_blend_axioms_cached = used_blend_axioms
       index = UserInteraction.
         new("Please select an axiom to drop to restore consistency.",
-            used_blend_axioms_cached, user_interaction_mutex, print_proc).run
+            used_blend_axioms_cached, user_interaction_mutex, print_proc).call
       used_blend_axioms_cached[index]
     end
 
@@ -207,12 +207,12 @@ module ConceptualBlending
       input_spaces = [['InputSpace1', input_space1], ['InputSpace2', input_space2]]
       index = UserInteraction.
         new(%(Please select the input space where the selected axiom "#{axiom}" is originated (could not determine it automatically).),
-           input_spaces, user_interaction_mutex).run
+           input_spaces, user_interaction_mutex).call
       input_space = input_spaces[index].first
 
       index = UserInteraction.
         new(%(Please select the axiom "#{axiom}" from this input space.),
-           axioms[input_space], user_interaction_mutex).run
+           axioms[input_space], user_interaction_mutex).call
       axiom = axioms[input_space][index]
 
       [input_space, axiom]
@@ -258,7 +258,7 @@ end
 
 if ARGV.any?
   if ARGV[0] && ARGV[1]
-    puts ConceptualBlending::Workflow.new(ARGV[0], ARGV[1]).run.inspect
+    puts ConceptualBlending::Workflow.new(ARGV[0], ARGV[1]).call.inspect
   else
     $stderr.puts 'Specify URLs to two ontologies.'
   end

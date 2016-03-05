@@ -16,7 +16,7 @@ module ConceptualBlending
       @node = node
     end
 
-    def run
+    def call
       medusa_markup_filepath = create_medusa_json(blend_temp_filepath)
       if complete?(medusa_markup_filepath)
         medusa_png_filepath = create_png_using_medusa(medusa_markup_filepath)
@@ -56,7 +56,7 @@ module ConceptualBlending
 
     def complete?(medusa_markup_filepath)
       self.missing_pairs = CompletenessCheck.
-        run(medusa_markup_filepath, MEDUSA_REPOSITORY)
+        call(medusa_markup_filepath, MEDUSA_REPOSITORY)
 
       missing_pairs.empty?
     end

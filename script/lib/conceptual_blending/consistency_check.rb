@@ -26,7 +26,7 @@ module ConceptualBlending
       self.consistency_checker = consistency_checker
     end
 
-    def run
+    def call
       retrieve_consistency_checkers unless consistency_checker
       select_consistency_checker unless consistency_checker
       try_until_limit_reached_or_solved(limit: MAX_TRIES) do |timeout|
@@ -53,7 +53,7 @@ module ConceptualBlending
     def select_consistency_checker
       index = UserInteraction.
         new("Please select a consistency checker for the consistency check.",
-            consistency_checkers.map { |cc| cc['name'] }, mutex).run
+            consistency_checkers.map { |cc| cc['name'] }, mutex).call
       self.consistency_checker = consistency_checkers[index]['identifier']
     end
 

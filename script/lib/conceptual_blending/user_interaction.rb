@@ -9,7 +9,7 @@ module ConceptualBlending
       self.print_proc = print_proc
     end
 
-    def run
+    def call
       if mutex
         mutex.synchronize { execute }
       else

@@ -12,7 +12,7 @@ module ConceptualBlending
       self.name = name
     end
 
-    def run
+    def call
       port = choose_port
       puts "Starting #{name} on port #{port}."
 
