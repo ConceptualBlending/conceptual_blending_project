@@ -284,7 +284,7 @@
       }
     },
     {
-      "Type": "SnakeTrunk",
+      "Type": "CobraTrunk",
       "ImageFile": "Assets/SnakeTrunk.png",
       "Points": {
         "NeckBoundary": {
@@ -314,7 +314,7 @@
       }
     },
     {
-      "Type": "SnakeHead",
+      "Type": "CobraHead",
       "ImageFile": "Assets/SnakeHead.png",
       "Points": {
         "ProximalBoundary": {
@@ -324,7 +324,7 @@
       }
     },
     {
-      "Type": "SnakeTail",
+      "Type": "CobraTail",
       "ImageFile": "Assets/SnakeTail.png",
       "Points": {
         "ProximalBoundary": {
