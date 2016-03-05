@@ -1,4 +1,5 @@
 require_relative 'completeness_check.rb'
+require_relative 'error.rb'
 
 module ConceptualBlending
   class HetsMedusa
@@ -39,7 +40,7 @@ module ConceptualBlending
       if match
         match[:out_filepath]
       else
-        raise "Hets could not process the file.\n"\
+        raise ConceptualBlending::HetsError, "Hets could not process the file.\n"\
           "Its output is:\n#{output}"
       end
     end
@@ -48,7 +49,7 @@ module ConceptualBlending
       output = %x(mono "#{MEDUSA_BINARY}" --overwrite "#{MEDUSA_REPOSITORY}" "#{medusa_markup_filepath}" "#{png_target_filepath}")
       success = output.strip.empty?
       if !success
-        raise "Medusa could not create the blend picture:\n"\
+        raise ConceptualBlending::MedusaError, "Medusa could not create the blend picture:\n"\
           "#{output}\n"\
           "The Medusa markup file was stored at #{medusa_markup_filepath}"
       end

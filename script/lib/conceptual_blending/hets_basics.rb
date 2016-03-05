@@ -16,8 +16,8 @@ module ConceptualBlending
                             accept: :json)
           end
         result = parse_json ? JSON.parse(response) : response
-      rescue
-        $stderr.puts "Error!"
+      rescue ::StandardError => e
+        $stderr.puts "Error calling the Hets-Server!"
         $stderr.puts
         if response
           $stderr.puts "Received response:"
@@ -32,7 +32,7 @@ module ConceptualBlending
         $stderr.puts hets_curl_command(http_method, url, data)
         $stderr.puts
 
-        raise
+        raise ConnectionError, "#{e.class.to_s}: #{e.message}"
       end
       result
     end

@@ -1,6 +1,7 @@
 require 'fileutils'
 require 'nokogiri'
 require 'tempfile'
+require_relative 'error.rb'
 
 module ConceptualBlending
   class Analysis
@@ -41,13 +42,12 @@ module ConceptualBlending
           FileUtils.mv(match[:out_filepath], tempfile.path)
           yield(tempfile.path)
         else
-          raise "Hets could not process the file.\n"\
+          raise HetsError, "Hets could not process the file.\n"\
             "Its output is:\n#{output}"
         end
       end
     rescue
-      $stderr.puts "Tried and failed to call:\n#{command}"
-      raise
+      raise HetsError, "Tried and failed to call:\n#{command}"
     end
 
     def axioms(doc, node)

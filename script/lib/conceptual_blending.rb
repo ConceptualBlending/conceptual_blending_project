@@ -1,6 +1,7 @@
 require 'fileutils'
 require_relative 'conceptual_blending/analysis.rb'
 require_relative 'conceptual_blending/consistency_check.rb'
+require_relative 'conceptual_blending/error.rb'
 require_relative 'conceptual_blending/hets_medusa.rb'
 require_relative 'conceptual_blending/hets_server.rb'
 require_relative 'conceptual_blending/inconsistency_check.rb'
@@ -86,7 +87,7 @@ module ConceptualBlending
           check_consistency(file_url)
         else
           @inconsistency_thread.kill
-          raise "Aborted by user."
+          raise UserError, "Aborted by user."
         end
       else
         @consistent = result == true
@@ -110,7 +111,7 @@ module ConceptualBlending
           check_inconsistency(file_url)
         else
           @consistency_thread.kill
-          raise "Aborted by user."
+          raise UserError, "Aborted by user."
         end
       else
         @consistent = result == :theory_is_consistent
@@ -144,7 +145,7 @@ module ConceptualBlending
     end
 
     def handle_consistency_check_not_finished_error
-      raise "[In]Consistency check did not properly finish."
+      raise TimeoutError, "[In]Consistency check did not properly finish."
     end
 
     def handle_consistency(temp_filepath)

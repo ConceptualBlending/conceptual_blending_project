@@ -1,5 +1,6 @@
 require 'fileutils'
 require 'tempfile'
+require_relative 'error.rb'
 require_relative 'hets_extraction.rb'
 
 module ConceptualBlending
