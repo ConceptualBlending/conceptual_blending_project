@@ -55,8 +55,8 @@ module ConceptualBlending
     end
 
     def complete?(medusa_markup_filepath)
-      self.missing_pairs = CompletenessCheck.new.
-        call(medusa_markup_filepath, MEDUSA_REPOSITORY)
+      self.missing_pairs = CompletenessCheck.
+        new(medusa_markup_filepath, MEDUSA_REPOSITORY).call
 
       missing_pairs.empty?
     end
