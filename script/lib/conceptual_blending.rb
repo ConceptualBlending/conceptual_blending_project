@@ -248,9 +248,9 @@ module ConceptualBlending
           origin += ' and ' unless origin.empty?
           origin += "InputSpace2 (#{input_space2})"
         end
-        "From #{origin}:\n#{ax[:text]}\n"
+        "From #{origin}:\n#{ax[:name]} #{ax[:text]}\n"
       else
-        "Input space not identified:\n#{blend_axiom[:text]}"
+        "Input space not identified:\n#{blend_axiom[:name]} #{blend_axiom[:text]}"
       end
     end
   end
