@@ -119,6 +119,7 @@ module ConceptualBlending
         # TODO what to do on a timeout? (:consistency_could_not_be_determined)
         set_inconsistent_and_terminate_other_thread if @inconsistent
         @used_axioms = result if @inconsistent
+        puts result.inspect
       end
     end
 
@@ -231,9 +232,13 @@ module ConceptualBlending
     end
 
     def used_blend_axioms
-      axioms['Blend'].select do |blend_axiom|
+      b = axioms['Blend'].select do |blend_axiom|
         @used_axioms.include?(blend_axiom[:name])
       end
+      puts b.inspect
+      puts "-------------------"
+      puts axioms['Blend'].inspect
+      b
     end
 
     def print_blend_axiom(blend_axiom)
