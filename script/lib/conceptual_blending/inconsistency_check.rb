@@ -9,7 +9,7 @@ module ConceptualBlending
     include HetsBasics
 
     MAX_TRIES = 3
-    BASE_TIMEOUT = 30
+    BASE_TIMEOUT = 100
     REQUEST_DATA = {format: 'json',
                     theorems: [TempTheory::INCONSISTENCY_THEOREM_NAME],
                     node: 'Inconsistency',
