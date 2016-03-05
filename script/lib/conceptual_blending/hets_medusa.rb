@@ -3,7 +3,7 @@ require_relative 'completeness_check.rb'
 module ConceptualBlending
   class HetsMedusa
     HETS_BINARY = ENV['HETS_BINARY'] || 'hets'
-    MEDUSA_ROOT = File.join(File.dirname(__FILE__), '../../../medusa/Medusa')
+    MEDUSA_ROOT = File.join(File.dirname(__FILE__), '../../vendor/medusa/Medusa')
     MEDUSA_BINARY = ENV['MEDUSA_BINARY'] || File.join(MEDUSA_ROOT, 'Binaries/Release/medusa.exe')
     MEDUSA_REPOSITORY = ENV['MEDUSA_REPOSITORY'] || File.join(File.dirname(__FILE__), '../../../medusa_repository/Repository.json')
 
