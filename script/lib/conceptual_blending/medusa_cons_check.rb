@@ -1,7 +1,6 @@
 require 'json'
 
 def medusa_consistency_check(markupURL, repoURL)
-
  markup = File.read(markupURL) 
  repo = File.read(repoURL)
  markup_hash = JSON.parse(markup)
@@ -32,5 +31,4 @@ def medusa_consistency_check(markupURL, repoURL)
  end # h
 
  return multipleRelations
-
 end

@@ -31,14 +31,14 @@ module ConceptualBlending
 
     def choose_port
       port = rand(200)+8000
-      if port_used?('127.0.0.1', port)
+      if port_taken?('127.0.0.1', port)
         choose_port
       else
         port
       end
     end
 
-    def port_used?(ip, port, seconds = 1)
+    def port_taken?(ip, port, seconds = 1)
       Timeout::timeout(seconds) do
         begin
           TCPSocket.new(ip, port).close

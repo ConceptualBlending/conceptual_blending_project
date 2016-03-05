@@ -2,32 +2,40 @@ require 'json'
 
 module ConceptualBlending
   class CompletenessCheck
-    def self.call(markupURL, repoURL)
+    attr_accessor :markup_url, :repository_url
 
-      markup = File.read(markupURL)
-      repo = File.read(repoURL)
+    def initialize(markup_url, repository_url)
+      self.markup_url = markup_url
+      self.repository_url = repository_url
+    end
+
+    def call
+      markup = File.read(markup_url)
+      repository = File.read(repository_url)
+
       markup_hash = JSON.parse(markup)
-      repo_hash = JSON.parse(repo)
+      repo_hash = JSON.parse(repository)
 
-      missingPairs = Hash.new
+      missing_pairs = {}
 
       markup_hash['Definitions'].each do |h|
-        i = h['Identifier']
-        t = h['Type']
+        identifier = h['Identifier']
+        type = h['Type']
         repo_hash['RepositoryContent'].each do |x|
-          if x['Type'] == t
+          if x['Type'] == type
             x['Points'].each do |p|
               unless markup_hash['Relations'].any? do |r|
-                ((r['Individual1'] == i) and (r['Point1'] == p[0])) or ((r['Individual2'] == i) and (r['Point2'] == p[0]))
+                (r['Individual1'] == identifier && r['Point1'] == p[0]) ||
+                  (r['Individual2'] == identifier && r['Point2'] == p[0])
               end # r
-              missingPairs[i] = p[0]
+              missing_pairs[identifier] = p[0]
               end # if
             end # p
           end  # if
         end # x
       end # h
 
-      return missingPairs
+      return missing_pairs
     end
   end
 end
