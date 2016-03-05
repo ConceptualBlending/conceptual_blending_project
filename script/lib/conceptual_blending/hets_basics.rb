@@ -11,9 +11,9 @@ module ConceptualBlending
           if http_method == :get
             RestClient.get(url, content_type: :json, accept: :json)
           else
-            RestClient.send(http_method, url, data,
-                            content_type: :json,
-                            accept: :json,
+            RestClient::Request.execute(method: http_method, url: url, 
+                            payload: data,
+                            headers: {content_type: :json, accept: :json},
                             timeout: 9000000)
           end
         result = parse_json ? JSON.parse(response) : response
