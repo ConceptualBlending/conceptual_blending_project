@@ -8,7 +8,7 @@ module ConceptualBlending
     include HetsBasics
 
     MAX_TRIES = 3
-    BASE_TIMEOUT = 30
+    BASE_TIMEOUT = 200
 
     CONSISTENCY_CHECK_REQUEST_DATA = {format: 'json',
                                       node: 'Blend',
