@@ -343,6 +343,7 @@
         }
       }
     },
+
     {
       "Type": "LeftHindTigerPaw",
       "ImageFile": "Assets/TigerLeftFoot.png",
@@ -517,6 +518,17 @@
         "ProximalBoundary": {
           "x": 356,
           "y": 552
+        }
+      }
+    },
+
+    {
+      "Type": "PandaTail",
+      "ImageFile": "Assets/Blank.png",
+      "Points": {
+        "ProximalBoundary": {
+          "x": 1,
+          "y": 1
         }
       }
     },
