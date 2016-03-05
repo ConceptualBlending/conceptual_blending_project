@@ -8,7 +8,12 @@ module ConceptualBlending
     attr_accessor :file, :nodes
 
     def initialize(file, nodes)
-      self.file = file
+      self.file =
+        if file.start_with?('file://')
+          file.sub(%r(\Afile://), '')
+        else
+          file
+        end
       self.nodes = nodes
     end
 
@@ -20,7 +25,8 @@ module ConceptualBlending
           source_tempfile.close
         else
           source_tempfile.close
-          FileUtils.cp(file, source_tempfile)
+          raise UserError, "file #{file} does not exist" unless File.exist?(file)
+          FileUtils.cp(file, source_tempfile.path)
         end
         if nodes.any?
           output = %x(#{HETS_BINARY} -v -o th -n #{nodes.join(',')} "#{source_tempfile.path}")
