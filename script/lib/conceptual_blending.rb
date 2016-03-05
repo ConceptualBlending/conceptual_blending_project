@@ -259,8 +259,14 @@ end
 
 if ARGV.any?
   if ARGV[0] && ARGV[1]
-    puts ConceptualBlending::Workflow.new(ARGV[0], ARGV[1]).call.inspect
+    begin
+      puts ConceptualBlending::Workflow.new(ARGV[0], ARGV[1]).call.inspect
+    rescue ConceptualBlending::Error => e
+      $stderr.puts "Error!\n#{e.class}:\n#{e.message}"
+      exit 1
+    end
   else
     $stderr.puts 'Specify URLs to two ontologies.'
+    exit 2
   end
 end
